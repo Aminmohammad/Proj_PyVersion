@@ -1,5 +1,10 @@
 import os
 
+import pickle
+
+import scipy
+import sys
+
 from C_Device_RawData_Loading.Device_RawData_Loading import Device_RawData_Loading
 
 
@@ -17,22 +22,24 @@ class DatasetMakerOrLoader:
             "time_Length_of_a_Single_Chip_with_Respect_to_Seconds"]
         self.sampling_Frequency = varargin["sampling_Frequency"]
         self.allow = varargin["allow"]
+        self.characteristics_Extractor_Method = varargin["characteristics_Extractor_Method"]
 
     def method_Caller(self):
-        if not self.do_You_Want_to_Make_new_DataSet or not os.path.isfile(self.dataSet_Address + "//DataSet//DataSet.mat"):
+        if (not self.do_You_Want_to_Make_new_DataSet) and (os.path.isfile(self.dataSet_Address + "//DataSet//DataSet.mat")):
             self.Data_Set_Loader()
-
-        elif self.do_You_Want_to_Make_new_DataSet:
+        else:
             self.Data_Set_Maker()
 
     def Data_Set_Loader(self):
-        # TODO: Complete the code
         pass
+        # TODO: Complete the code
 
     def Data_Set_Maker(self):
         list_of_folders_in_the_dataset_folder = os.listdir(self.dataSet_Address)
-
-        for device_Index in range(len(list_of_folders_in_the_dataset_folder)):
+        sys.exit(0)
+        scipy.io.savemat('arrdata.mat', mdict={'arr': self.vertical_Structure_of_all_Devices})
+        for device_Index in [0]:
+            # range(len(list_of_folders_in_the_dataset_folder))
             current_data_location = self.dataSet_Address + "/" + list_of_folders_in_the_dataset_folder[device_Index]
             vertical_structure_of_all_bursts = Device_RawData_Loading(current_data_location,
                                                                       self.zero_Conversion_Threshold,
@@ -41,10 +48,12 @@ class DatasetMakerOrLoader:
                                                                       self.number_of_Chips_per_subRegion,
                                                                       self.time_Length_of_a_Single_Chip_with_Respect_to_Seconds,
                                                                       self.sampling_Frequency,
-                                                                      self.allow)
+                                                                      self.allow,
+                                                                      self.characteristics_Extractor_Method)
 
             self.vertical_Structure_of_all_Devices[device_Index] = {"a_Single_Device": vertical_structure_of_all_bursts,
                                                                     }
+
 
         # address_of_Saving_DataSet = sprintf('%s%s%s%s', resources_Folder_Address
         # {:}, '\', selected_DataSet_Folder, '\DataSet\DataSet.mat

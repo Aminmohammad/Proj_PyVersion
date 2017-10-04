@@ -1,9 +1,8 @@
-# from B_DataSet_Maker.DataSet_Maker import DatasetMakerOrLoader
+from B_DataSet_Maker.DataSet_Maker import DatasetMakerOrLoader
 
 
 def initialization(test):
-    print(test)
-    data_set_address = "D:\\PHD_Project_Folder\\Resources\\2016_07_11_IQ_20Msps_RZUSBSTICK\\RawData"
+    data_set_address = "U:\\MAHAB\Ph.D._Files\\PHD_Project_Folder\Resources\\2016_07_11_IQ_20Msps_RZUSBSTICK\\RawData"
     data_set_address = data_set_address.replace("\\", "/")
 
     input_hash_map = {"do_You_Want_to_Make_new_DataSet": True,
@@ -15,9 +14,12 @@ def initialization(test):
                       "time_Length_of_a_Single_Chip_with_Respect_to_Seconds": 1e-6,
                       "sampling_Frequency": 20e6,
                       "allow": 1,
+                      "characteristics_Extractor_Method": "AmpPhaseFreq_Chars",
                       }
 
-    # dg = DatasetMakerOrLoader(input_hash_map)
-    # dg.method_Caller()
+    dg = DatasetMakerOrLoader(input_hash_map)
+    dg.method_Caller()
 
 
+if __name__ == '__main__':
+    initialization('Test')

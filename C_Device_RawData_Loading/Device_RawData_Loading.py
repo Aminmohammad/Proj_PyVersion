@@ -1,6 +1,7 @@
 import os
 
 import pywt
+from numpy import hstack, shape
 from numpy.matlib import repmat
 from pylab import size, amax, figure, plot, show
 from scipy.io import loadmat
@@ -73,7 +74,12 @@ def Device_RawData_Loading(device_dataset_address,
             length_of_a_single_subregion = int(size(current_burst, 0) / number_of_subregions)
             vertical_hashMap_of_a_single_burst = {}
 
-            for subRegion_Index in range(number_of_subregions):
+            pure_all_subRegions = []
+            amplitude_all_subRegions = []
+            phase_all_subRegions = []
+            ifrequency_all_subRegions = []
+
+            for subRegion_Index in range(number_of_subregions + 1):
                 print("        subRegion_Index:" + str(subRegion_Index))
                 if subRegion_Index <= number_of_subregions:
                     starting_index = subRegion_Index * length_of_a_single_subregion
@@ -81,8 +87,8 @@ def Device_RawData_Loading(device_dataset_address,
 
                     a_single_subRegion = current_burst[starting_index:ending_index, 0]
 
-                    Characteristics_Extractor ( a_single_subRegion,
-                                                characteristics_Extractor_Method )
+                    amplitude, phase, ifrequency = Characteristics_Extractor ( a_single_subRegion,
+                                                                               characteristics_Extractor_Method )
 
                     # if allow == 1:
                     #     tree = pywt.wavedec(a_single_subRegion, 'haar')
@@ -93,38 +99,36 @@ def Device_RawData_Loading(device_dataset_address,
                     #     allow = 0
 
                     vertical_hashMap_of_a_single_burst[
-                        "a_Single_subRegion_" + str(subRegion_Index)] = a_single_subRegion
+                        "pure_single_subRegion_" + str(subRegion_Index)] = a_single_subRegion
+
+                    vertical_hashMap_of_a_single_burst[
+                        "amp_single_subRegion_" + str(subRegion_Index)] = amplitude
+
+                    vertical_hashMap_of_a_single_burst[
+                        "phase_single_subRegion_" + str(subRegion_Index)] = phase
+
+                    vertical_hashMap_of_a_single_burst[
+                        "ifreq_single_subRegion_" + str(subRegion_Index)] = ifrequency
+
+                    pure_all_subRegions.append(a_single_subRegion)
+                    amplitude_all_subRegions.append(amplitude)
+                    phase_all_subRegions.append(phase)
+                    ifrequency_all_subRegions.append(ifrequency)
 
                 else:
 
-                    vertical_hashMap_of_a_single_burst["a_Single_subRegion_" + str(subRegion_Index)] = current_burst
+                    vertical_hashMap_of_a_single_burst[
+                        "pure_single_subRegion_" + str(subRegion_Index)] = pure_all_subRegions
+
+                    vertical_hashMap_of_a_single_burst[
+                        "amp_single_subRegion_" + str(subRegion_Index)] = amplitude_all_subRegions
+
+                    vertical_hashMap_of_a_single_burst[
+                        "phase_single_subRegion_" + str(subRegion_Index)] = phase_all_subRegions
+
+                    vertical_hashMap_of_a_single_burst[
+                        "ifreq_single_subRegion_" + str(subRegion_Index)] = ifrequency_all_subRegions
 
                     # saving the Single Burst
                     vertical_hashmap_of_all_bursts[
                         "a_Single_Burst_" + str(burst_Index)] = vertical_hashMap_of_a_single_burst
-
-    input("promt: ")
-
-# a = array ([1+1j, 1+1j, 1+1j, 2+1j, 2+1j, 2+1j, 3+1j, 1+1j, 1+1j, 1+1j, 1+4j, 1+4j, 1+1j, 1+1j, 3+4j, 3+4j])
-# Burst_Index_Extractor( a, 2 )
-
-
-# def scalogram(data):
-#     bottom = 0
-#
-#     vmin = min(map(lambda x: min(abs(x)), data))
-#     vmax = max(map(lambda x: max(abs(x)), data))
-#
-#     gca().set_autoscale_on(False)
-#
-#     for row in range(0, len(data)):
-#         scale = 2.0 ** (row - len(data))
-#
-#         imshow(
-#             array([abs(data[row])]),
-#             interpolation='nearest',
-#             vmin=vmin,
-#             vmax=vmax,
-#             extent=[0, 1, bottom, bottom + scale])
-#
-#         bottom += scale
