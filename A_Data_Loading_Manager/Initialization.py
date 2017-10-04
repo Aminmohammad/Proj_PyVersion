@@ -1,3 +1,5 @@
+import csv
+
 from B_DataSet_Maker.DataSet_Maker import DatasetMakerOrLoader
 
 
@@ -18,7 +20,11 @@ def initialization(test):
                       }
 
     dg = DatasetMakerOrLoader(input_hash_map)
-    dg.method_Caller()
+    dataSet = dg.method_Caller()
+    print(dataSet)
+    w = csv.writer(open("output.csv", "w"))
+    for key, val in dataSet.items():
+        w.writerow([key, val])
 
 
 if __name__ == '__main__':

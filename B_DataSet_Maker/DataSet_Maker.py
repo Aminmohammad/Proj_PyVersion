@@ -26,9 +26,11 @@ class DatasetMakerOrLoader:
 
     def method_Caller(self):
         if (not self.do_You_Want_to_Make_new_DataSet) and (os.path.isfile(self.dataSet_Address + "//DataSet//DataSet.mat")):
-            self.Data_Set_Loader()
+            dataSet = self.Data_Set_Loader()
         else:
-            self.Data_Set_Maker()
+            dataSet = self.Data_Set_Maker()
+
+            return dataSet
 
     def Data_Set_Loader(self):
         pass
@@ -36,10 +38,10 @@ class DatasetMakerOrLoader:
 
     def Data_Set_Maker(self):
         list_of_folders_in_the_dataset_folder = os.listdir(self.dataSet_Address)
-        sys.exit(0)
-        scipy.io.savemat('arrdata.mat', mdict={'arr': self.vertical_Structure_of_all_Devices})
+        # sys.exit(0)
+        # scipy.io.savemat('arrdata.mat', mdict={'arr': self.vertical_Structure_of_all_Devices})
         for device_Index in [0]:
-            # range(len(list_of_folders_in_the_dataset_folder))
+            #range(len(list_of_folders_in_the_dataset_folder))
             current_data_location = self.dataSet_Address + "/" + list_of_folders_in_the_dataset_folder[device_Index]
             vertical_structure_of_all_bursts = Device_RawData_Loading(current_data_location,
                                                                       self.zero_Conversion_Threshold,
@@ -54,13 +56,8 @@ class DatasetMakerOrLoader:
             self.vertical_Structure_of_all_Devices[device_Index] = {"a_Single_Device": vertical_structure_of_all_bursts,
                                                                     }
 
+        return self.vertical_Structure_of_all_Devices
 
-        # address_of_Saving_DataSet = sprintf('%s%s%s%s', resources_Folder_Address
-        # {:}, '\', selected_DataSet_Folder, '\DataSet\DataSet.mat
-        # ' )
-        # save(address_of_Saving_DataSet, 'vertical_Structure_of_all_Devices')
-
-        return
 
 # data_Set_Address = "D:\\PHD_Project_Folder\\Resources\\2016_07_11_IQ_20Msps_RZUSBSTICK\\RawData"
 # data_Set_Address = data_Set_Address.replace("\\", "/")
