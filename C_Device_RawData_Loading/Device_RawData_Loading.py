@@ -6,7 +6,8 @@ from pylab import size, amax, figure, plot, show
 from scipy.io import loadmat
 from scipy.sparse import csc_matrix
 
-from D_Burst_Index_Extractor.Burst_Index_Extractor import Burst_Index_Extractor
+from C_Device_RawData_Loading.Burst_Index_Extractor import Burst_Index_Extractor
+from D_Characteristics_Extractor.Characteristics_Extractor import Characteristics_Extractor
 
 
 def Device_RawData_Loading(device_dataset_address,
@@ -16,7 +17,8 @@ def Device_RawData_Loading(device_dataset_address,
                            number_of_chips_per_subregion,
                            time_length_of_a_single_chip_with_respect_to_seconds,
                            sampling_frequency,
-                           allow):
+                           allow,
+                           characteristics_Extractor_Method):
 
     # Extracting the Address of all Records in the 'DataSet Folder' for a Single Device
     list_of_records = os.listdir(device_dataset_address)
@@ -69,7 +71,7 @@ def Device_RawData_Loading(device_dataset_address,
 
             # subRegions of 'current_burst'
             length_of_a_single_subregion = int(size(current_burst, 0) / number_of_subregions)
-            vertical_hashmap_of_a_single_burst = {}
+            vertical_hashMap_of_a_single_burst = {}
 
             for subRegion_Index in range(number_of_subregions):
                 print("        subRegion_Index:" + str(subRegion_Index))
@@ -77,29 +79,31 @@ def Device_RawData_Loading(device_dataset_address,
                     starting_index = subRegion_Index * length_of_a_single_subregion
                     ending_index = (subRegion_Index + 1) * length_of_a_single_subregion - 1
 
-                    a_single_subregion = current_burst[starting_index:ending_index, 0]
+                    a_single_subRegion = current_burst[starting_index:ending_index, 0]
 
-                    if allow == 1:
-                        tree = pywt.wavedec(a_single_subregion, 'haar')
-                        tree = tree[0][0:79]
-                        figure()
-                        plot(tree)
-                        show(block=False)
-                        allow = 0
+                    Characteristics_Extractor ( a_single_subRegion,
+                                                characteristics_Extractor_Method )
 
-                    vertical_hashmap_of_a_single_burst[
-                        "a_Single_subRegion_" + str(subRegion_Index)] = a_single_subregion
+                    # if allow == 1:
+                    #     tree = pywt.wavedec(a_single_subRegion, 'haar')
+                    #     tree = tree[0][0:79]
+                    #     figure()
+                    #     plot(tree)
+                    #     show(block=False)
+                    #     allow = 0
+
+                    vertical_hashMap_of_a_single_burst[
+                        "a_Single_subRegion_" + str(subRegion_Index)] = a_single_subRegion
 
                 else:
 
-                    vertical_hashmap_of_a_single_burst["a_Single_subRegion_" + str(subRegion_Index)] = current_burst
+                    vertical_hashMap_of_a_single_burst["a_Single_subRegion_" + str(subRegion_Index)] = current_burst
 
                     # saving the Single Burst
                     vertical_hashmap_of_all_bursts[
-                        "a_Single_Burst_" + str(burst_Index)] = vertical_hashmap_of_a_single_burst
+                        "a_Single_Burst_" + str(burst_Index)] = vertical_hashMap_of_a_single_burst
 
     input("promt: ")
-
 
 # a = array ([1+1j, 1+1j, 1+1j, 2+1j, 2+1j, 2+1j, 3+1j, 1+1j, 1+1j, 1+1j, 1+4j, 1+4j, 1+1j, 1+1j, 3+4j, 3+4j])
 # Burst_Index_Extractor( a, 2 )
