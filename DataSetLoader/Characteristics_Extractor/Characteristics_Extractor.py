@@ -1,4 +1,4 @@
-from DataSetLoader.D_Characteristics_Extractor.AmpPhaseFreq_Chars import AmpPhaseFreq_Chars
+from DataSetLoader.Characteristics_Extractor.AmpPhaseFreq_Chars import AmpPhaseFreq_Chars
 
 
 def Characteristics_Extractor(a_single_subRegion,
