@@ -16,7 +16,7 @@ def data_set_loading_manager(**kwargs):
                       "characteristics_Extractor_Method": kwargs["characteristics_Extractor_Method"]}
 
     dsmol_instance = DatasetMakerOrLoader(input_hash_map)
-    extracted_data_set = dsmol_instance.method_caller();
+    extracted_data_set = dsmol_instance.method_caller()
 
     print(extracted_data_set)
 

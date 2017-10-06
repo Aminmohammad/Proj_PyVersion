@@ -5,10 +5,11 @@ from scipy.stats import skew, kurtosis
 def finger_print_production_manager(**kwargs):
     extracted_data_set = kwargs["extracted_data_set"]
 
+    data_bank = []
     for device_data_set in extracted_data_set:
         bursts_of_a_single_device = device_data_set["a_Single_Device"]
 
-        burst_finger_print = [];
+        burst_finger_print = []
         for burst in bursts_of_a_single_device:
             for subregion_index in range(len(burst)):
                 current_subregion = burst[subregion_index]

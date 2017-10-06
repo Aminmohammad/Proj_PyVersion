@@ -1,5 +1,5 @@
 from DataSetLoader.Data_Loading_Manager.Data_Set_Loading_Manager import data_set_loading_manager
-from RFFingerprintGenerator.FingerPrint_Production_Manager import finger_print_production_manager
+from RFFingerprintGenerator.RFFP_Production_Manager.FingerPrint_Production_Manager import finger_print_production_manager
 
 
 def project_manager():
@@ -23,6 +23,9 @@ def project_manager():
     data_bank = finger_print_production_manager(extracted_data_set=extracted_data_set)
     data_bank.to_csv(data_set_address+"\\data_bank.csv")
     # Todo: make the address dynamic
+
+    # pre-processing of extracted data-set
+
 
 
 if __name__ == '__main__':
