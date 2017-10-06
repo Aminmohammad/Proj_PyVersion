@@ -4,7 +4,7 @@ from RFFingerprintGenerator.RFFP_Production_Manager.FingerPrint_Production_Manag
 
 def project_manager():
     # extract the DataSet
-    data_set_address = "U:\\MAHAB\Ph.D._Files\\PHD_Project_Folder\Resources\\2016_07_11_IQ_20Msps_RZUSBSTICK\\RawData"
+    data_set_address = ".\\2016_07_11_IQ_20Msps_RZUSBSTICK\\RawData"
     # Todo: make the address dynamic
 
     data_set_address = data_set_address.replace("\\", "/")
