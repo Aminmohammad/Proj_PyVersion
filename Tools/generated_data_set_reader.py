@@ -1,6 +1,6 @@
 def generated_data_set_reader (extracted_data_set, conversion_methods, **kwargs):
     input_data_set = kwargs("extracted_data_set")
-    conversion_methods = kconversion_methods
+    conversion_methods = conversion_methods
 
     data_bank = []
     for device_data_set in input_data_set:

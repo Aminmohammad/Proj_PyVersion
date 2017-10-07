@@ -5,6 +5,7 @@ from DataSetLoader.Device_RawData_Loading.Device_RawData_Loading import device_r
 
 class DatasetMakerOrLoader:
     def __init__(self, input_set):
+        x = DatasetMakerOrLoader
         self.vertical_structure_of_all_devices = {}
         self.data_set_address = input_set["data_Set_Address"]
         self.do_you_want_to_make_new_data_set = input_set["do_You_Want_to_Make_new_DataSet"]
@@ -33,7 +34,7 @@ class DatasetMakerOrLoader:
         pass
         # TODO: Complete the code
 
-    def data_set_maker(self):
+    def data_set_maker(self, arg1, arg2):
         list_of_folders_in_the_data_set_folder = os.listdir(self.data_set_address)
         # sys.exit(0)
         # scipy.io.savemat('arrdata.mat', mdict={'arr': self.vertical_Structure_of_all_Devices})
