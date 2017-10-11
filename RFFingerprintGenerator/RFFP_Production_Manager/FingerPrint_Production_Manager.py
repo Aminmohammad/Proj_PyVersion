@@ -1,43 +1,34 @@
-from numpy import var, array
-from scipy.stats import skew, kurtosis
+from numpy import vstack, size, reshape, column_stack
+
+from Tools.StatisticsGenerator.StatisticsGenaerator_Manager import statistics_generator_manager
 
 
 def finger_print_production_manager(**kwargs):
-    extracted_data_set = kwargs["extracted_data_set"]
+    extracted_data_set = dict(kwargs["extracted_data_set"])
+    data_bank = [0]
+    first_burst = True
+    for device_data_set_key in extracted_data_set.keys():
+        bursts_of_a_single_device = dict(extracted_data_set[device_data_set_key])
+        print(bursts_of_a_single_device.keys())
+        for burst_key in bursts_of_a_single_device.keys():
+            burst = dict(bursts_of_a_single_device[burst_key])
+            burst_finger_print = [0]
+            for subregion_key in burst.keys():
+                subregion_calculated_characteristic = burst[subregion_key]
+                calculated_statistics_for_subregion = dict(statistics_generator_manager
+                                                           (subregion_calculated_characteristic))
 
-    data_bank = []
-    for device_data_set in extracted_data_set:
-        bursts_of_a_single_device = device_data_set["a_Single_Device"]
+                for stat_key in calculated_statistics_for_subregion.keys():
+                    burst_finger_print = vstack((burst_finger_print, calculated_statistics_for_subregion[stat_key]))
+                    print(size(burst_finger_print))
 
-        burst_finger_print = []
-        for burst in bursts_of_a_single_device:
-            for subregion_index in range(len(burst)):
-                current_subregion = burst[subregion_index]
+            burst_finger_print = burst_finger_print[1:]
+            burst_finger_print = reshape(burst_finger_print, size(burst_finger_print), 1)
+            if first_burst:
+                data_bank = burst_finger_print
+                first_burst = False
 
-                # Characteristics of the single sub-Region
-                amp_single_subregion = current_subregion["amp_single_subRegion"]
-                phase_single_subregion = current_subregion["amp_single_subRegion"]
-                ifreq_single_subregion = current_subregion["amp_single_subRegion"]
-
-                # Variance
-                amp_variance = var(amp_single_subregion)
-                phase_variance = skew(phase_single_subregion)
-                ifreq_variance = skew(ifreq_single_subregion)
-
-                # Skewness
-                amp_skewness = skew(amp_single_subregion)
-                phase_skewness = skew(phase_single_subregion)
-                ifreq_skewness = skew(ifreq_single_subregion)
-
-                # Kurtosis
-                amp_kurtosis = kurtosis(amp_single_subregion)
-                phase_kurtosis = skew(phase_single_subregion)
-                ifreq_kurtosis = skew(ifreq_single_subregion)
-
-                burst_finger_print = burst_finger_print.append(array(
-                    [amp_variance, phase_variance, ifreq_variance, amp_skewness, phase_skewness, ifreq_skewness,
-                     amp_kurtosis, phase_kurtosis, ifreq_kurtosis]))
-
-        data_bank = data_bank.append(burst_finger_print)
+            else:
+                data_bank = column_stack((data_bank, burst_finger_print))
 
     return data_bank

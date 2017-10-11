@@ -1,4 +1,4 @@
-from Tools.generated_data_set_reader import generated_data_set_reader
+from Tools.generated_data_set_decomposer import generated_data_set_reader
 
 
 class preProc_Manager:
