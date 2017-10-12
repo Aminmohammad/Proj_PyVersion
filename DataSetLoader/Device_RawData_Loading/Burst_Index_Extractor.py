@@ -31,5 +31,3 @@ def Burst_Index_Extractor(record, threshold):
 
     return hashmap_bursts_indices_matrix
 
-# a = array ([1+1j, 1+1j, 1+1j, 2+1j, 2+1j, 2+1j, 3+1j, 1+1j, 1+1j, 1+1j, 1+4j, 1+4j, 1+1j, 1+1j, 3+4j, 3+4j])
-# Burst_Index_Extractor( a, 2 )
