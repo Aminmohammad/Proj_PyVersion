@@ -12,6 +12,7 @@ def data_set_loading_manager(**kwargs):
                       "number_of_chips_per_subRegion": kwargs["number_of_chips_per_subRegion"],
                       "time_length_of_a_single_chip_in_second": kwargs["time_length_of_a_single_chip_in_second"],
                       "sampling_frequency": kwargs["sampling_frequency"],
+                      "communication_frequency": kwargs["communication_frequency"],
                       "characteristics_extractor_method": kwargs["characteristics_extractor_method"]}
 
     dsmol_instance = DataSetMakerOrLoader(input_hash_map)

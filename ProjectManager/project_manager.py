@@ -1,6 +1,3 @@
-import sys
-
-from numpy import savetxt, shape
 import os
 
 from DataSetLoader.Data_Loading_Manager.Data_Set_Loading_Manager import data_set_loading_manager
@@ -21,12 +18,11 @@ def project_manager(**kwarg):
         number_of_chips_per_subRegion=kwarg["number_of_chips_per_subRegion"],
         time_length_of_a_single_chip_in_second=kwarg["time_length_of_a_single_chip_in_second"],
         sampling_frequency=kwarg["sampling_frequency"],
+        communication_frequency=kwarg["communication_frequency"],
         characteristics_extractor_method=kwarg["characteristics_extractor_method"]
     )
     # producing the Finger-Print from `extracted_data_set`
     data_bank = finger_print_production_manager(extracted_data_set=extracted_data_set)
-    print(data_bank)
-    print(type(data_bank))
 
     # saving the generated from data-bank
     data_bank_saving_address = kwarg["data_set_address"].replace("RawData", "DataBank")
@@ -34,7 +30,7 @@ def project_manager(**kwarg):
         os.makedirs(data_bank_saving_address)
 
     csv_file_saver(saving_address=data_bank_saving_address,
-                   data=data_bank)
+                   data=data_bank.transpose())
 
     # Todo: make the address dynamic
 

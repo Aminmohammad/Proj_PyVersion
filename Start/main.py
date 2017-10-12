@@ -1,16 +1,11 @@
-import os
-
-import sys
-
 from ProjectManager.project_manager import project_manager
 from Tools.folder_address_extractor import folder_address_extractor
 
 
 def main():
     """
-    it is nothing
+    Start of program
     """
-    pass
     # Input Parameters
     selected_data_set_name = "2016_07_11_IQ_20Msps_RZUSBSTICK"
     do_you_want_to_make_new_data_set = True,
@@ -20,6 +15,7 @@ def main():
     number_of_chips_per_subRegion = 4,
     time_length_of_a_single_chip_in_second = 1e-6,
     sampling_frequency = 20e6,
+    communication_frequency = 2e6,
     characteristics_extractor_method = "AmpPhaseFreq_Chars"
 
     # Address Extraction of Selected Data-Set
@@ -35,6 +31,7 @@ def main():
                     number_of_chips_per_subRegion=number_of_chips_per_subRegion,
                     time_length_of_a_single_chip_in_second=time_length_of_a_single_chip_in_second,
                     sampling_frequency=sampling_frequency,
+                    communication_frequency=communication_frequency,
                     characteristics_extractor_method=characteristics_extractor_method,
                     )
 

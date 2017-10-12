@@ -1,12 +1,3 @@
-import os
-
-import sys
-
-from numpy import shape, size
-
-from DataSetLoader.Device_RawData_Loading.Device_RawData_Loading import device_raw_data_loading
-
-
 class DataSetMakerOrLoader:
     def __init__(self, input_set):
         x = DataSetMakerOrLoader
@@ -21,6 +12,7 @@ class DataSetMakerOrLoader:
         self.time_length_of_a_single_chip_in_second = input_set[
             "time_length_of_a_single_chip_in_second"]
         self.sampling_frequency = input_set["sampling_frequency"]
+        self.communication_frequency = input_set["communication_frequency"]
         # self.allow = input_set["allow"]
         self.characteristics_extractor_method = input_set["characteristics_extractor_method"]
 
@@ -50,6 +42,7 @@ class DataSetMakerOrLoader:
                                                                        number_of_chips_per_subregion=self.number_of_chips_per_subregion,
                                                                        time_length_of_a_single_chip_in_second=self.time_length_of_a_single_chip_in_second,
                                                                        sampling_frequency=self.sampling_frequency,
+                                                                       communication_frequency=self.communication_frequency,
                                                                        characteristics_extractor_method=self.characteristics_extractor_method)
 
             self.vertical_structure_of_all_devices["single_device_"
