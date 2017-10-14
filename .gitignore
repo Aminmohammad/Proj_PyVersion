@@ -169,9 +169,12 @@ venv.bak/
 # End of https://www.gitignore.io/api/python,pycharm
 
 *.xml
+*.patch
+*.iml
 *.mat
 *.csv
 *.fig
 &.fig
 *.jpg
 *.xlsx
+*.txt
