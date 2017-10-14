@@ -167,3 +167,11 @@ venv.bak/
 .mypy_cache/
 
 # End of https://www.gitignore.io/api/python,pycharm
+
+*.xml
+*.mat
+*.csv
+*.fig
+&.fig
+*.jpg
+*.xlsx

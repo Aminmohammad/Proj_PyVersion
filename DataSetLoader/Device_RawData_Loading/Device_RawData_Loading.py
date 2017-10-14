@@ -32,7 +32,7 @@ def device_raw_data_loading(**kwarg):
     # Extracting all Records of Current Device
     overall_burst_index = 0
     vertical_hashmap_of_all_bursts = {}
-    for records_Index in range(len(list_of_records)):
+    for records_Index in [0, 1]:#range(len(list_of_records)):
         name_of_current_record = list_of_records[records_Index]
         print("    Record:" + str(records_Index))
         address_of_current_record = device_data_set_address + "/" + name_of_current_record
@@ -48,7 +48,7 @@ def device_raw_data_loading(**kwarg):
 
         key_values = bursts_indices_matrix.keys()
 
-        for burst_Index in range(len(key_values)):
+        for burst_Index in [0, 1]:#range(len(key_values)):
             print("        burst_Index:" + str(burst_Index))
             temp = bursts_indices_matrix[str(burst_Index)]
 
