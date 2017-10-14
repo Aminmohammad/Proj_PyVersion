@@ -1,14 +1,15 @@
 import os
 
 import pywt
+from numpy import array, zeros, arange, hstack
 from pylab import size, amax
 from scipy.io import loadmat
 from scipy.sparse import csc_matrix
-from numpy import array, zeros, arange, hstack
 
 from DataSetLoader.Characteristics_Extractor.Characteristics_Extractor import Characteristics_Extractor
 from DataSetLoader.Device_RawData_Loading.Burst_Index_Extractor import Burst_Index_Extractor
-from Tools.PhaseCompensator.phase_compensator import phase_compensator
+from pre_FeatureGeneration_Processor.preProcTools.PhaseCompensator.Compensator.phase_compensator import \
+    phase_compensator
 
 
 def device_raw_data_loading(**kwarg):

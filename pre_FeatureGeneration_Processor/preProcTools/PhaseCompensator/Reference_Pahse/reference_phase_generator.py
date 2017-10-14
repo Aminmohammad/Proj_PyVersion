@@ -1,6 +1,6 @@
 import math
 
-from numpy.ma import arange, zeros, angle, array, sin, column_stack
+from numpy.ma import arange, zeros, angle, array, sin, column_stack, shape
 from numpy.matlib import repmat, unwrap
 
 
@@ -62,3 +62,4 @@ def reference_phase_generator(**kwarg):
 
     return phase_ref
 
+reference_phase_generator(sampling_frequency=20e6, communication_frequency=2e6)

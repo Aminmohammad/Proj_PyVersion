@@ -3,7 +3,8 @@ import os
 from DataSetLoader.Data_Loading_Manager.Data_Set_Loading_Manager import data_set_loading_manager
 from RFFingerprintGenerator.RFFP_Production_Manager.FingerPrint_Production_Manager import \
     finger_print_production_manager
-from Tools.CSVSaver.csv_file_saver import csv_file_saver
+from GeneralTools.CSVSaver.csv_file_saver import csv_file_saver
+from pre_FeatureGeneration_Processor.preProc_Manager.preProc_Manager import preProc_manager
 
 
 def project_manager(**kwarg):
@@ -21,6 +22,10 @@ def project_manager(**kwarg):
         communication_frequency=kwarg["communication_frequency"],
         characteristics_extractor_method=kwarg["characteristics_extractor_method"]
     )
+
+    # pre-Processing the `extracted_data_set`
+    extracted_data_set = preProc_manager(extracted_data_set=extracted_data_set)
+
     # producing the Finger-Print from `extracted_data_set`
     data_bank = finger_print_production_manager(extracted_data_set=extracted_data_set)
 

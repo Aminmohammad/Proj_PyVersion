@@ -1,5 +1,5 @@
 from ProjectManager.project_manager import project_manager
-from Tools.FolderAddressExtractor.folder_address_extractor import folder_address_extractor
+from GeneralTools.FolderAddressExtractor.folder_address_extractor import folder_address_extractor
 
 
 def main():
