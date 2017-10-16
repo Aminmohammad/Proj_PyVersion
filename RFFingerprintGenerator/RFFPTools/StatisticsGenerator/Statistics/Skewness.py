@@ -1,7 +1,7 @@
 from scipy.stats import skew
 
 
-def skewness(**kwarg):
-    signal = kwarg["signal"]
+def skewness(signal, **kwarg):
+    signal = signal
     statistic = skew(signal)
     return statistic
