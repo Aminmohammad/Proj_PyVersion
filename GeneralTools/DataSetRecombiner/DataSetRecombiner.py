@@ -15,6 +15,7 @@ class DataSetRecombiner(object):
         self.device_key = []
         self.burst_key = []
         self.characteristic_key = []
+        self.selected_conversion_methods = []
 
         # finger-print inputs
         self.label_vector = 0
@@ -70,6 +71,9 @@ class DataSetRecombiner(object):
         # if we cover all devices
         all_devices_covered = kwargs["all_devices_covered"]
 
+        # if we cover all devices
+        self.selected_conversion_methods = kwargs["selected_conversion_methods"]
+
         # device_key
         self.device_key = kwargs["device_key"]
 
@@ -107,7 +111,7 @@ class DataSetRecombiner(object):
         # subregion_index = int(temp[last_index+1:])
         # print(subregion_index)
         # print(type(subregion_index))
-        converted_characteristic = conversion_manager(self.single_characteristic, {"dwt_calculator"})
+        converted_characteristic = conversion_manager(self.single_characteristic, {self.selected_conversion_methods})
         return converted_characteristic
 
     def preProcessor_characteristic_collector(self):

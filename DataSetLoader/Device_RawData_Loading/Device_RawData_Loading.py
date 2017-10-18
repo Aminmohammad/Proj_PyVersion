@@ -1,6 +1,5 @@
 import os
 
-import pywt
 from numpy import array, zeros, arange, hstack
 from pylab import size, amax
 from scipy.io import loadmat
@@ -32,7 +31,7 @@ def device_raw_data_loading(**kwarg):
     # Extracting all Records of Current Device
     overall_burst_index = 0
     vertical_hashmap_of_all_bursts = {}
-    for records_Index in [0, 1]:#range(len(list_of_records)):
+    for records_Index in range(len(list_of_records)):
         name_of_current_record = list_of_records[records_Index]
         print("    Record:" + str(records_Index))
         address_of_current_record = device_data_set_address + "/" + name_of_current_record
@@ -48,7 +47,7 @@ def device_raw_data_loading(**kwarg):
 
         key_values = bursts_indices_matrix.keys()
 
-        for burst_Index in [0, 1]:#range(len(key_values)):
+        for burst_Index in range(len(key_values)):
             print("        burst_Index:" + str(burst_Index))
             temp = bursts_indices_matrix[str(burst_Index)]
 
@@ -66,7 +65,6 @@ def device_raw_data_loading(**kwarg):
 
             if size(current_burst, 0) < length_of_a_single_preamble:
                 temp0 = []
-                # current_burst = repmat(current_burst, number_of_subregions, 1)
                 temp1 = zeros(length_of_a_single_preamble - size(current_burst, 0), 1)
                 temp0 = temp0.append(current_burst)
                 temp0 = temp0.append(temp1)
@@ -90,7 +88,6 @@ def device_raw_data_loading(**kwarg):
             ifrequency_all_subregions = []
             vertical_hash_map_of_a_single_burst = {}
             for subRegion_Index in arange(number_of_subregions + 1):
-                # print("            subRegion_Index:" + str(subRegion_Index))
                 if subRegion_Index < number_of_subregions:
                     starting_index = subRegion_Index * length_of_a_single_subregion
                     ending_index = (subRegion_Index + 1) * length_of_a_single_subregion
@@ -98,13 +95,6 @@ def device_raw_data_loading(**kwarg):
 
                     amplitude, phase, ifrequency = Characteristics_Extractor(a_single_subregion,
                                                                              characteristics_extractor_method)
-                    # cA_amplitude, cD_amplitude = pywt.dwt(amplitude, 'haar')
-                    # cA_phase, cD_phase = pywt.dwt(phase, 'haar')
-                    # cA_ifrequency, cD_ifrequency = pywt.dwt(ifrequency, 'haar')
-                    #
-                    # amplitude = cD_amplitude
-                    # phase = cD_phase
-                    # ifrequency = cD_ifrequency
 
                     vertical_hash_map_of_a_single_burst[
                         "amp_single_subRegion_" + str(subRegion_Index)] = array(amplitude)
@@ -119,16 +109,6 @@ def device_raw_data_loading(**kwarg):
                     phase_all_subregions = hstack((phase_all_subregions, phase))
                     ifrequency_all_subregions = hstack((ifrequency_all_subregions, ifrequency))
                 else:
-
-                    # cA_amplitude_all_subregions, cD_amplitude_all_subregions = \
-                    #     pywt.dwt(amplitude_all_subregions, 'haar')
-                    # cA_phase_all_subregions, cD_phase_all_subregions = pywt.dwt(phase_all_subregions, 'haar')
-                    # cA_ifrequency_all_subregions, cD_ifrequency_all_subregions = \
-                    #     pywt.dwt(ifrequency_all_subregions, 'haar')
-                    #
-                    # amplitude_all_subregions = cD_amplitude_all_subregions
-                    # phase_all_subregions = cD_phase_all_subregions
-                    # ifrequency_all_subregions = cD_ifrequency_all_subregions
 
                     vertical_hash_map_of_a_single_burst[
                         "amp_single_subRegion_" + str(subRegion_Index)] = array(amplitude_all_subregions)

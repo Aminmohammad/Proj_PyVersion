@@ -1,44 +1,69 @@
 import os
 
 import sys
-from numpy import shape, size, array
+from numpy import array
 
 from DataSetLoader.Data_Loading_Manager.Data_Set_Loading_Manager import data_set_loading_manager
+from GeneralTools.MATSaver.mat_file_saver import mat_file_saver
 from RFFingerprintGenerator.RFFP_Production_Manager.FingerPrint_Manager import \
     finger_print_manager
 from GeneralTools.CSVSaver.csv_file_saver import csv_file_saver
 from pre_FeatureGeneration_Processor.preProcessorManager.preProcessor_manager import preProcessor_manager
 
 
-def project_manager(**kwarg):
+def project_manager(**kwargs):
     """this is good"""
+    # output
+    output = {}
     # extract the DataSet
     extracted_data_set = data_set_loading_manager(
-        do_you_want_to_make_new_data_set=kwarg["do_you_want_to_make_new_data_set"],
-        data_set_address=kwarg["data_set_address"],
-        zero_conversion_threshold=kwarg["zero_conversion_threshold"],
-        number_of_subRegions=kwarg["number_of_subRegions"],
-        number_of_symbols_per_preamble=kwarg["number_of_symbols_per_preamble"],
-        number_of_chips_per_subRegion=kwarg["number_of_chips_per_subRegion"],
-        time_length_of_a_single_chip_in_second=kwarg["time_length_of_a_single_chip_in_second"],
-        sampling_frequency=kwarg["sampling_frequency"],
-        communication_frequency=kwarg["communication_frequency"],
-        characteristics_extractor_method=kwarg["characteristics_extractor_method"]
+        data_set_address=kwargs["data_set_address"],
+        zero_conversion_threshold=kwargs["zero_conversion_threshold"],
+        number_of_subRegions=kwargs["number_of_subRegions"],
+        number_of_symbols_per_preamble=kwargs["number_of_symbols_per_preamble"],
+        number_of_chips_per_subRegion=kwargs["number_of_chips_per_subRegion"],
+        time_length_of_a_single_chip_in_second=kwargs["time_length_of_a_single_chip_in_second"],
+        sampling_frequency=kwargs["sampling_frequency"],
+        communication_frequency=kwargs["communication_frequency"],
+        characteristics_extractor_method=kwargs["characteristics_extractor_method"],
+        make_new_data_set=kwargs["make_new_data_set"],
+        selected_loading_format=kwargs["selected_loading_format"]
     )
+    output["Initial_data_set"] = extracted_data_set
 
-    extracted_data_set = preProcessor_manager(extracted_data_set=extracted_data_set)
+    if kwargs["save_initial_data_set"]:
+        file_saver(extracted_data_set, "InitialDataSet", "data_set", kwargs)
+
+    # Running the pre-Processing
+    if kwargs["run_preProcess"]:
+
+        extracted_data_set = preProcessor_manager(extracted_data_set,
+                                                  kwargs["selected_conversion_methods"])
+        output["preProcessed_data_set"] = extracted_data_set
+
+        if kwargs["save_preProcessed_data_set"]:
+            file_saver(extracted_data_set, "preProcessedDataSet", "data_set", kwargs)
 
     # producing the Finger-Print from `extracted_data_set`
-    data_bank = array(finger_print_manager(extracted_data_set=extracted_data_set))
+    if kwargs["run_finger_print_production"]:
+        data_bank = array(finger_print_manager(extracted_data_set,
+                                               kwargs["selected_conversion_methods"]))
+        output["data_bank"] = data_bank.transpose()
 
+        if kwargs["save_preProcessed_data_set"]:
+            file_saver(data_bank.transpose(), "DataBank", "data_bank", kwargs)
+
+    return output
+
+
+def file_saver(data, folder_name, file_name, kwargs):
     # saving the generated from data-bank
-    data_bank_saving_address = kwarg["data_set_address"].replace("RawData", "DataBank")
-    if not (os.path.exists(data_bank_saving_address)):
-        os.makedirs(data_bank_saving_address)
+    data_saving_address = kwargs["data_set_address"].replace("RawData", folder_name)
+    if not (os.path.exists(data_saving_address)):
+        os.makedirs(data_saving_address)
 
-    csv_file_saver(saving_address=data_bank_saving_address,
-                   data=data_bank.transpose())
+    if kwargs["selected_saving_format"] == "csv":
+        csv_file_saver(data, data_saving_address, file_name)
 
-    # Todo: make the address dynamic
-
-    # pre-processing of extracted data-set
+    elif kwargs["selected_saving_format"] == "mat":
+        mat_file_saver(data, data_saving_address, file_name)

@@ -1,15 +1,11 @@
-import sys
 from numpy import size, array
 
 from GeneralTools.DataSetRecombiner.DataSetRecombiner import DataSetRecombiner
-from RFFingerprintGenerator.FingePrintGenerator.finger_print_generator import FingerPrintGenerator
 
 reference = DataSetRecombiner()
 
 
-def generated_data_set_decomposer_and_recombiner(extracted_data_set, name_of_caller_manager):
-    # output = array([])
-
+def generated_data_set_decomposer_and_recombiner(extracted_data_set, name_of_caller_manager, selected_conversion_methods):
     device_key_list = array(list(extracted_data_set.keys()))
     device_label = 0
     all_devices_covered = False
@@ -50,6 +46,7 @@ def generated_data_set_decomposer_and_recombiner(extracted_data_set, name_of_cal
                                                        name_of_caller_manager=name_of_caller_manager,
                                                        device_key=device_data_set_key,
                                                        burst_key=burst_key,
-                                                       characteristic_key=characteristic_key)
+                                                       characteristic_key=characteristic_key,
+                                                       selected_conversion_methods=selected_conversion_methods)
     reference.__init__()
     return output

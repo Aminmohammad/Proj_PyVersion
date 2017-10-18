@@ -20,9 +20,7 @@ signal_statistics = {}
 def conversion_manager(signal, conversions):
     # all conversions
     for conversion_method in conversions:
-        if   conversion_method == "dwt_calculator":
+        if conversion_method == "dwt_calculator":
             signal = dwt_calculator(signal)
-
-
 
     return signal
