@@ -1,6 +1,5 @@
-from GeneralTools.StatisticsGenerator.Kurtosis import kurt
-from GeneralTools.StatisticsGenerator.Skewness import skewness
-
+from RFFingerprintGenerator.RFFPTools.StatisticsGenerator.Statistics.Kurtosis import kurt
+from RFFingerprintGenerator.RFFPTools.StatisticsGenerator.Statistics.Skewness import skewness
 from RFFingerprintGenerator.RFFPTools.StatisticsGenerator.Statistics.Variance import variance
 
 signal_statistics = {}

@@ -1,10 +1,13 @@
 import os
 
+import sys
+from numpy import shape, size, array
+
 from DataSetLoader.Data_Loading_Manager.Data_Set_Loading_Manager import data_set_loading_manager
-from RFFingerprintGenerator.RFFP_Production_Manager.FingerPrint_Production_Manager import \
-    finger_print_production_manager
+from RFFingerprintGenerator.RFFP_Production_Manager.FingerPrint_Manager import \
+    finger_print_manager
 from GeneralTools.CSVSaver.csv_file_saver import csv_file_saver
-from pre_FeatureGeneration_Processor.preProc_Manager.preProc_Manager import preProc_manager
+from pre_FeatureGeneration_Processor.preProcessorManager.preProcessor_manager import preProcessor_manager
 
 
 def project_manager(**kwarg):
@@ -23,11 +26,10 @@ def project_manager(**kwarg):
         characteristics_extractor_method=kwarg["characteristics_extractor_method"]
     )
 
-    # pre-Processing the `extracted_data_set`
-    extracted_data_set = preProc_manager(extracted_data_set=extracted_data_set)
+    extracted_data_set = preProcessor_manager(extracted_data_set=extracted_data_set)
 
     # producing the Finger-Print from `extracted_data_set`
-    data_bank = finger_print_production_manager(extracted_data_set=extracted_data_set)
+    data_bank = array(finger_print_manager(extracted_data_set=extracted_data_set))
 
     # saving the generated from data-bank
     data_bank_saving_address = kwarg["data_set_address"].replace("RawData", "DataBank")

@@ -1,0 +1,9 @@
+from GeneralTools.DataSetDecomposerAndRecombiner.generated_data_set_decomposer_and_recombiner import \
+    generated_data_set_decomposer_and_recombiner
+
+
+def preProcessor_manager(**kwargs):
+    data_set = generated_data_set_decomposer_and_recombiner(extracted_data_set=kwargs["extracted_data_set"],
+                                                            name_of_caller_manager="preProcessor_manager")
+
+    return data_set

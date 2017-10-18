@@ -8,8 +8,7 @@ from scipy.sparse import csc_matrix
 
 from DataSetLoader.Characteristics_Extractor.Characteristics_Extractor import Characteristics_Extractor
 from DataSetLoader.Device_RawData_Loading.Burst_Index_Extractor import Burst_Index_Extractor
-from pre_FeatureGeneration_Processor.preProcTools.PhaseCompensator.Compensator.phase_compensator import \
-    phase_compensator
+from pre_FeatureGeneration_Processor.preProcessingTools.phase_compensator.phase_compensator import phase_compensator
 
 
 def device_raw_data_loading(**kwarg):
@@ -76,10 +75,11 @@ def device_raw_data_loading(**kwarg):
                 current_burst = array(current_burst[0: length_of_a_single_preamble])
             current_burst = array(current_burst)
 
-            # burst phase compensation
+            # # burst phase compensation
             current_burst = phase_compensator(preamble=current_burst,
                                               sampling_frequency=sampling_frequency,
                                               communication_frequency=communication_frequency)
+            # TODO: Omit these lines
 
             # subRegions of 'current_burst'
             length_of_a_single_subregion = int(size(current_burst) / number_of_subregions)
@@ -98,13 +98,13 @@ def device_raw_data_loading(**kwarg):
 
                     amplitude, phase, ifrequency = Characteristics_Extractor(a_single_subregion,
                                                                              characteristics_extractor_method)
-                    cA_amplitude, cD_amplitude = pywt.dwt(amplitude, 'haar')
-                    cA_phase, cD_phase = pywt.dwt(phase, 'haar')
-                    cA_ifrequency, cD_ifrequency = pywt.dwt(ifrequency, 'haar')
-
-                    amplitude = cD_amplitude
-                    phase = cD_phase
-                    ifrequency = cD_ifrequency
+                    # cA_amplitude, cD_amplitude = pywt.dwt(amplitude, 'haar')
+                    # cA_phase, cD_phase = pywt.dwt(phase, 'haar')
+                    # cA_ifrequency, cD_ifrequency = pywt.dwt(ifrequency, 'haar')
+                    #
+                    # amplitude = cD_amplitude
+                    # phase = cD_phase
+                    # ifrequency = cD_ifrequency
 
                     vertical_hash_map_of_a_single_burst[
                         "amp_single_subRegion_" + str(subRegion_Index)] = array(amplitude)
@@ -120,15 +120,15 @@ def device_raw_data_loading(**kwarg):
                     ifrequency_all_subregions = hstack((ifrequency_all_subregions, ifrequency))
                 else:
 
-                    cA_amplitude_all_subregions, cD_amplitude_all_subregions = \
-                        pywt.dwt(amplitude_all_subregions, 'haar')
-                    cA_phase_all_subregions, cD_phase_all_subregions = pywt.dwt(phase_all_subregions, 'haar')
-                    cA_ifrequency_all_subregions, cD_ifrequency_all_subregions = \
-                        pywt.dwt(ifrequency_all_subregions, 'haar')
-
-                    amplitude_all_subregions = cD_amplitude_all_subregions
-                    phase_all_subregions = cD_phase_all_subregions
-                    ifrequency_all_subregions = cD_ifrequency_all_subregions
+                    # cA_amplitude_all_subregions, cD_amplitude_all_subregions = \
+                    #     pywt.dwt(amplitude_all_subregions, 'haar')
+                    # cA_phase_all_subregions, cD_phase_all_subregions = pywt.dwt(phase_all_subregions, 'haar')
+                    # cA_ifrequency_all_subregions, cD_ifrequency_all_subregions = \
+                    #     pywt.dwt(ifrequency_all_subregions, 'haar')
+                    #
+                    # amplitude_all_subregions = cD_amplitude_all_subregions
+                    # phase_all_subregions = cD_phase_all_subregions
+                    # ifrequency_all_subregions = cD_ifrequency_all_subregions
 
                     vertical_hash_map_of_a_single_burst[
                         "amp_single_subRegion_" + str(subRegion_Index)] = array(amplitude_all_subregions)

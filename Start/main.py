@@ -1,8 +1,19 @@
 from ProjectManager.project_manager import project_manager
 from GeneralTools.FolderAddressExtractor.folder_address_extractor import folder_address_extractor
+from tkinter import Tk, filedialog
+import os, sys
 
 
 def main():
+    # root = Tk()
+    # root.withdraw()  # use to hide tkinter window
+    #
+    # currdir = os.getcwd()
+    # tempdir = filedialog.askdirectory(parent=root, initialdir=currdir, title='Please select a directory')
+    # print(tempdir)
+    # sys.exit(0)
+
+
     """
     Start of program
     """
@@ -20,7 +31,7 @@ def main():
 
     # Address Extraction of Selected Data-Set
     root_folder_address = folder_address_extractor(target_folder_name="PythonVersion")
-    data_set_address = root_folder_address + "\\resources\\" + selected_data_set_name + "\\RawData"
+    data_set_address = root_folder_address + "\\Resources\\" + selected_data_set_name + "\\RawData"
     data_set_address = data_set_address.replace("\\", "/")
 
     project_manager(do_you_want_to_make_new_data_set=do_you_want_to_make_new_data_set,
@@ -35,7 +46,6 @@ def main():
                     characteristics_extractor_method=characteristics_extractor_method,
                     )
 
-# ssss
 if __name__ == '__main__':
     # print(main.__doc__)
     # help(main)
