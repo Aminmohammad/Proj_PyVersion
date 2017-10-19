@@ -11,7 +11,7 @@ def main():
     Start of program
     """
     # Input Parameters
-    selected_data_set_name = "2016_07_11_IQ_20Msps_RZUSBSTICK"  # if it is zero, a pop-up window will give you the opportunity to select it graphically   2016_07_11_IQ_20Msps_RZUSBSTICK
+    selected_data_set_name = ""  # if it is zero, a pop-up window will give you the opportunity to select it graphically   2016_07_11_IQ_20Msps_RZUSBSTICK
     zero_conversion_threshold = 0.7,
     number_of_subRegions = 32,
     number_of_symbols_per_preamble = 8,
@@ -27,8 +27,8 @@ def main():
     selected_data_bank_saving_format = "mat"  # "csv" or "mat"
 
     # permissions
-    make_new_data_set = False  # if 'make_new_data_set=False' >> it will load an existing
-    # "data-set.selected_loading_format"
+    make_new_data_set = False  # if 'make_new_data_set=False' >> it will load an existing "data-set.selected_loading_format"
+                               # if 'make_new_data_set=False' and 'exist(InitialDataSet) == 0' >> # automatically changes: 'make_new_data_set=False'
     run_preProcess = True
     run_finger_print_production = True
     save_initial_data_set = True

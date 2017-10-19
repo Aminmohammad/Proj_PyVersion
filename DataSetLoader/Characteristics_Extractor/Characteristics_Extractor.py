@@ -4,7 +4,7 @@ from DataSetLoader.Characteristics_Extractor.AmpPhaseFreq_Chars import AmpPhaseF
 def Characteristics_Extractor(a_single_subRegion,
                               characteristics_Extractor_Method):
     amplitude, phase, ifrequency = AmpPhaseFreq_Chars(a_single_subRegion)
-    # TODO: maker here automatic
+    # TODO: maker characteristic Selection automatic
 
     return amplitude, phase, ifrequency
 
