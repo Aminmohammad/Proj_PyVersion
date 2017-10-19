@@ -1,6 +1,7 @@
+from GeneralTools.RawDataAddressExtractor.raw_data_address_extractor import raw_data_folder_address_extractor
 from ProjectManager.project_manager import project_manager
 from GeneralTools.FolderAddressExtractor.folder_address_extractor import folder_address_extractor
-from tkinter import Tk, filedialog
+
 import os, sys
 
 
@@ -10,7 +11,7 @@ def main():
     Start of program
     """
     # Input Parameters
-    selected_data_set_name = "2016_07_11_IQ_20Msps_RZUSBSTICK"
+    selected_data_set_name = "2016_07_11_IQ_20Msps_RZUSBSTICK"  # if it is zero, a pop-up window will give you the opportunity to select it graphically   2016_07_11_IQ_20Msps_RZUSBSTICK
     zero_conversion_threshold = 0.7,
     number_of_subRegions = 32,
     number_of_symbols_per_preamble = 8,
@@ -36,8 +37,7 @@ def main():
 
     # Address Extraction of Selected Data-Set
     root_folder_address = folder_address_extractor(target_folder_name="PythonVersion")
-    data_set_address = root_folder_address + "\\Resources\\" + selected_data_set_name + "\\RawData"
-    data_set_address = data_set_address.replace("\\", "/")
+    data_set_address = raw_data_folder_address_extractor(root_folder_address, selected_data_set_name)
 
     output = project_manager(data_set_address=data_set_address,
                              zero_conversion_threshold=zero_conversion_threshold,
