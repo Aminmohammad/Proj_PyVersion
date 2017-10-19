@@ -3,9 +3,11 @@ import os
 
 import sys
 from numpy import array
+import pickle
 
 from DataSetLoader.Data_Loading_Manager.Data_Set_Loading_Manager import data_set_loading_manager
 from GeneralTools.MATSaver.mat_file_saver import mat_file_saver
+from GeneralTools.PickleSaver.pickle_file_saver import pickle_file_saver
 from RFFingerprintGenerator.RFFP_Production_Manager.FingerPrint_Manager import \
     finger_print_manager
 from GeneralTools.CSVSaver.csv_file_saver import csv_file_saver
@@ -13,6 +15,7 @@ from pre_FeatureGeneration_Processor.preProcessorManager.preProcessor_manager im
 
 
 def project_manager(**kwargs):
+    # TODO: manage kwargs
     """this is good"""
     # output
     output = {}
@@ -28,12 +31,14 @@ def project_manager(**kwargs):
         communication_frequency=kwargs["communication_frequency"],
         characteristics_extractor_method=kwargs["characteristics_extractor_method"],
         make_new_data_set=kwargs["make_new_data_set"],
-        selected_loading_format=kwargs["selected_loading_format"]
+        selected_loading_format=kwargs["selected_initial_data_set_loading_format"]
     )
+
     output["Initial_data_set"] = extracted_data_set
 
     if kwargs["save_initial_data_set"]:
-        file_saver(extracted_data_set, "InitialDataSet", "data_set", kwargs)
+        kwargs["selected_saving_format"] = kwargs ["selected_initial_data_set_saving_format"]
+        file_saver(extracted_data_set, "InitialDataSet", "initial_data_set", kwargs)
 
     # Running the pre-Processing
     if kwargs["run_preProcess"]:
@@ -43,7 +48,8 @@ def project_manager(**kwargs):
         output["preProcessed_data_set"] = extracted_data_set
 
         if kwargs["save_preProcessed_data_set"]:
-            file_saver(extracted_data_set, "preProcessedDataSet", "data_set", kwargs)
+            kwargs["selected_saving_format"] = kwargs["selected_preProcessed_data_set_saving_format"]
+            file_saver(extracted_data_set, "preProcessedDataSet", "preProcessed_data_set",kwargs)
 
     # producing the Finger-Print from `extracted_data_set`
     if kwargs["run_finger_print_production"]:
@@ -52,13 +58,13 @@ def project_manager(**kwargs):
         output["data_bank"] = data_bank.transpose()
 
         if kwargs["save_preProcessed_data_set"]:
+            kwargs["selected_saving_format"] = kwargs["selected_data_bank_saving_format"]
             file_saver(data_bank.transpose(), "DataBank", "data_bank", kwargs)
 
     return output
 
 
 def file_saver(data, folder_name, file_name, kwargs):
-    # saving the generated from data-bank
     data_saving_address = kwargs["data_set_address"].replace("RawData", folder_name)
     if not (os.path.exists(data_saving_address)):
         os.makedirs(data_saving_address)
@@ -66,14 +72,8 @@ def file_saver(data, folder_name, file_name, kwargs):
     if kwargs["selected_saving_format"] == "csv":
         csv_file_saver(data, data_saving_address, file_name)
 
-        # file_address = data_saving_address + "/" + file_name + ".csv"
-        # with open(file_address, 'wb') as csv_file:
-        #
-        #     writer = csv.writer(csv_file)
-        #     for key, value in data.items():
-        #         key, value
-        #         writer.writerow([key, value])
-            # TODO: First               Priority
+    elif kwargs["selected_saving_format"] == "txt":
+        pickle_file_saver(data, data_saving_address, file_name)
 
     elif kwargs["selected_saving_format"] == "mat":
         mat_file_saver(data, data_saving_address, file_name)
