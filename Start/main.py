@@ -6,8 +6,6 @@ import os, sys
 
 def main():
     # TODO: here is the place of Graphic Resources Address
-
-
     """
     Start of program
     """
@@ -22,11 +20,13 @@ def main():
     communication_frequency = 2e6,
     characteristics_extractor_method = "AmpPhaseFreq_Chars"
     selected_conversion_methods = "dwt_calculator"  # TODO: make it plural
-    selected_saving_format = "csv"  # "csv" or "mat"
-    selected_loading_format = "csv"  # "csv" or "mat"
+    selected_initial_data_set_saving_format = "txt"  # "txt"
+    selected_initial_data_set_loading_format = "txt"  # "txt"
+    selected_preProcessed_data_set_saving_format = "txt"  # "txt"
+    selected_data_bank_saving_format = "mat"  # "csv" or "mat"
 
     # permissions
-    make_new_data_set = True  # if 'make_new_data_set=False' >> it will load an existing
+    make_new_data_set = False  # if 'make_new_data_set=False' >> it will load an existing
     # "data-set.selected_loading_format"
     run_preProcess = True
     run_finger_print_production = True
@@ -49,8 +49,10 @@ def main():
                              communication_frequency=communication_frequency,
                              characteristics_extractor_method=characteristics_extractor_method,
                              selected_conversion_methods=selected_conversion_methods,
-                             selected_saving_format=selected_saving_format,
-                             selected_loading_format=selected_loading_format,
+                             selected_initial_data_set_saving_format=selected_initial_data_set_saving_format,
+                             selected_initial_data_set_loading_format=selected_initial_data_set_loading_format,
+                             selected_preProcessed_data_set_saving_format=selected_preProcessed_data_set_saving_format,
+                             selected_data_bank_saving_format=selected_data_bank_saving_format,
                              make_new_data_set=make_new_data_set,
                              run_preProcess=run_preProcess,
                              run_finger_print_production=run_finger_print_production,

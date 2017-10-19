@@ -3,6 +3,7 @@ import os
 from DataSetLoader.Device_RawData_Loading.Device_RawData_Loading import device_raw_data_loading
 from GeneralTools.CSVLoader.csv_file_loader import csv_file_loader
 from GeneralTools.MATLoader.mat_file_loader import mat_file_loader
+from GeneralTools.PickleLoader.pickle_file_loader import pickle_file_loader
 
 
 class DataSetMakerOrLoader:
@@ -26,7 +27,7 @@ class DataSetMakerOrLoader:
 
     def method_caller(self):
         self.loading_data_set_address = self.data_set_address.replace("RawData", "InitialDataSet")
-        self.file_address = self.loading_data_set_address + "//data_set." + self.selected_loading_format
+        self.file_address = self.loading_data_set_address + "//initial_data_set." + self.selected_loading_format
         if (not self.make_new_data_set) and (
                 os.path.isfile(self.file_address)):
             data_set = self.data_set_loader()
@@ -36,12 +37,7 @@ class DataSetMakerOrLoader:
         return data_set
 
     def data_set_loader(self):
-        # if self.selected_loading_format == "csv":
-        #     data_set = csv_file_loader(self.file_address)
-        #
-        # elif self.selected_loading_format == "mat":
-        #     data_set = mat_file_loader(self.file_address)
-        data_set = self.data_set_maker()
+        data_set = pickle_file_loader(self.file_address)
 
         # TODO: Un-comment previous files and delete: 'data_set = self.data_set_maker()'
 
