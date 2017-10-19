@@ -88,8 +88,6 @@ class DataSetRecombiner(object):
 
         # collect converted characteristic in burst
         self.collected_burst = converted_characteristic_collector_function(self)
-        # print(self.collected_burst)
-        # print(size(self.collected_burst))
 
         if all_characteristics_of_current_burst_covered:
             burst_collector_function(self)
@@ -106,11 +104,6 @@ class DataSetRecombiner(object):
 
     # preProcessing Functions
     def preProcessor_characteristic_converter(self):
-        # temp = str(self.characteristic_key)
-        # last_index = int(temp.rfind('_'))
-        # subregion_index = int(temp[last_index+1:])
-        # print(subregion_index)
-        # print(type(subregion_index))
         converted_characteristic = conversion_manager(self.single_characteristic, {self.selected_conversion_methods})
         return converted_characteristic
 

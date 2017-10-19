@@ -15,6 +15,7 @@ signal_statistics = {}
 #     imported_module = import_module(test, ".")
 #
 #     return imported_module
+# TODO: Revise this section
 
 
 def conversion_manager(signal, conversions):

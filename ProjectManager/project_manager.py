@@ -1,3 +1,4 @@
+import csv
 import os
 
 import sys
@@ -64,6 +65,15 @@ def file_saver(data, folder_name, file_name, kwargs):
 
     if kwargs["selected_saving_format"] == "csv":
         csv_file_saver(data, data_saving_address, file_name)
+
+        # file_address = data_saving_address + "/" + file_name + ".csv"
+        # with open(file_address, 'wb') as csv_file:
+        #
+        #     writer = csv.writer(csv_file)
+        #     for key, value in data.items():
+        #         key, value
+        #         writer.writerow([key, value])
+            # TODO: First               Priority
 
     elif kwargs["selected_saving_format"] == "mat":
         mat_file_saver(data, data_saving_address, file_name)

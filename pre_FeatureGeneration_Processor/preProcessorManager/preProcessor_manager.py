@@ -1,5 +1,3 @@
-import sys
-
 from GeneralTools.DataSetDecomposerAndRecombiner.generated_data_set_decomposer_and_recombiner import \
     generated_data_set_decomposer_and_recombiner
 
