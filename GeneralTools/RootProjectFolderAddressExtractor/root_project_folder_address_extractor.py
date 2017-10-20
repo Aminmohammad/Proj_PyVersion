@@ -1,7 +1,7 @@
 import os
 
 
-def folder_address_extractor(**kwarg):
+def root_project_folder_address_extractor(**kwarg):
     target_folder_name = kwarg["target_folder_name"]
     current_folder_address = os.getcwd()
     starting_index = current_folder_address.find(target_folder_name)

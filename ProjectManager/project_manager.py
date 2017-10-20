@@ -11,7 +11,7 @@ from GeneralTools.PickleSaver.pickle_file_saver import pickle_file_saver
 from RFFingerprintGenerator.RFFP_Production_Manager.FingerPrint_Manager import \
     finger_print_manager
 from GeneralTools.CSVSaver.csv_file_saver import csv_file_saver
-from pre_FeatureGeneration_Processor.preProcessorManager.preProcessor_manager import preProcessor_manager
+from preFeatureGenerationProcessor.preProcessorManager.preProcessor_manager import preProcessor_manager
 
 
 def project_manager(**kwargs):
@@ -30,7 +30,7 @@ def project_manager(**kwargs):
         time_length_of_a_single_chip_in_second=kwargs["time_length_of_a_single_chip_in_second"],
         sampling_frequency=kwargs["sampling_frequency"],
         communication_frequency=kwargs["communication_frequency"],
-        characteristics_extractor_method=kwargs["characteristics_extractor_method"],
+        characteristics_extractor_methods=kwargs["characteristics_extractor_methods"],
         make_new_data_set=kwargs["make_new_data_set"],
         selected_loading_format=kwargs["selected_initial_data_set_loading_format"]
     )
@@ -50,7 +50,7 @@ def project_manager(**kwargs):
 
         if kwargs["save_preProcessed_data_set"]:
             kwargs["selected_saving_format"] = kwargs["selected_preProcessed_data_set_saving_format"]
-            file_saver(extracted_data_set, "preProcessedDataSet", "preProcessed_data_set",kwargs)
+            file_saver(extracted_data_set, "preProcessedDataSet", "preProcessed_data_set", kwargs)
 
     # producing the Finger-Print from `extracted_data_set`
     if kwargs["run_finger_print_production"]:

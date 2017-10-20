@@ -7,7 +7,7 @@ from scipy.sparse import csc_matrix
 
 from DataSetLoader.Characteristics_Extractor.Characteristics_Extractor import Characteristics_Extractor
 from DataSetLoader.Device_RawData_Loading.Burst_Index_Extractor import Burst_Index_Extractor
-from pre_FeatureGeneration_Processor.preProcessingTools.phase_compensator.phase_compensator import phase_compensator
+from preFeatureGenerationProcessor.preProcessingTools.phase_compensator.phase_compensator import phase_compensator
 
 
 def device_raw_data_loading(**kwarg):
@@ -20,7 +20,7 @@ def device_raw_data_loading(**kwarg):
     time_length_of_a_single_chip_in_second = array(kwarg["time_length_of_a_single_chip_in_second"])
     sampling_frequency = array(kwarg["sampling_frequency"])
     communication_frequency = array(kwarg["communication_frequency"])
-    characteristics_extractor_method = kwarg["characteristics_extractor_method"]
+    characteristics_extractor_methods = kwarg["characteristics_extractor_methods"]
 
     # Extracting the Address of all Records in the 'DataSet Folder' for a Single Device
     list_of_records = os.listdir(device_data_set_address)
@@ -73,7 +73,7 @@ def device_raw_data_loading(**kwarg):
                 current_burst = array(current_burst[0: length_of_a_single_preamble])
             current_burst = array(current_burst)
 
-            # # burst phase compensation
+            # burst phase compensation
             current_burst = phase_compensator(preamble=current_burst,
                                               sampling_frequency=sampling_frequency,
                                               communication_frequency=communication_frequency)
@@ -94,7 +94,7 @@ def device_raw_data_loading(**kwarg):
                     a_single_subregion = current_burst[starting_index:ending_index]
 
                     amplitude, phase, ifrequency = Characteristics_Extractor(a_single_subregion,
-                                                                             characteristics_extractor_method)
+                                                                             characteristics_extractor_methods)
 
                     vertical_hash_map_of_a_single_burst[
                         "amp_single_subRegion_" + str(subRegion_Index)] = array(amplitude)

@@ -3,7 +3,7 @@ from numpy.ma import vstack, reshape, size, column_stack, row_stack, array, shap
 
 from RFFingerprintGenerator.RFFPTools.StatisticsGenerator.Manager.StatisticsGenaerator_Manager import \
     statistics_generator_manager
-from pre_FeatureGeneration_Processor.preProcessingTools.conversion_manager import conversion_manager
+from preFeatureGenerationProcessor.preProcessingTools.conversion_manager import conversion_manager
 
 
 class DataSetRecombiner(object):
@@ -104,7 +104,7 @@ class DataSetRecombiner(object):
 
     # preProcessing Functions
     def preProcessor_characteristic_converter(self):
-        converted_characteristic = conversion_manager(self.single_characteristic, {self.selected_conversion_methods})
+        converted_characteristic = conversion_manager(self.single_characteristic, self.selected_conversion_methods)
         return converted_characteristic
 
     def preProcessor_characteristic_collector(self):

@@ -20,7 +20,7 @@ class DataSetMakerOrLoader:
             "time_length_of_a_single_chip_in_second"]
         self.sampling_frequency = input_set["sampling_frequency"]
         self.communication_frequency = input_set["communication_frequency"]
-        self.characteristics_extractor_method = input_set["characteristics_extractor_method"]
+        self.characteristics_extractor_methods = input_set["characteristics_extractor_methods"]
         self.selected_loading_format = input_set["selected_loading_format"]
         self.file_address = []
         self.loading_data_set_address = []
@@ -62,8 +62,8 @@ class DataSetMakerOrLoader:
                                                                        self.sampling_frequency,
                                                                        communication_frequency=
                                                                        self.communication_frequency,
-                                                                       characteristics_extractor_method=
-                                                                       self.characteristics_extractor_method)
+                                                                       characteristics_extractor_methods=
+                                                                       self.characteristics_extractor_methods)
 
             self.vertical_structure_of_all_devices["single_device_"
                                                    + str(device_index)] = vertical_structure_of_all_bursts
