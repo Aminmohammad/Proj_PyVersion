@@ -22,6 +22,7 @@ class DataSetMakerOrLoader:
         self.communication_frequency = input_set["communication_frequency"]
         self.characteristics_extractor_methods = input_set["characteristics_extractor_methods"]
         self.selected_loading_format = input_set["selected_loading_format"]
+        self.project_name = input_set["project_name"]
         self.file_address = []
         self.loading_data_set_address = []
 
@@ -63,7 +64,8 @@ class DataSetMakerOrLoader:
                                                                        communication_frequency=
                                                                        self.communication_frequency,
                                                                        characteristics_extractor_methods=
-                                                                       self.characteristics_extractor_methods)
+                                                                       self.characteristics_extractor_methods,
+                                                                       project_name=self.project_name)
 
             self.vertical_structure_of_all_devices["single_device_"
                                                    + str(device_index)] = vertical_structure_of_all_bursts

@@ -32,7 +32,8 @@ def project_manager(**kwargs):
         communication_frequency=kwargs["communication_frequency"],
         characteristics_extractor_methods=kwargs["characteristics_extractor_methods"],
         make_new_data_set=kwargs["make_new_data_set"],
-        selected_loading_format=kwargs["selected_initial_data_set_loading_format"]
+        selected_loading_format=kwargs["selected_initial_data_set_loading_format"],
+        project_name=kwargs["project_name"]
     )
 
     output["Initial_data_set"] = extracted_data_set
@@ -45,7 +46,8 @@ def project_manager(**kwargs):
     if kwargs["run_preProcess"]:
 
         extracted_data_set = preProcessor_manager(extracted_data_set,
-                                                  kwargs["selected_conversion_methods"])
+                                                  kwargs["selected_conversion_methods"],
+                                                  kwargs["project_name"])
         output["preProcessed_data_set"] = extracted_data_set
 
         if kwargs["save_preProcessed_data_set"]:
@@ -55,7 +57,8 @@ def project_manager(**kwargs):
     # producing the Finger-Print from `extracted_data_set`
     if kwargs["run_finger_print_production"]:
         data_bank = array(finger_print_manager(extracted_data_set,
-                                               kwargs["selected_conversion_methods"]))
+                                               kwargs["selected_feature_extraction_methods"],
+                                               kwargs["project_name"]))
         output["data_bank"] = data_bank.transpose()
 
         if kwargs["save_preProcessed_data_set"]:

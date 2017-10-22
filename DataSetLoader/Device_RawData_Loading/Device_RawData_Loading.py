@@ -1,13 +1,16 @@
 import os
 
+import sys
 from numpy import array, zeros, arange, hstack
 from pylab import size, amax
 from scipy.io import loadmat
 from scipy.sparse import csc_matrix
 
-from DataSetLoader.Characteristics_Extractor.Characteristics_Extractor import Characteristics_Extractor
+from DataSetLoader.CharTools.Manager.Characteristics_Extractor import characteristics_extractor
 from DataSetLoader.Device_RawData_Loading.Burst_Index_Extractor import Burst_Index_Extractor
-from preFeatureGenerationProcessor.preProcessingTools.phase_compensator.phase_compensator import phase_compensator
+from DataSetLoader.PhaseCompensator.phase_compensator import phase_compensator
+from GeneralTools.ModuleOrClassImporterSection.ImporterMethodsManager.ImporterMethedsManager import \
+    importer_methods_manager
 
 
 def device_raw_data_loading(**kwarg):
@@ -21,6 +24,7 @@ def device_raw_data_loading(**kwarg):
     sampling_frequency = array(kwarg["sampling_frequency"])
     communication_frequency = array(kwarg["communication_frequency"])
     characteristics_extractor_methods = kwarg["characteristics_extractor_methods"]
+    project_name = kwarg["project_name"]
 
     # Extracting the Address of all Records in the 'DataSet Folder' for a Single Device
     list_of_records = os.listdir(device_data_set_address)
@@ -28,10 +32,13 @@ def device_raw_data_loading(**kwarg):
     # Extracting of Essential Parameters
     number_of_subregions_per_preamble = int(number_of_subregions / number_of_symbols_per_preamble)
 
+    # extraction of modules
+    selected_methods = importer_methods_manager(project_name, characteristics_extractor_methods)
+
     # Extracting all Records of Current Device
     overall_burst_index = 0
     vertical_hashmap_of_all_bursts = {}
-    for records_Index in [0, 1]: # range(len(list_of_records)): # TODO: omit
+    for records_Index in [0, 1]: #range(len(list_of_records)):  # TODO: omit
         name_of_current_record = list_of_records[records_Index]
         print("    Record:" + str(records_Index))
         address_of_current_record = device_data_set_address + "/" + name_of_current_record
@@ -47,7 +54,7 @@ def device_raw_data_loading(**kwarg):
 
         key_values = bursts_indices_matrix.keys()
 
-        for burst_Index in [0, 1]:  # range(len(key_values)): # TODO: omit
+        for burst_Index in [0, 1]: #range(len(key_values)):  # TODO: omit
             print("        burst_Index:" + str(burst_Index))
             temp = bursts_indices_matrix[str(burst_Index)]
 
@@ -83,43 +90,45 @@ def device_raw_data_loading(**kwarg):
             length_of_a_single_subregion = int(size(current_burst) / number_of_subregions)
 
             pure_all_subregions = []
-            amplitude_all_subregions = []
-            phase_all_subregions = []
-            ifrequency_all_subregions = []
             vertical_hash_map_of_a_single_burst = {}
+            fields = {}
             for subRegion_Index in arange(number_of_subregions + 1):
                 if subRegion_Index < number_of_subregions:
                     starting_index = subRegion_Index * length_of_a_single_subregion
                     ending_index = (subRegion_Index + 1) * length_of_a_single_subregion
                     a_single_subregion = current_burst[starting_index:ending_index]
 
-                    amplitude, phase, ifrequency = Characteristics_Extractor(a_single_subregion,
-                                                                             characteristics_extractor_methods)
-
-                    vertical_hash_map_of_a_single_burst[
-                        "amp_single_subRegion_" + str(subRegion_Index)] = array(amplitude)
-                    vertical_hash_map_of_a_single_burst[
-                        "phase_single_subRegion_" + str(subRegion_Index)] = array(phase)
-
-                    vertical_hash_map_of_a_single_burst[
-                        "ifreq_single_subRegion_" + str(subRegion_Index)] = array(ifrequency)
+                    # Selected Character Extraction Methods
+                    subRegion_characteristics = characteristics_extractor(a_single_subregion,
+                                                                          selected_methods)
 
                     pure_all_subregions = hstack((pure_all_subregions, a_single_subregion))
-                    amplitude_all_subregions = hstack((amplitude_all_subregions, amplitude))
-                    phase_all_subregions = hstack((phase_all_subregions, phase))
-                    ifrequency_all_subregions = hstack((ifrequency_all_subregions, ifrequency))
+                    # TODO: this assignmentation is still in vein
+
+                    # getting all characteristics of a single subRegion
+                    for key in subRegion_characteristics.keys():
+                        vertical_hash_map_of_a_single_burst[
+                            key + "_single_subRegion_" + str(subRegion_Index)] = array(subRegion_characteristics[key])
+
+                        fields[key] = key
+
+                        # saving the current subRegion in the Dictionary of Burst
+                        if not (("%s_all_subregions" % key) in locals()):
+                            vars()[("%s_all_subregions" % key)] = array(subRegion_characteristics[key])
+
+                        else:
+                            vars()[("%s_all_subregions" % key)] = hstack((vars()[("%s_all_subregions" % key)],
+                                                                          array(subRegion_characteristics[key])))
+
                 else:
+                    # saving and deleting all subRegions together in the Nr+1 subRegion
+                    for key in fields.keys():
+                        vertical_hash_map_of_a_single_burst[
+                            key + "_single_subRegion_" + str(subRegion_Index)] = array(
+                            vars()[("%s_all_subregions" % key)])
+                        del (vars()[("%s_all_subregions" % key)])
 
-                    vertical_hash_map_of_a_single_burst[
-                        "amp_single_subRegion_" + str(subRegion_Index)] = array(amplitude_all_subregions)
-
-                    vertical_hash_map_of_a_single_burst[
-                        "phase_single_subRegion_" + str(subRegion_Index)] = array(phase_all_subregions)
-
-                    vertical_hash_map_of_a_single_burst[
-                        "ifreq_single_subRegion_" + str(subRegion_Index)] = array(ifrequency_all_subregions)
-
-                    # saving the Single Burst
+                    # saving the Single Burst in the Dictionary of all Bursts
                     vertical_hashmap_of_all_bursts[str(overall_burst_index)] = vertical_hash_map_of_a_single_burst
                     overall_burst_index += 1
 

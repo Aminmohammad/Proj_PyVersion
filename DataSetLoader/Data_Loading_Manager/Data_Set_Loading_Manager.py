@@ -14,7 +14,8 @@ def data_set_loading_manager(**kwargs):
                       "communication_frequency": kwargs["communication_frequency"],
                       "characteristics_extractor_methods": kwargs["characteristics_extractor_methods"],
                       "make_new_data_set": kwargs["make_new_data_set"],
-                      "selected_loading_format": kwargs["selected_loading_format"]}
+                      "selected_loading_format": kwargs["selected_loading_format"],
+                      "project_name": kwargs["project_name"]}
 
     dsmol_instance = DataSetMakerOrLoader(input_hash_map)
     extracted_data_set = dsmol_instance.method_caller()

@@ -1,9 +1,7 @@
-import sys
-from numpy.ma import vstack, reshape, size, column_stack, row_stack, array, shape
+from numpy.ma import vstack, reshape, size, column_stack, row_stack, array
 
-from RFFingerprintGenerator.RFFPTools.StatisticsGenerator.Manager.StatisticsGenaerator_Manager import \
-    statistics_generator_manager
-from preFeatureGenerationProcessor.preProcessingTools.conversion_manager import conversion_manager
+from RFFingerprintGenerator.RFFPTools.Manager.finger_print_producer import finger_print_producer
+from preFeatureGenerationProcessor.preProcessingTools.Manager.conversion_manager import conversion_manager
 
 
 class DataSetRecombiner(object):
@@ -15,7 +13,7 @@ class DataSetRecombiner(object):
         self.device_key = []
         self.burst_key = []
         self.characteristic_key = []
-        self.selected_conversion_methods = []
+        self.selected_methods = []
 
         # finger-print inputs
         self.label_vector = 0
@@ -72,7 +70,7 @@ class DataSetRecombiner(object):
         all_devices_covered = kwargs["all_devices_covered"]
 
         # if we cover all devices
-        self.selected_conversion_methods = kwargs["selected_conversion_methods"]
+        self.selected_methods = kwargs["selected_methods"]
 
         # device_key
         self.device_key = kwargs["device_key"]
@@ -104,7 +102,7 @@ class DataSetRecombiner(object):
 
     # preProcessing Functions
     def preProcessor_characteristic_converter(self):
-        converted_characteristic = conversion_manager(self.single_characteristic, self.selected_conversion_methods)
+        converted_characteristic = conversion_manager(self.single_characteristic, self.selected_methods)
         return converted_characteristic
 
     def preProcessor_characteristic_collector(self):
@@ -131,7 +129,7 @@ class DataSetRecombiner(object):
 
     # FingerPrinting Functions
     def finger_print_characteristic_converter(self):
-        characteristic_statistics = dict(statistics_generator_manager(self.single_characteristic))
+        characteristic_statistics = dict(finger_print_producer(self.single_characteristic, self.selected_methods))
         return characteristic_statistics
 
     def finger_print_characteristic_collector(self):
@@ -166,7 +164,7 @@ class DataSetRecombiner(object):
 
     # postProcessing Functions
     def postProcessor_characteristic_converter(self):
-        characteristic_statistics = dict(statistics_generator_manager(self.single_characteristic))
+        characteristic_statistics = dict(se(self.single_characteristic))
         return characteristic_statistics
 
     def postProcessor_characteristic_collector(self):

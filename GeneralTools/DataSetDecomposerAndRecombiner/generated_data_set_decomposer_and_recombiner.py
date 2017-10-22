@@ -1,11 +1,18 @@
 from numpy import size, array
 
 from GeneralTools.DataSetRecombiner.DataSetRecombiner import DataSetRecombiner
+from GeneralTools.ModuleOrClassImporterSection.ImporterMethodsManager.ImporterMethedsManager import \
+    importer_methods_manager
 
 reference = DataSetRecombiner()
 
 
-def generated_data_set_decomposer_and_recombiner(extracted_data_set, name_of_caller_manager, selected_conversion_methods):
+def generated_data_set_decomposer_and_recombiner(extracted_data_set, name_of_caller_manager, selected_methods,
+                                                 project_name):
+    # extraction of modules
+    selected_methods = importer_methods_manager(project_name, selected_methods)
+
+    # running the codes
     device_key_list = array(list(extracted_data_set.keys()))
     device_label = 0
     all_devices_covered = False
@@ -47,6 +54,6 @@ def generated_data_set_decomposer_and_recombiner(extracted_data_set, name_of_cal
                                                        device_key=device_data_set_key,
                                                        burst_key=burst_key,
                                                        characteristic_key=characteristic_key,
-                                                       selected_conversion_methods=selected_conversion_methods)
+                                                       selected_methods=selected_methods)
     reference.__init__()
     return output
