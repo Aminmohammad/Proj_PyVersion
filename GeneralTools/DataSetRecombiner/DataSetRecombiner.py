@@ -132,7 +132,7 @@ class DataSetRecombiner(object):
     def finger_print_characteristic_converter(self):
         characteristic_statistics = dict(finger_print_producer(self.single_characteristic, self.selected_methods))
         return characteristic_statistics
-
+#
     def finger_print_characteristic_collector(self):
         collected_characteristics_vector = self.collected_burst
         for key in self.converted_characteristic.keys():
