@@ -7,4 +7,5 @@ def variance(signal, special_parameters):
     squared_signal = power(signal, 2)
     summation = sum(squared_signal)
     statistic = (1 / size(signal)) * summation
+
     return statistic

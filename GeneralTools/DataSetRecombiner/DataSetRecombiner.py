@@ -1,4 +1,5 @@
-from numpy.ma import vstack, reshape, size, column_stack, row_stack, array
+import sys
+from numpy.ma import vstack, reshape, size, column_stack, row_stack, array, shape, ndim
 
 from RFFingerprintGenerator.RFFPTools.Manager.finger_print_producer import finger_print_producer
 from preFeatureGenerationProcessor.preProcessingTools.Manager.conversion_manager import conversion_manager
@@ -135,15 +136,19 @@ class DataSetRecombiner(object):
     def finger_print_characteristic_collector(self):
         collected_characteristics_vector = self.collected_burst
         for key in self.converted_characteristic.keys():
-            collected_characteristics_vector = vstack(
-                (collected_characteristics_vector, self.converted_characteristic[key]))
+            self.converted_characteristic[key] = array(self.converted_characteristic[key])
+            if size(self.converted_characteristic[key]) > 1:
+                self.converted_characteristic[key] = reshape(self.converted_characteristic[key],
+                                                             [size(self.converted_characteristic[key], 0), 1])
 
+            collected_characteristics_vector = row_stack(
+                (collected_characteristics_vector, self.converted_characteristic[key]))
         return collected_characteristics_vector
 
     def finger_print_burst_collector(self):
         # saving the whole burst in the data-bank
         self.collected_burst = self.collected_burst[1:]
-        self.collected_burst = reshape(self.collected_burst, size(self.collected_burst), 1)
+        self.collected_burst = reshape(self.collected_burst, [size(self.collected_burst, 0), 1])
         if size(self.data_collection) == 0:
             self.data_collection = self.collected_burst
         else:
@@ -164,7 +169,7 @@ class DataSetRecombiner(object):
 
     # postProcessing Functions
     def postProcessor_characteristic_converter(self):
-        characteristic_statistics = dict(se(self.single_characteristic))
+        characteristic_statistics = dict(self.single_characteristic)
         return characteristic_statistics
 
     def postProcessor_characteristic_collector(self):

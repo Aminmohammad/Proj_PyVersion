@@ -2,6 +2,11 @@ from  pywt import dwt
 
 
 def dwt_calculator(signal, special_parameters):
-    # TODO: this 'special_parameters' maybe be useful
     approximation_coefficients, detail_coefficients = dwt(signal, 'haar')
-    return detail_coefficients
+    if special_parameters["important_element"] == "details":
+        converted_signal = detail_coefficients
+
+    elif special_parameters["important_element"] == "approximations":
+        converted_signal = approximation_coefficients
+
+    return converted_signal

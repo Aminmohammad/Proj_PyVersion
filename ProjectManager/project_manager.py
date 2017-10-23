@@ -2,7 +2,7 @@ import csv
 import os
 
 import sys
-from numpy import array
+from numpy import array, size
 import pickle
 
 from DataSetLoader.Data_Loading_Manager.Data_Set_Loading_Manager import data_set_loading_manager
@@ -59,6 +59,7 @@ def project_manager(**kwargs):
         data_bank = array(finger_print_manager(extracted_data_set,
                                                kwargs["selected_feature_extraction_methods"],
                                                kwargs["project_name"]))
+
         output["data_bank"] = data_bank.transpose()
 
         if kwargs["save_preProcessed_data_set"]:

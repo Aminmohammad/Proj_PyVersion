@@ -1,6 +1,3 @@
-import sys
-
-
 def finger_print_producer(signal, methods):
     methods = dict(methods)
     method_index = 0

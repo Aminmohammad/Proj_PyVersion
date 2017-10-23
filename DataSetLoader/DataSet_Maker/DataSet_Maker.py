@@ -46,7 +46,7 @@ class DataSetMakerOrLoader:
 
     def data_set_maker(self):
         list_of_folders_in_the_data_set_folder = os.listdir(self.data_set_address)
-        for device_index in [0, 1]: #range(len(list_of_folders_in_the_data_set_folder)): # TODO: omit
+        for device_index in [0]: #range(len(list_of_folders_in_the_data_set_folder)): # TODO: omit
             print("device:%d" % device_index)
             current_data_location = self.data_set_address + "/" + list_of_folders_in_the_data_set_folder[device_index]
             vertical_structure_of_all_bursts = device_raw_data_loading(device_data_set_address=current_data_location,
