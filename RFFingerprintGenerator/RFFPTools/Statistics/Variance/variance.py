@@ -8,4 +8,6 @@ def variance(signal, special_parameters):
     summation = sum(squared_signal)
     statistic = (1 / size(signal)) * summation
 
-    return statistic
+    added_label = "var"
+
+    return statistic, added_label

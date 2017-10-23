@@ -1,4 +1,4 @@
-from numpy import size, array
+from numpy import size, array, shape
 
 from GeneralTools.DataSetRecombiner.DataSetRecombiner import DataSetRecombiner
 from GeneralTools.ModuleOrClassImporterSection.ImporterMethodsManager.ImporterMethedsManager import \
@@ -42,18 +42,18 @@ def generated_data_set_decomposer_and_recombiner(extracted_data_set, name_of_cal
                 if number_of_characteristics_covered_for_current_burst == size(characteristics_key_list):
                     all_characteristics_of_current_burst_covered = True
 
-                output = reference.data_set_recombiner(device_label=device_label,
-                                                       subregion_calculated_characteristic=
-                                                       burst[characteristic_key],
-                                                       all_characteristics_of_current_burst_covered=
-                                                       all_characteristics_of_current_burst_covered,
-                                                       all_devices_covered=all_devices_covered,
-                                                       all_bursts_of_current_device_covered=
-                                                       all_bursts_of_current_device_covered,
-                                                       name_of_caller_manager=name_of_caller_manager,
-                                                       device_key=device_data_set_key,
-                                                       burst_key=burst_key,
-                                                       characteristic_key=characteristic_key,
-                                                       selected_methods=selected_methods)
+                output_1, output_2 = reference.data_set_recombiner(device_label=device_label,
+                                                                   subregion_calculated_characteristic=
+                                                                   burst[characteristic_key],
+                                                                   all_characteristics_of_current_burst_covered=
+                                                                   all_characteristics_of_current_burst_covered,
+                                                                   all_devices_covered=all_devices_covered,
+                                                                   all_bursts_of_current_device_covered=
+                                                                   all_bursts_of_current_device_covered,
+                                                                   name_of_caller_manager=name_of_caller_manager,
+                                                                   device_key=device_data_set_key,
+                                                                   burst_key=burst_key,
+                                                                   characteristic_key=characteristic_key,
+                                                                   selected_methods=selected_methods)
     reference.__init__()
-    return output
+    return output_1, output_2

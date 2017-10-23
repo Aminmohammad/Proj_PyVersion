@@ -1,2 +1,5 @@
 def no_change_FP(signal, special_parameters):
-    return signal
+
+    added_label = ""
+
+    return signal, added_label

@@ -36,6 +36,10 @@ def main():
     save_preProcessed_data_set = True  # if 'run_preProcess=False' >> automatically: 'save_preProcessed_data_set=False'
     save_data_bank = True  # if 'run_finger_print_production=False' >> automatically: 'save_data_bank=False'
 
+    add_labels_to_saved_data_bank = True    # if 'run_finger_print_production=False'
+                                            # or 'selected_data_bank_saving_format!=csv'
+                                            # >> automatically:  'add_labels_to_saved_data_bank=False'
+
     # selected_characteristics_extraction_methods_for_data_set_making = {1: {
     #                                                                         "module_name":
     #                                                                             "amplitude_calculator",
@@ -85,33 +89,33 @@ def main():
                                                           },
                                                      2: ""}  # these functions are executed in order of the keys
 
-    # selected_feature_extraction_methods_for_finger_printing = {1:
-    #                                                                {"module_name": "variance",
-    #                                                                 "class_name": "",
-    #                                                                 "method_name": "variance",
-    #                                                                 "special_parameters": {}
-    #                                                                 },
-    #                                                            2:
-    #                                                                {"module_name": "skewness",
-    #                                                                 "class_name": "",
-    #                                                                 "method_name": "skewness",
-    #                                                                 "special_parameters": {}
-    #                                                                 },
-    #                                                            3:
-    #                                                                {"module_name": "kurtosis",
-    #                                                                 "class_name": "",
-    #                                                                 "method_name": "kurt",
-    #                                                                 "special_parameters": {}
-    #                                                                 },
-    #                                                            4: ""}  # these functions are executed in order of
-
     selected_feature_extraction_methods_for_finger_printing = {1:
-                                                                   {"module_name": "no_change_FP",
+                                                                   {"module_name": "variance",
                                                                     "class_name": "",
-                                                                    "method_name": "no_change_FP",
+                                                                    "method_name": "variance",
                                                                     "special_parameters": {}
-                                                                    }
-                                                               }  # these functions are executed in order of
+                                                                    },
+                                                               2:
+                                                                   {"module_name": "skewness",
+                                                                    "class_name": "",
+                                                                    "method_name": "skewness",
+                                                                    "special_parameters": {}
+                                                                    },
+                                                               3:
+                                                                   {"module_name": "kurtosis",
+                                                                    "class_name": "",
+                                                                    "method_name": "kurt",
+                                                                    "special_parameters": {}
+                                                                    },
+                                                               4: ""}  # these functions are executed in order of
+
+    # selected_feature_extraction_methods_for_finger_printing = {1:
+    #                                                                {"module_name": "no_change_FP",
+    #                                                                 "class_name": "",
+    #                                                                 "method_name": "no_change_FP",
+    #                                                                 "special_parameters": {}
+    #                                                                 }
+    #                                                            }  # these functions are executed in order of
 
     # Address Extraction of Selected Data-Set
     root_folder_address = root_project_folder_address_extractor(target_folder_name="PythonVersion")
@@ -139,7 +143,8 @@ def main():
                              save_initial_data_set=save_initial_data_set,
                              save_preProcessed_data_set=save_preProcessed_data_set,
                              save_data_bank=save_data_bank,
-                             project_name=project_name
+                             project_name=project_name,
+                             add_labels_to_saved_data_bank=add_labels_to_saved_data_bank
                              )
 
     return output

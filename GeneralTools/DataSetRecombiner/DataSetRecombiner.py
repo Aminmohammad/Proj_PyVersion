@@ -19,11 +19,14 @@ class DataSetRecombiner(object):
         # finger-print inputs
         self.label_vector = 0
         self.device_label = 0
+        self.output_label_index = 0
 
         # general outputs
         self.converted_characteristic = []
         self.collected_burst = 0
         self.data_collection = array([])
+        self.output_labels = {}
+        self.collected_labels = []
 
         # pre-process outputs
         self.device_collection = {}
@@ -83,28 +86,29 @@ class DataSetRecombiner(object):
         self.characteristic_key = ("%s" % kwargs["characteristic_key"])
 
         # convert characteristic
-        self.converted_characteristic = characteristic_converter_function(self)
+        self.converted_characteristic, self.output_labels = characteristic_converter_function(self)
 
         # collect converted characteristic in burst
-        self.collected_burst = converted_characteristic_collector_function(self)
+        self.collected_burst, self.collected_labels = converted_characteristic_collector_function(self)
 
         if all_characteristics_of_current_burst_covered:
             burst_collector_function(self)
-            # TODO: Make these functions selectable
 
         if all_characteristics_of_current_burst_covered:
             device_collector_function(self)
+            self.output_label_index = 0
 
         if all_devices_covered and all_bursts_of_current_device_covered and \
                 all_characteristics_of_current_burst_covered:
             output_collector_function(self)
 
-        return self.data_collection
+        return self.data_collection, self.collected_labels
 
     # preProcessing Functions
     def preProcessor_characteristic_converter(self):
         converted_characteristic = conversion_manager(self.single_characteristic, self.selected_methods)
-        return converted_characteristic
+        output_labels = ""
+        return converted_characteristic, output_labels
 
     def preProcessor_characteristic_collector(self):
         if self.collected_burst == 0:
@@ -112,8 +116,8 @@ class DataSetRecombiner(object):
 
         collected_characteristics_dict = self.collected_burst
         collected_characteristics_dict[self.characteristic_key] = self.converted_characteristic
-
-        return collected_characteristics_dict
+        collected_labels = ""
+        return collected_characteristics_dict, collected_labels
 
     def preProcessor_burst_collector(self):
         self.device_collection[self.burst_key] = self.collected_burst
@@ -130,12 +134,21 @@ class DataSetRecombiner(object):
 
     # FingerPrinting Functions
     def finger_print_characteristic_converter(self):
-        characteristic_statistics = dict(finger_print_producer(self.single_characteristic, self.selected_methods))
-        return characteristic_statistics
-#
+        characteristic_statistics, output_labels = finger_print_producer(self.single_characteristic,
+                                                                         self.selected_methods,
+                                                                         self.characteristic_key)
+        characteristic_statistics = dict(characteristic_statistics)
+        output_labels = dict(output_labels)
+
+        return characteristic_statistics, output_labels
+
+    #
     def finger_print_characteristic_collector(self):
         collected_characteristics_vector = self.collected_burst
+        collected_labels = self.collected_labels
+
         for key in self.converted_characteristic.keys():
+
             self.converted_characteristic[key] = array(self.converted_characteristic[key])
             if size(self.converted_characteristic[key]) > 1:
                 self.converted_characteristic[key] = reshape(self.converted_characteristic[key],
@@ -143,7 +156,16 @@ class DataSetRecombiner(object):
 
             collected_characteristics_vector = row_stack(
                 (collected_characteristics_vector, self.converted_characteristic[key]))
-        return collected_characteristics_vector
+
+            if size(collected_labels) == 0:
+                collected_labels = {self.output_label_index: self.output_labels[key]}
+                self.output_label_index += 1
+
+            else:
+                collected_labels[self.output_label_index] = self.output_labels[key]
+                self.output_label_index += 1
+
+        return collected_characteristics_vector, collected_labels
 
     def finger_print_burst_collector(self):
         # saving the whole burst in the data-bank

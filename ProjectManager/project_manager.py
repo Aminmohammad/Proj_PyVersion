@@ -56,9 +56,13 @@ def project_manager(**kwargs):
 
     # producing the Finger-Print from `extracted_data_set`
     if kwargs["run_finger_print_production"]:
-        data_bank = array(finger_print_manager(extracted_data_set,
-                                               kwargs["selected_feature_extraction_methods"],
-                                               kwargs["project_name"]))
+        data_bank, collected_labels = finger_print_manager(extracted_data_set,
+                                                           kwargs["selected_feature_extraction_methods"],
+                                                           kwargs["project_name"])
+
+        data_bank = array(data_bank)
+
+        kwargs["collected_labels"] = collected_labels
 
         output["data_bank"] = data_bank.transpose()
 
@@ -75,10 +79,12 @@ def file_saver(data, folder_name, file_name, kwargs):
         os.makedirs(data_saving_address)
 
     if kwargs["selected_saving_format"] == "csv":
-        csv_file_saver(data, data_saving_address, file_name)
+        csv_file_saver(data, data_saving_address, file_name, kwargs)
 
     elif kwargs["selected_saving_format"] == "txt":
-        pickle_file_saver(data, data_saving_address, file_name)
+        special_input = []
+        pickle_file_saver(data, data_saving_address, file_name, special_input)
 
     elif kwargs["selected_saving_format"] == "mat":
-        mat_file_saver(data, data_saving_address, file_name)
+        special_input = []
+        mat_file_saver(data, data_saving_address, file_name, special_input)
