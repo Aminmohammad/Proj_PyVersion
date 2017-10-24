@@ -11,6 +11,7 @@ from GeneralTools.PickleSaver.pickle_file_saver import pickle_file_saver
 from RFFingerprintGenerator.RFFP_Production_Manager.FingerPrint_Manager import \
     finger_print_manager
 from GeneralTools.CSVSaver.csv_file_saver import csv_file_saver
+from postFeatureGenerationProcessor.postProcessorManager.postProcessor_manager import postProcessor_manager
 from preFeatureGenerationProcessor.preProcessorManager.preProcessor_manager import preProcessor_manager
 
 
@@ -64,11 +65,28 @@ def project_manager(**kwargs):
 
         kwargs["collected_labels"] = collected_labels
 
-        output["data_bank"] = data_bank.transpose()
+        if not kwargs["run_postProcess"]:
+            output["data_bank"] = data_bank.transpose()
 
-        if kwargs["save_preProcessed_data_set"]:
+            if kwargs["save_data_bank"]:
+                kwargs["selected_saving_format"] = kwargs["selected_data_bank_saving_format"]
+                file_saver(data_bank.transpose(), "DataBank", "data_bank", kwargs)
+
+    # Running the post-Processing
+    if kwargs["run_postProcess"]:
+
+        new_data_bank, new_collected_labels = postProcessor_manager(data_bank,
+                                                                   kwargs["selected_conversion_methods"],
+                                                                   kwargs["project_name"])
+
+        if not new_collected_labels:
+            kwargs["collected_labels"] = new_collected_labels
+
+        output["data_bank"] = new_data_bank.transpose()
+
+        if kwargs["save_data_bank"]:
             kwargs["selected_saving_format"] = kwargs["selected_data_bank_saving_format"]
-            file_saver(data_bank.transpose(), "DataBank", "data_bank", kwargs)
+            file_saver(new_data_bank.transpose(), "DataBank", "data_bank", kwargs)
 
     return output
 

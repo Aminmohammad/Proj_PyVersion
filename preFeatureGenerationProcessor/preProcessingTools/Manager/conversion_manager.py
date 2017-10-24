@@ -1,6 +1,3 @@
-signal_statistics = {}
-
-
 def conversion_manager(signal, conversions):
     conversions = dict(conversions)
     for key in sorted(conversions.keys()):
