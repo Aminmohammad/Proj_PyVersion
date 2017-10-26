@@ -26,19 +26,23 @@ def main():
     selected_preProcessed_data_set_saving_format = "txt"  # "txt"
     selected_data_bank_saving_format = "csv"  # "csv" or "mat"
 
+    # output data_bank structure
+    dimension_must_be_in_rows_or_columns = "columns"  # rows or columns
+
     # permissions
     make_new_data_set = True  # if 'make_new_data_set=False' >> it will load an existing "data-set.selected_loading_format"
-                              # if 'make_new_data_set=False' and 'exist(InitialDataSet) == 0' >> # automatically changes: 'make_new_data_set=True'
+    # if 'make_new_data_set=False' and 'exist(InitialDataSet) == 0' >> # automatically changes: 'make_new_data_set=True'
 
     run_preProcess = True
     run_finger_print_production = True
+    run_postProcess = True # if 'run_finger_print_production=False' >> automatically: 'run_postProcess=False'
     save_initial_data_set = True
     save_preProcessed_data_set = True  # if 'run_preProcess=False' >> automatically: 'save_preProcessed_data_set=False'
     save_data_bank = True  # if 'run_finger_print_production=False' >> automatically: 'save_data_bank=False'
 
-    add_labels_to_saved_data_bank = True    # if 'run_finger_print_production=False'
-                                            # or 'selected_data_bank_saving_format!=csv'
-                                            # >> automatically:  'add_labels_to_saved_data_bank=False'
+    add_labels_to_saved_data_bank = True  # if 'run_finger_print_production=False'
+    # or 'selected_data_bank_saving_format!=csv'
+    # >> automatically:  'add_labels_to_saved_data_bank=False'
 
     # selected_characteristics_extraction_methods_for_data_set_making = {1: {
     #                                                                         "module_name":
@@ -70,24 +74,24 @@ def main():
     #                                                                    4: ""}  # these functions are executed in the order of keys
 
     selected_characteristics_extraction_methods_for_data_set_making = {1: {
-                                                                            "module_name":
-                                                                                "no_change_char",
-                                                                            "class_name": "",
-                                                                            "method_name":
-                                                                                "no_change_char",
-                                                                            "special_parameters":
-                                                                                {""}
-                                                                            }
-                                                                        }  # these functions are executed in the order of keys
+        "module_name":
+            "no_change_char",
+        "class_name": "",
+        "method_name":
+            "no_change_char",
+        "special_parameters":
+            {""}
+    }
+    }  # these functions are executed in the order of keys
 
     selected_conversion_methods_for_preProcessing = {1:
-                                                         {
-                                                          "module_name": "dwt_calculator",
-                                                          "class_name": "",
-                                                          "method_name": "dwt_calculator",
-                                                          "special_parameters": {"important_element": "details"} # 'approximations' or 'details'
-                                                          },
-                                                     2: ""}  # these functions are executed in order of the keys
+        {
+            "module_name": "dwt_calculator",
+            "class_name": "",
+            "method_name": "dwt_calculator",
+            "special_parameters": {"important_element": "details"}  # 'approximations' or 'details'
+        },
+        2: ""}  # these functions are executed in order of the keys
 
     selected_feature_extraction_methods_for_finger_printing = {1:
                                                                    {"module_name": "variance",
@@ -117,6 +121,22 @@ def main():
     #                                                                 }
     #                                                            }  # these functions are executed in order of
 
+    selected_conversion_methods_for_postProcessing = {1:
+        {
+            "module_name": "normalizer",
+            "class_name": "",
+            "method_name": "normalizer",
+            "special_parameters": {}
+        },
+        2:
+            {
+                "module_name": "standardizer",
+                "class_name": "",
+                "method_name": "standardizer",
+                "special_parameters": {}
+            },
+    }  # these functions are executed in order of the keys
+
     # Address Extraction of Selected Data-Set
     root_folder_address = root_project_folder_address_extractor(target_folder_name="PythonVersion")
     data_set_address = raw_data_folder_address_extractor(root_folder_address, selected_data_set_name)
@@ -131,7 +151,8 @@ def main():
                              communication_frequency=communication_frequency,
                              characteristics_extractor_methods=
                              selected_characteristics_extraction_methods_for_data_set_making,
-                             selected_conversion_methods=selected_conversion_methods_for_preProcessing,
+                             selected_preProcessing_conversion_methods=selected_conversion_methods_for_preProcessing,
+                             selected_postProcessing_conversion_methods=selected_conversion_methods_for_postProcessing,
                              selected_feature_extraction_methods=selected_feature_extraction_methods_for_finger_printing,
                              selected_initial_data_set_saving_format=selected_initial_data_set_saving_format,
                              selected_initial_data_set_loading_format=selected_initial_data_set_loading_format,
@@ -139,12 +160,14 @@ def main():
                              selected_data_bank_saving_format=selected_data_bank_saving_format,
                              make_new_data_set=make_new_data_set,
                              run_preProcess=run_preProcess,
+                             run_postProcess=run_postProcess,
                              run_finger_print_production=run_finger_print_production,
                              save_initial_data_set=save_initial_data_set,
                              save_preProcessed_data_set=save_preProcessed_data_set,
                              save_data_bank=save_data_bank,
                              project_name=project_name,
-                             add_labels_to_saved_data_bank=add_labels_to_saved_data_bank
+                             add_labels_to_saved_data_bank=add_labels_to_saved_data_bank,
+                             dimension_must_be_in_rows_or_columns=dimension_must_be_in_rows_or_columns
                              )
 
     return output
