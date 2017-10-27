@@ -11,7 +11,6 @@ from GeneralTools.PickleSaver.pickle_file_saver import pickle_file_saver
 from RFFingerprintGenerator.RFFP_Production_Manager.FingerPrint_Manager import \
     finger_print_manager
 from GeneralTools.CSVSaver.csv_file_saver import csv_file_saver
-
 from postFeatureGenerationProcessor.postProcessorManager.postProcessor_manager import postProcessor_manager
 from preFeatureGenerationProcessor.preProcessorManager.preProcessor_manager import preProcessor_manager
 
@@ -19,6 +18,7 @@ from preFeatureGenerationProcessor.preProcessorManager.preProcessor_manager impo
 def project_manager(**kwargs):
     # TODO: manage kwargs
     """this is good"""
+
     # output
     output = {}
     # extract the DataSet
@@ -40,14 +40,14 @@ def project_manager(**kwargs):
     output["Initial_data_set"] = extracted_data_set
 
     if kwargs["save_initial_data_set"]:
-        kwargs["selected_saving_format"] = kwargs ["selected_initial_data_set_saving_format"]
+        kwargs["selected_saving_format"] = kwargs["selected_initial_data_set_saving_format"]
         file_saver(extracted_data_set, "InitialDataSet", "initial_data_set", kwargs)
 
     # Running the pre-Processing
     if kwargs["run_preProcess"]:
 
         extracted_data_set = preProcessor_manager(extracted_data_set,
-                                                  kwargs["selected_conversion_methods"],
+                                                  kwargs["selected_preProcessing_conversion_methods"],
                                                   kwargs["project_name"])
         output["preProcessed_data_set"] = extracted_data_set
 
@@ -66,23 +66,28 @@ def project_manager(**kwargs):
         kwargs["collected_labels"] = collected_labels
 
         if not kwargs["run_postProcess"]:
-            output["data_bank"] = data_bank.transpose()
+
+            if kwargs["dimension_must_be_in_rows_or_columns"] == "columns":
+                output["data_bank"] = data_bank.transpose()
+
+            elif kwargs["dimension_must_be_in_rows_or_columns"] == "rows":
+                output["data_bank"] = data_bank
 
             if kwargs["save_data_bank"]:
                 kwargs["selected_saving_format"] = kwargs["selected_data_bank_saving_format"]
                 file_saver(data_bank.transpose(), "DataBank", "data_bank", kwargs)
 
     # Running the post-Processing
-    if kwargs["run_postProcess"]:
-
+    if kwargs["run_finger_print_production"] and kwargs["run_postProcess"]:
         new_data_bank, new_collected_labels = postProcessor_manager(data_bank,
-                                                                   kwargs["selected_conversion_methods"],
-                                                                   kwargs["project_name"])
+                                                                    kwargs["project_name"],
+                                                                    kwargs["selected_postProcessing_conversion_methods"],
+                                                                    kwargs["dimension_must_be_in_rows_or_columns"])
 
-        if not new_collected_labels:
+        if new_collected_labels:
             kwargs["collected_labels"] = new_collected_labels
 
-        output["data_bank"] = new_data_bank.transpose()
+        output["data_bank"] = new_data_bank() # no transpose is needed here. since we cared about transpose in data-bank section
 
         if kwargs["save_data_bank"]:
             kwargs["selected_saving_format"] = kwargs["selected_data_bank_saving_format"]
