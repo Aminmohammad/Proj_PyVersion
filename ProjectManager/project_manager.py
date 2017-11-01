@@ -43,7 +43,6 @@ def project_manager(**kwargs):
         file_saver(extracted_data_set, "InitialDataSet", "initial_data_set", kwargs)
 
     # Running the pre-Processing
-    kwargs["run_preProcess"] = False
     if kwargs["run_preProcess"]:
 
         extracted_data_set = preProcessor_manager(extracted_data_set,

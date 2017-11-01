@@ -14,21 +14,8 @@ def main(parameters):
     Start of program
     """
 
-
-
-
-
-
-
-
-
-
-
-
-
     project_name = parameters["project_name"]
-    selected_data_set_name = parameters[
-        "data_set_name"]  # if it is empty, a pop-up window will give you the opportunity to select it graphically   2016_07_11_IQ_20Msps_RZUSBSTICK
+
     zero_conversion_threshold = float(parameters["zero_conversion_threshold"]),
     number_of_subRegions = int(parameters["number_of_subRegions"]),
     number_of_symbols_per_preamble = int(parameters["number_of_symbols_per_subRegion"]),
@@ -36,7 +23,7 @@ def main(parameters):
     time_length_of_a_single_chip_in_second = float(parameters["time_length_of_chip"]),
     sampling_frequency = int(float(parameters["sampling_frequency"])),
     communication_frequency = int(float(parameters["communication_frequency"])),
-    data_set_name = parameters["data_set_address"]
+    data_set_address = parameters["data_set_address"]
 
     # the extensions
     selected_initial_data_set_saving_format = parameters["data_set_saving_format"]  # "txt"
@@ -60,8 +47,8 @@ def main(parameters):
     save_data_bank = parameters["save_data_bank"]  # if 'run_finger_print_production=False' >> automatically: 'save_data_bank=False'
 
     add_labels_to_saved_data_bank = parameters["add_dim_headers"]   # if 'run_finger_print_production=False'
-                                                                    # or 'selected_data_bank_saving_format!=csv'
-                                                                    # >> automatically:  'add_labels_to_saved_data_bank=False'
+    # or 'selected_data_bank_saving_format!=csv'
+    # >> automatically:  'add_labels_to_saved_data_bank=False'
 
     selected_characteristics_extraction_methods_for_data_set_making = ast.literal_eval(parameters["data_set_extractor_methods"])
     selected_conversion_methods_for_preProcessing = ast.literal_eval(parameters["preProcessing_methods"])
@@ -120,7 +107,6 @@ def main(parameters):
     # print(selected_feature_extraction_methods_for_finger_printing)
     # print(selected_conversion_methods_for_postProcessing)
     # print(dimension_must_be_in_rows_or_columns)
-
 
 
 
@@ -294,7 +280,7 @@ def main(parameters):
 
 
 
-
+    print(data_set_address)
     # Address Extraction of Selected Data-Set
     #data_set_address = raw_data_folder_address_extractor(root_folder_address, selected_data_set_name)
 

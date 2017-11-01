@@ -5,11 +5,16 @@
 # Created by: PyQt5 UI code generator 5.6
 #
 # WARNING! All changes made in this file will be lost!
-from tkinter import Tk, filedialog
+import ast
+from tkinter import filedialog, Tk
 
 import os
 from PyQt5 import QtCore, QtGui, QtWidgets
 
+from GeneralTools.CSVLoader.csv_file_loader import csv_file_loader
+from GeneralTools.CSVSaver.csv_file_saver import csv_file_saver
+from GeneralTools.PickleLoader.pickle_file_loader import pickle_file_loader
+from GeneralTools.PickleSaver.pickle_file_saver import pickle_file_saver
 from GeneralTools.RootProjectFolderAddressExtractor.root_project_folder_address_extractor import \
     root_project_folder_address_extractor
 from Start.PythonStarter.main import main
@@ -90,11 +95,11 @@ class Ui_Form(object):
         self.data_set_address_groupBox.setObjectName("data_set_address_groupBox")
         self.rbtn_data_set_name = QtWidgets.QRadioButton(self.data_set_address_groupBox)
         self.rbtn_data_set_name.setGeometry(QtCore.QRect(20, 21, 141, 21))
-        self.rbtn_data_set_name.setChecked(False)
+        self.rbtn_data_set_name.setChecked(True)
         self.rbtn_data_set_name.setObjectName("rbtn_data_set_name")
         self.rbtn_data_set_address = QtWidgets.QRadioButton(self.data_set_address_groupBox)
         self.rbtn_data_set_address.setGeometry(QtCore.QRect(20, 56, 151, 21))
-        self.rbtn_data_set_address.setChecked(True)
+        self.rbtn_data_set_address.setChecked(False)
         self.rbtn_data_set_address.setObjectName("rbtn_data_set_address")
         self.st1 = QtWidgets.QPlainTextEdit(self.tab_data_set)
         self.st1.setGeometry(QtCore.QRect(30, 160, 270, 30))
@@ -823,84 +828,84 @@ class Ui_Form(object):
         self.st9.setPlainText(_translate("Form", "Data-Set Saving Format:"))
         self.st10.setPlainText(_translate("Form", "Data-Set Loading Format:"))
         self.et_data_set_extractor_methods.setPlainText(_translate("Form", "{    \n"
-                                                                           "    1: {\n"
-                                                                           "                     \"module_name\": \"amplitude_calculator\",\n"
-                                                                           "                     \"class_name\": \"\",\n"
-                                                                           "                     \"method_name\":\"amp\",\n"
-                                                                           "                     \"special_parameters\":{\"\"}\n"
-                                                                           "                     },\n"
-                                                                           "\n"
-                                                                           "                2: {\n"
-                                                                           "                      \"module_name\": \"phase_calculator\",\n"
-                                                                           "                      \"class_name\": \"\",\n"
-                                                                           "                       \"method_name\": \"phase\",\n"
-                                                                           "                       \"special_parameters\": {\"\"}\n"
-                                                                           "                     },\n"
-                                                                           "\n"
-                                                                           "                 3: {\n"
-                                                                           "                        \"module_name\": \"ifrequency_calculator\",\n"
-                                                                           "                        \"class_name\": \"\",\n"
-                                                                           "                        \"method_name\": \"ifreq\",\n"
-                                                                           "                        \"special_parameters\": {\"\"}\n"
-                                                                           "                     },\n"
-                                                                           "\n"
-                                                                           "} "))
+"    1: {\n"
+"                     \"module_name\": \"amplitude_calculator\",\n"
+"                     \"class_name\": \"\",\n"
+"                     \"method_name\":\"amp\",\n"
+"                     \"special_parameters\":{\"\"}\n"
+"                     },\n"
+"\n"
+"                2: {\n"
+"                      \"module_name\": \"phase_calculator\",\n"
+"                      \"class_name\": \"\",\n"
+"                       \"method_name\": \"phase\",\n"
+"                       \"special_parameters\": {\"\"}\n"
+"                     },\n"
+"\n"
+"                 3: {\n"
+"                        \"module_name\": \"ifrequency_calculator\",\n"
+"                        \"class_name\": \"\",\n"
+"                        \"method_name\": \"ifreq\",\n"
+"                        \"special_parameters\": {\"\"}\n"
+"                     },\n"
+"\n"
+"} "))
         self.btn_dat_set_extractor_method_ex.setText(_translate("Form", "Ex."))
         self.et_data_set_name.setHtml(_translate("Form", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
-                                                         "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
-                                                         "p, li { white-space: pre-wrap; }\n"
-                                                         "</style></head><body style=\" font-family:\'MS Shell Dlg 2\'; font-size:8pt; font-weight:400; font-style:normal;\">\n"
-                                                         "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">2016_07_11_IQ_20Msps_RZUSBSTICK</p></body></html>"))
+"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
+"p, li { white-space: pre-wrap; }\n"
+"</style></head><body style=\" font-family:\'MS Shell Dlg 2\'; font-size:8.25pt; font-weight:400; font-style:normal;\">\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:8pt;\">2016_07_11_IQ_20Msps_RZUSBSTICK</span></p></body></html>"))
         self.btn_brows_data_set.setText(_translate("Form", "Browse"))
         self.st11.setPlainText(_translate("Form", "{\n"
-                                                  "     priority-index : {\n"
-                                                  "                                     \"module_name\":\n"
-                                                  "                                               \"name of module\",\n"
-                                                  "\n"
-                                                  "                                      \"class_name\": \n"
-                                                  "                                                  \"name of class\",\n"
-                                                  "\n"
-                                                  "                                      \"method_name\": \n"
-                                                  "                                                   \"name of method\",\n"
-                                                  "\n"
-                                                  "                                       \"special_parameters\":\n"
-                                                  "                                                    {\"parameter-1\": parameter_1,\n"
-                                                  "                                                      \"parameter-2\": parameter_2, \n"
-                                                  "                                                    ...}\n"
-                                                  "                                }, \n"
-                                                  "\n"
-                                                  " ...  }\n"
-                                                  "\n"
-                                                  "\n"
-                                                  "\n"
-                                                  "\n"
-                                                  "\n"
-                                                  "for ex.:\n"
-                                                  "{    \n"
-                                                  "    1: {\n"
-                                                  "                     \"module_name\": \"amplitude_calculator\",\n"
-                                                  "                     \"class_name\": \"\",\n"
-                                                  "                     \"method_name\":\"amp\",\n"
-                                                  "                     \"special_parameters\":{\"\"}\n"
-                                                  "                     },\n"
-                                                  "\n"
-                                                  "                2: {\n"
-                                                  "                      \"module_name\": \"phase_calculator\",\n"
-                                                  "                      \"class_name\": \"\",\n"
-                                                  "                       \"method_name\": \"phase\",\n"
-                                                  "                       \"special_parameters\": {\"\"}\n"
-                                                  "                     },\n"
-                                                  "\n"
-                                                  "                 3: {\n"
-                                                  "                        \"module_name\": \"ifrequency_calculator\",\n"
-                                                  "                        \"class_name\": \"\",\n"
-                                                  "                        \"method_name\": \"ifreq\",\n"
-                                                  "                        \"special_parameters\": {\"\"}\n"
-                                                  "                     },\n"
-                                                  "\n"
-                                                  "    4:{}\n"
-                                                  "\n"
-                                                  "} "))
+"     priority-index : {\n"
+"                                     \"module_name\":\n"
+"                                               \"name of module\",\n"
+"\n"
+"                                      \"class_name\": \n"
+"                                                  \"name of class\",\n"
+"\n"
+"                                      \"method_name\": \n"
+"                                                   \"name of method\",\n"
+"\n"
+"                                       \"special_parameters\":\n"
+"                                                    {\"parameter-1\": parameter_1,\n"
+"                                                      \"parameter-2\": parameter_2, \n"
+"                                                    ...}\n"
+"                                }, \n"
+"\n"
+" ...  }\n"
+"\n"
+"\n"
+"\n"
+"\n"
+"\n"
+"for ex.:\n"
+"{    \n"
+"    1: {\n"
+"                     \"module_name\": \"amplitude_calculator\",\n"
+"                     \"class_name\": \"\",\n"
+"                     \"method_name\":\"amp\",\n"
+"                     \"special_parameters\":{\"\"}\n"
+"                     },\n"
+"\n"
+"                2: {\n"
+"                      \"module_name\": \"phase_calculator\",\n"
+"                      \"class_name\": \"\",\n"
+"                       \"method_name\": \"phase\",\n"
+"                       \"special_parameters\": {\"\"}\n"
+"                     },\n"
+"\n"
+"                 3: {\n"
+"                        \"module_name\": \"ifrequency_calculator\",\n"
+"                        \"class_name\": \"\",\n"
+"                        \"method_name\": \"ifreq\",\n"
+"                        \"special_parameters\": {\"\"}\n"
+"                     },\n"
+"\n"
+"    4:{}\n"
+"\n"
+"} "))
         self.rbtn_data_set_saving_format_txt.setText(_translate("Form", ".TXT"))
         self.rbtn_data_set_loading_format_txt.setText(_translate("Form", ".TXT"))
         self.rbtn_load_new_data_set.setText(_translate("Form", "Load Current Data-Set"))
@@ -912,57 +917,57 @@ class Ui_Form(object):
         self.st16.setPlainText(_translate("Form", "selected pre-Processing Methods:"))
         self.btn_preProcess_methods_ex.setText(_translate("Form", "Ex."))
         self.et_preProcessed_methods.setPlainText(_translate("Form", "{\n"
-                                                                     "  1 : {\n"
-                                                                     "          \"module_name\": \"dwt_calculator\",\n"
-                                                                     "          \"class_name\": \"\",\n"
-                                                                     "          \"method_name\": \"dwt_calculator\",\n"
-                                                                     "          \"special_parameters\":{\"important_element\":\"details\"}\n"
-                                                                     "         }\n"
-                                                                     "}"))
+"  1 : {\n"
+"          \"module_name\": \"dwt_calculator\",\n"
+"          \"class_name\": \"\",\n"
+"          \"method_name\": \"dwt_calculator\",\n"
+"          \"special_parameters\":{\"important_element\":\"details\"}\n"
+"         }\n"
+"}"))
         self.st17.setPlainText(_translate("Form", "{\n"
-                                                  "     priority-index : {\n"
-                                                  "                                     \"module_name\":\n"
-                                                  "                                               \"name of module\",\n"
-                                                  "\n"
-                                                  "                                      \"class_name\": \n"
-                                                  "                                                  \"name of class\",\n"
-                                                  "\n"
-                                                  "                                      \"method_name\": \n"
-                                                  "                                                   \"name of method\",\n"
-                                                  "\n"
-                                                  "                                       \"special_parameters\":\n"
-                                                  "                                                    {\"parameter-1\": parameter_1,\n"
-                                                  "                                                      \"parameter-2\": parameter_2, \n"
-                                                  "                                                    ...}\n"
-                                                  "                                }, \n"
-                                                  "\n"
-                                                  " ...  }# these functions are executed in order of priority-index\n"
-                                                  "\n"
-                                                  "\n"
-                                                  "\n"
-                                                  "\n"
-                                                  "\n"
-                                                  "for ex.:\n"
-                                                  "{\n"
-                                                  "                        1 : {\n"
-                                                  "                                     \"module_name\": \"wavelet_module_name\",\n"
-                                                  "                                      \"class_name\": \"wavelet_class_name\",\n"
-                                                  "                                      \"method_name\": \"wavelet_method_name\",\n"
-                                                  "                                       \"special_parameters\":{\"important_element\":\"details\"} # or: \"approximations\"\n"
-                                                  "                                },\n"
-                                                  "\n"
-                                                  "\n"
-                                                  "                        2 : {\n"
-                                                  "                                     \"module_name\":\"fourier_module_name\",\n"
-                                                  "                                      \"class_name\":\"fourier_class_name\",\n"
-                                                  "                                      \"method_name\":\"fourier_method_name\",\n"
-                                                  "                                       \"special_parameters\":\n"
-                                                  "                                                    {\"first_factor\": 2,\n"
-                                                  "                                                      \"output_name\": \"ft}\n"
-                                                  "                                }\n"
-                                                  "\n"
-                                                  "\n"
-                                                  "   }"))
+"     priority-index : {\n"
+"                                     \"module_name\":\n"
+"                                               \"name of module\",\n"
+"\n"
+"                                      \"class_name\": \n"
+"                                                  \"name of class\",\n"
+"\n"
+"                                      \"method_name\": \n"
+"                                                   \"name of method\",\n"
+"\n"
+"                                       \"special_parameters\":\n"
+"                                                    {\"parameter-1\": parameter_1,\n"
+"                                                      \"parameter-2\": parameter_2, \n"
+"                                                    ...}\n"
+"                                }, \n"
+"\n"
+" ...  }# these functions are executed in order of priority-index\n"
+"\n"
+"\n"
+"\n"
+"\n"
+"\n"
+"for ex.:\n"
+"{\n"
+"                        1 : {\n"
+"                                     \"module_name\": \"wavelet_module_name\",\n"
+"                                      \"class_name\": \"wavelet_class_name\",\n"
+"                                      \"method_name\": \"wavelet_method_name\",\n"
+"                                       \"special_parameters\":{\"important_element\":\"details\"} # or: \"approximations\"\n"
+"                                },\n"
+"\n"
+"\n"
+"                        2 : {\n"
+"                                     \"module_name\":\"fourier_module_name\",\n"
+"                                      \"class_name\":\"fourier_class_name\",\n"
+"                                      \"method_name\":\"fourier_method_name\",\n"
+"                                       \"special_parameters\":\n"
+"                                                    {\"first_factor\": 2,\n"
+"                                                      \"output_name\": \"ft}\n"
+"                                }\n"
+"\n"
+"\n"
+"   }"))
         self.rbtn_saving_preProcessed_data_set_txt.setText(_translate("Form", ".TXT"))
         self.rbtn_save_preProcessed_data_set.setText(_translate("Form", "Yes"))
         self.rbtn_dont_save_preProcessed_data_set.setText(_translate("Form", "No"))
@@ -978,81 +983,81 @@ class Ui_Form(object):
         self.rbtn_run_data_bank.setText(_translate("Form", "Yes"))
         self.rbtn_dont_run_data_bank.setText(_translate("Form", "No"))
         self.et_data_bank_methods.setPlainText(_translate("Form", "{\n"
-                                                                  "\n"
-                                                                  "  1:\n"
-                                                                  "          {\n"
-                                                                  "            \"module_name\": \"variance\",\n"
-                                                                  "            \"class_name\": \"\",\n"
-                                                                  "            \"method_name\": \"variance\",\n"
-                                                                  "            \"special_parameters\": {}\n"
-                                                                  "           },\n"
-                                                                  "  2:\n"
-                                                                  "          {\n"
-                                                                  "            \"module_name\": \"skewness\",\n"
-                                                                  "            \"class_name\": \"\",\n"
-                                                                  "            \"method_name\": \"skewness\",\n"
-                                                                  "            \"special_parameters\": {}\n"
-                                                                  "           },\n"
-                                                                  "  3:\n"
-                                                                  "           {\n"
-                                                                  "             \"module_name\": \"kurtosis\",\n"
-                                                                  "             \"class_name\": \"\",\n"
-                                                                  "             \"method_name\": \"kurt\",\n"
-                                                                  "             \"special_parameters\": {}\n"
-                                                                  "            }\n"
-                                                                  "\n"
-                                                                  "}  \n"
-                                                                  ""))
+"\n"
+"  1:\n"
+"          {\n"
+"            \"module_name\": \"variance\",\n"
+"            \"class_name\": \"\",\n"
+"            \"method_name\": \"variance\",\n"
+"            \"special_parameters\": {}\n"
+"           },\n"
+"  2:\n"
+"          {\n"
+"            \"module_name\": \"skewness\",\n"
+"            \"class_name\": \"\",\n"
+"            \"method_name\": \"skewness\",\n"
+"            \"special_parameters\": {}\n"
+"           },\n"
+"  3:\n"
+"           {\n"
+"             \"module_name\": \"kurtosis\",\n"
+"             \"class_name\": \"\",\n"
+"             \"method_name\": \"kurt\",\n"
+"             \"special_parameters\": {}\n"
+"            }\n"
+"\n"
+"}  \n"
+""))
         self.st23.setPlainText(_translate("Form", "selected Data-Bsnk Poduction Methods:"))
         self.st24.setPlainText(_translate("Form", "{\n"
-                                                  "     priority-index : {\n"
-                                                  "                                     \"module_name\":\n"
-                                                  "                                               \"name of module\",\n"
-                                                  "\n"
-                                                  "                                      \"class_name\": \n"
-                                                  "                                                  \"name of class\",\n"
-                                                  "\n"
-                                                  "                                      \"method_name\": \n"
-                                                  "                                                   \"name of method\",\n"
-                                                  "\n"
-                                                  "                                       \"special_parameters\":\n"
-                                                  "                                                    {\"parameter-1\": parameter_1,\n"
-                                                  "                                                      \"parameter-2\": parameter_2, \n"
-                                                  "                                                    ...}\n"
-                                                  "                                }, \n"
-                                                  "\n"
-                                                  " ...  }# these functions are executed in order of priority-index\n"
-                                                  "\n"
-                                                  "\n"
-                                                  "\n"
-                                                  "\n"
-                                                  "\n"
-                                                  "for ex.:\n"
-                                                  "{\n"
-                                                  "                       1:\n"
-                                                  "                  {\n"
-                                                  "                      \"module_name\": \"variance\",\n"
-                                                  "                      \"class_name\": \"\",\n"
-                                                  "                      \"method_name\": \"variance\",\n"
-                                                  "                      \"special_parameters\": {}\n"
-                                                  "                   },\n"
-                                                  "             2:\n"
-                                                  "                  {\n"
-                                                  "                      \"module_name\": \"skewness\",\n"
-                                                  "                      \"class_name\": \"\",\n"
-                                                  "                      \"method_name\": \"skewness\",\n"
-                                                  "                      \"special_parameters\": {}\n"
-                                                  "                   },\n"
-                                                  "                       3:\n"
-                                                  "                   {\n"
-                                                  "                       \"module_name\": \"kurtosis\",\n"
-                                                  "                        \"class_name\": \"\",\n"
-                                                  "                       \"method_name\": \"kurt\",\n"
-                                                  "                         \"special_parameters\": {}\n"
-                                                  "                                 }\n"
-                                                  "\n"
-                                                  "\n"
-                                                  "   }"))
+"     priority-index : {\n"
+"                                     \"module_name\":\n"
+"                                               \"name of module\",\n"
+"\n"
+"                                      \"class_name\": \n"
+"                                                  \"name of class\",\n"
+"\n"
+"                                      \"method_name\": \n"
+"                                                   \"name of method\",\n"
+"\n"
+"                                       \"special_parameters\":\n"
+"                                                    {\"parameter-1\": parameter_1,\n"
+"                                                      \"parameter-2\": parameter_2, \n"
+"                                                    ...}\n"
+"                                }, \n"
+"\n"
+" ...  }# these functions are executed in order of priority-index\n"
+"\n"
+"\n"
+"\n"
+"\n"
+"\n"
+"for ex.:\n"
+"{\n"
+"                       1:\n"
+"                  {\n"
+"                      \"module_name\": \"variance\",\n"
+"                      \"class_name\": \"\",\n"
+"                      \"method_name\": \"variance\",\n"
+"                      \"special_parameters\": {}\n"
+"                   },\n"
+"             2:\n"
+"                  {\n"
+"                      \"module_name\": \"skewness\",\n"
+"                      \"class_name\": \"\",\n"
+"                      \"method_name\": \"skewness\",\n"
+"                      \"special_parameters\": {}\n"
+"                   },\n"
+"                       3:\n"
+"                   {\n"
+"                       \"module_name\": \"kurtosis\",\n"
+"                        \"class_name\": \"\",\n"
+"                       \"method_name\": \"kurt\",\n"
+"                         \"special_parameters\": {}\n"
+"                                 }\n"
+"\n"
+"\n"
+"   }"))
         self.rbtn_saving_data_bank_csv.setText(_translate("Form", ".CSV"))
         self.rbtn_saving_data_bank_mat.setText(_translate("Form", ".MAT"))
         self.st21.setPlainText(_translate("Form", "Data-Bank Dimensions in Columns or Rows:"))
@@ -1068,65 +1073,65 @@ class Ui_Form(object):
         self.rbtn_run_postProcess.setText(_translate("Form", "Yes"))
         self.rbtn_dont_run_postProcess.setText(_translate("Form", "No"))
         self.et_postProcess_methods.setPlainText(_translate("Form", "{\n"
-                                                                    "\n"
-                                                                    "1:\n"
-                                                                    "        {\n"
-                                                                    "            \"module_name\": \"normalizer\",\n"
-                                                                    "            \"class_name\": \"\",\n"
-                                                                    "            \"method_name\": \"normalizer\",\n"
-                                                                    "            \"special_parameters\": {}\n"
-                                                                    "        },\n"
-                                                                    " 2:\n"
-                                                                    "        {\n"
-                                                                    "            \"module_name\": \"standardizer\",\n"
-                                                                    "            \"class_name\": \"\",\n"
-                                                                    "            \"method_name\": \"standardizer\",\n"
-                                                                    "            \"special_parameters\": {}\n"
-                                                                    "         },\n"
-                                                                    "\n"
-                                                                    "}  "))
+"\n"
+"1:\n"
+"        {\n"
+"            \"module_name\": \"normalizer\",\n"
+"            \"class_name\": \"\",\n"
+"            \"method_name\": \"normalizer\",\n"
+"            \"special_parameters\": {}\n"
+"        },\n"
+" 2:\n"
+"        {\n"
+"            \"module_name\": \"standardizer\",\n"
+"            \"class_name\": \"\",\n"
+"            \"method_name\": \"standardizer\",\n"
+"            \"special_parameters\": {}\n"
+"         },\n"
+"\n"
+"}  "))
         self.st28.setPlainText(_translate("Form", "{\n"
-                                                  "     priority-index : {\n"
-                                                  "                                     \"module_name\":\n"
-                                                  "                                               \"name of module\",\n"
-                                                  "\n"
-                                                  "                                      \"class_name\": \n"
-                                                  "                                                  \"name of class\",\n"
-                                                  "\n"
-                                                  "                                      \"method_name\": \n"
-                                                  "                                                   \"name of method\",\n"
-                                                  "\n"
-                                                  "                                       \"special_parameters\":\n"
-                                                  "                                                    {\"parameter-1\": parameter_1,\n"
-                                                  "                                                      \"parameter-2\": parameter_2, \n"
-                                                  "                                                    ...}\n"
-                                                  "                                }, \n"
-                                                  "\n"
-                                                  " ...  }# these functions are executed in order of priority-index\n"
-                                                  "\n"
-                                                  "\n"
-                                                  "\n"
-                                                  "\n"
-                                                  "\n"
-                                                  "for ex.:\n"
-                                                  "{\n"
-                                                  "\n"
-                                                  "                        1 : {\n"
-                                                  "                                     \"module_name\":  \"normalizer\",\n"
-                                                  "                                      \"class_name\": \"\",\n"
-                                                  "                                      \"method_name\": \"normalizer\",\n"
-                                                  "                                       \"special_parameters\":{}\n"
-                                                  "                                },\n"
-                                                  "\n"
-                                                  "                        2 : {\n"
-                                                  "                                     \"module_name\":  \"standardizer\",\n"
-                                                  "                                      \"class_name\": \"\",\n"
-                                                  "                                      \"method_name\": \"standardizer\",\n"
-                                                  "                                       \"special_parameters\":{}\n"
-                                                  "                                }\n"
-                                                  "\n"
-                                                  "\n"
-                                                  "   }"))
+"     priority-index : {\n"
+"                                     \"module_name\":\n"
+"                                               \"name of module\",\n"
+"\n"
+"                                      \"class_name\": \n"
+"                                                  \"name of class\",\n"
+"\n"
+"                                      \"method_name\": \n"
+"                                                   \"name of method\",\n"
+"\n"
+"                                       \"special_parameters\":\n"
+"                                                    {\"parameter-1\": parameter_1,\n"
+"                                                      \"parameter-2\": parameter_2, \n"
+"                                                    ...}\n"
+"                                }, \n"
+"\n"
+" ...  }# these functions are executed in order of priority-index\n"
+"\n"
+"\n"
+"\n"
+"\n"
+"\n"
+"for ex.:\n"
+"{\n"
+"\n"
+"                        1 : {\n"
+"                                     \"module_name\":  \"normalizer\",\n"
+"                                      \"class_name\": \"\",\n"
+"                                      \"method_name\": \"normalizer\",\n"
+"                                       \"special_parameters\":{}\n"
+"                                },\n"
+"\n"
+"                        2 : {\n"
+"                                     \"module_name\":  \"standardizer\",\n"
+"                                      \"class_name\": \"\",\n"
+"                                      \"method_name\": \"standardizer\",\n"
+"                                       \"special_parameters\":{}\n"
+"                                }\n"
+"\n"
+"\n"
+"   }"))
         self.Program_Tabs.setTabText(self.Program_Tabs.indexOf(self.tab_postProcessing), _translate("Form", "postProcessing"))
         self.Program_Tabs.setTabText(self.Program_Tabs.indexOf(self.tab_classification), _translate("Form", "Classification"))
         self.Program_Tabs.setTabText(self.Program_Tabs.indexOf(self.tab_evaluation), _translate("Form", "Evaluation"))
@@ -1134,14 +1139,16 @@ class Ui_Form(object):
         self.btn_save_as_default.setText(_translate("Form", "Save as Default"))
         self.btn_close.setText(_translate("Form", "Close"))
 
-        # assigning Event Handlers
+       # assigning Event Handlers
         # 1. General
         self.btn_start.clicked.connect(self.start_clicked)
         self.btn_close.clicked.connect(self.close_clicked)
+        self.btn_save_as_default.clicked.connect(self.save_as_default)
+
+        self.load_default()
 
         # 2. Data-Set
         self.rbtn_make_new_data_set.toggled.connect(self.making_data_set_selected)
-
         self.btn_brows_data_set.clicked.connect(self.brows_data_set)
         self.rbtn_data_set_name.toggled.connect(self.data_set_name_selected)
 
@@ -1154,82 +1161,145 @@ class Ui_Form(object):
         # 5. postProcessed Data-Set
         self.btn_postProcess_methods_ex.clicked.connect(self.postProcess_ex)
 
+
+    def configuration_folder_address_extractor (self):
+        root_folder_address = root_project_folder_address_extractor(
+            target_folder_name=self.et_project_name.toPlainText())
+
+        parent_folder_address = root_folder_address + "\\Start\\PythonGUI"
+        parent_folder_address = parent_folder_address.replace("\\", "/")
+
+        return parent_folder_address
+
+    def load_default(self):
+        parent_folder_address = self.configuration_folder_address_extractor()
+        configuration_file_address = ("%s/configuration.csv" % parent_folder_address)
+        if os.path.exists(configuration_file_address):
+            loaded_configuration = csv_file_loader(configuration_file_address)
+            print(loaded_configuration)
+            print(type(loaded_configuration))
+            loaded_configuration = ast.literal_eval(loaded_configuration)
+
+            # 1. General
+            self.et_project_name.setPlainText(loaded_configuration["project_name"])
+
+            # 2. Data-Set
+            self.et_data_set_name.setText(loaded_configuration["data_set_name"])
+            self.et_data_set_address.toPlainText(loaded_configuration["data_set_address"])
+
+            self.et_zero_conversion_threshold.toPlainText(loaded_configuration["zero_conversion_threshold"])
+            self.et_No_sR.toPlainText(loaded_configuration["number_of_subRegions"])
+            self.et_No_Symbols_preamb.toPlainText(loaded_configuration["number_of_symbols_per_subRegion"])
+            self.et_No_chips_in_sR.toPlainText(loaded_configuration["number_of_chips_per_subRegion"])
+            self.et_chip_length.toPlainText(loaded_configuration["time_length_of_chip"])
+            self.et_sampling_frequency.toPlainText(loaded_configuration["sampling_frequency"])
+            self.et_communication_frequency.toPlainText(loaded_configuration["communication_frequency"])
+
+
+            loaded_configuration["data_set_loading_format"] = "txt"
+
+            self.et_data_set_extractor_methods.toPlainText(loaded_configuration["data_set_extractor_methods"])
+
+            self.rbtn_save_data_set.isChecked(loaded_configuration["save_data_set"])
+            self.rbtn_make_new_data_set.isChecked(loaded_configuration["make_new_data_set"])
+
+            self.et_data_set_address.toPlainText(loaded_configuration["data_set_address"])
+
+
+            # 3. preProcessed Data-Set
+            self.rbtn_run_preProcess.isChecked(loaded_configuration["run_preProcess"])
+            self.rbtn_save_preProcessed_data_set.isChecked(loaded_configuration["save_preProcessed_data_set"])
+            self.et_preProcessed_methods.toPlainText(loaded_configuration["preProcessing_methods"])
+
+            loaded_configuration["preProcessed_data_set_loading_format"] = "txt"
+
+            # 4. Data-Bank
+            self.rbtn_run_data_bank.isChecked(loaded_configuration["run_data_bank"])
+            self.rbtn_save_data_bank.isChecked(loaded_configuration["save_data_bank"])
+
+            loaded_configuration["data_bank_dimensions_in_columns"] = "rows"
+
+            self.rbtn_add_dim_headers.isChecked(loaded_configuration["add_dim_headers"])
+            self.et_data_bank_methods.toPlainText(loaded_configuration["data_bank_methods"])
+
+            # 5. postProcessed Data-Set
+            self.rbtn_run_postProcess.isChecked(loaded_configuration["run_postProcess"])
+            self.et_postProcess_methods.setPlainText(loaded_configuration["postProcessing_methods"])
+
+    def save_as_default (self):
+        saved_parameters = self.parameter_collector()
+
+        parent_folder_address = self.configuration_folder_address_extractor()
+
+        csv_file_saver(saved_parameters, parent_folder_address, "configuration", [])
+
+
     def making_data_set_selected(self, enabled):
         if not enabled:
-            self.previous_state_of_data_set_address_rbtn = self.rbtn_data_set_address.isChecked()
-            self.rbtn_data_set_address.click()
-
-            self.previous_data_set_name = self.et_data_set_name.toPlainText()
-            self.et_data_set_name.setText("")
-
-            self.previous_data_set_address = self.et_data_set_address.toPlainText()
-            self.et_data_set_address.setText("A Data-Set Address Should be Assigned!")
-            self.et_data_set_address.setStyleSheet("QTextEdit {color:red}")
-            self.et_data_set_name.setDisabled(True)
+            self.et_zero_conversion_threshold.setDisabled(True)
+            self.et_No_sR.setDisabled(True)
+            self.et_No_Symbols_preamb.setDisabled(True)
+            self.et_No_chips_in_sR.setDisabled(True)
+            self.et_chip_length.setDisabled(True)
+            self.et_sampling_frequency.setDisabled(True)
+            self.et_communication_frequency.setDisabled(True)
+            self.et_data_set_extractor_methods.setDisabled(True)
 
         else:
-            print(self.previous_data_set_name)
-            if self.previous_state_of_data_set_address_rbtn:
-                self.rbtn_data_set_address.click()
-                self.et_data_set_name.setDisabled(True)
-                self.et_data_set_address.setDisabled(False)
-
-            else:
-                self.et_data_set_name.setDisabled(False)
-                self.et_data_set_address.setDisabled(True)
-                self.rbtn_data_set_name.click()
-
-            self.et_data_set_name.setText(self.previous_data_set_name)
-            self.et_data_set_address.setText(self.previous_data_set_address)
+            self.et_zero_conversion_threshold.setDisabled(False)
+            self.et_No_sR.setDisabled(False)
+            self.et_No_Symbols_preamb.setDisabled(False)
+            self.et_No_chips_in_sR.setDisabled(False)
+            self.et_chip_length.setDisabled(False)
+            self.et_sampling_frequency.setDisabled(False)
+            self.et_communication_frequency.setDisabled(False)
+            self.et_data_set_extractor_methods.setDisabled(False)
 
     def data_set_name_selected(self, enabled):
         if not enabled:
             self.et_data_set_name.setDisabled(True)
             self.et_data_set_address.setDisabled(False)
 
+            if self.et_data_set_name.toPlainText() == "A Data-Set Name Should be Assigned!":
+                self.et_data_set_name.setText("")
+
         else:
             self.et_data_set_address.setDisabled(True)
             self.et_data_set_name.setDisabled(False)
+
+            if (self.et_data_set_address.toPlainText() == "A Data-Set Address Should be Assigned!") or \
+                ("There is no Folder Named RawData in:" in self.et_data_set_address.toPlainText()):
+                self.et_data_set_address.setText("")
 
     def start_clicked(self):
         # Collecting Variables
         self.parameter_collection = self.parameter_collector()
 
-        a = main(self.parameter_collection)
-        print(a.keys())
+        if self.start_allowed():
+            outpurt = main(self.parameter_collection)
+            print(outpurt.keys())
 
     def close_clicked(self):
-        print("close_clicked_method")
-        # TODO: Complete this function
-        pass
+        sys.exit(0)
 
     def brows_data_set(self):
-        if self.rbtn_data_set_address:
-            root_folder_address = root_project_folder_address_extractor(target_folder_name=self.parameter_collection["project_name"])
+        if self.rbtn_data_set_address.isChecked():
+
+            root_folder_address = root_project_folder_address_extractor(target_folder_name=self.et_project_name.toPlainText())
             root = Tk()
             root.withdraw()  # use to hide tkinter window
             parent_folder_address = filedialog.askdirectory(parent=root, initialdir=root_folder_address,
-                                                        title='Please select a Recorded Data Collection')
-            print("111111")
+                                                            title='Please select a Recorded Data Collection')
+
             data_set_address = parent_folder_address + "\\RawData"
             data_set_address = data_set_address.replace("\\", "/")
             self.et_data_set_address.setText(data_set_address)
             self.et_data_set_address.setStyleSheet("QTextEdit {color:black}")
             if not os.path.exists(data_set_address):
-                error_text = ('There is no folder named RawData in: %s' % parent_folder_address)
+                error_text = ('There is no Folder Named RawData in: %s' % parent_folder_address)
                 self.et_data_set_address.setText(error_text)
                 self.et_data_set_address.setStyleSheet("QTextEdit {color:red}")
                 # raise ValueError(error_text)
-
-    def data_set_name_checked(self):
-        print("data_set_name_checked")
-        # TODO: Complete this function
-        pass
-
-    def data_set_address_checked(self):
-        print("data_set_address_checked")
-        # TODO: Complete this function
-        pass
 
     def preProcess_ex(self):
         # TODO: Complete this function
@@ -1242,12 +1312,10 @@ class Ui_Form(object):
         pass
 
     def postProcess_ex(self):
-        print("postProcess_ex")
         # TODO: Complete this function
         pass
 
     def parameter_collector (self):
-
         self.parameter_collection = {}
 
         # 1. General
@@ -1276,15 +1344,20 @@ class Ui_Form(object):
         self.parameter_collection["save_data_set"] = self.rbtn_save_data_set.isChecked()
         self.parameter_collection["make_new_data_set"] = self.rbtn_make_new_data_set.isChecked()
 
-        if self.rbtn_data_set_address:
+        if self.rbtn_data_set_address.isChecked():
             self.parameter_collection["data_set_address"] = self.et_data_set_address.toPlainText()
 
         else:
-            root_folder_address = root_project_folder_address_extractor(target_folder_name=self.parameter_collection["project_name"])
-            parent_folder_address = root_folder_address + "\\Resources\\" + self.et_data_set_name.toPlainText()
-            data_set_address = parent_folder_address + "\\RawData"
-            data_set_address = data_set_address.replace("\\", "/")
-            self.parameter_collection["data_set_address"] = data_set_address
+            if self.et_data_set_name.toPlainText():
+                root_folder_address = root_project_folder_address_extractor(target_folder_name=self.parameter_collection["project_name"])
+                parent_folder_address = root_folder_address + "\\Resources\\" + self.et_data_set_name.toPlainText()
+                data_set_address = parent_folder_address + "\\RawData"
+                data_set_address = data_set_address.replace("\\", "/")
+                self.parameter_collection["data_set_address"] = data_set_address
+
+            else:
+                self.et_data_set_name.setText("A Data-Set Name Should be Assigned!")
+                self.parameter_collection["data_set_address"] = ""
 
         # 3. preProcessed Data-Set
         self.parameter_collection["run_preProcess"] = self.rbtn_run_preProcess.isChecked()
@@ -1303,7 +1376,6 @@ class Ui_Form(object):
 
         if self.rbtn_data_bank_dimensions_in_columns.isChecked():
             self.parameter_collection["data_bank_dimensions_in_columns"] = "columns"
-
         else:
             self.parameter_collection["data_bank_dimensions_in_columns"] = "rows"
 
@@ -1312,13 +1384,38 @@ class Ui_Form(object):
 
         if self.rbtn_saving_data_bank_csv:
             self.parameter_collection["data_bank_saving_format"] = "csv"
-
         elif self.rbtn_saving_data_bank_mat:
             self.parameter_collection["data_bank_saving_format"] = "mat"
 
         # 5. postProcessed Data-Set
         self.parameter_collection["run_postProcess"] = self.rbtn_run_postProcess.isChecked()
         self.parameter_collection["postProcessing_methods"] = self.et_postProcess_methods.toPlainText()
+
+        return self.parameter_collection
+
+    def start_allowed(self):
+        print("sdfklhksdfhksdfhkhsdffkh")
+        print(self.parameter_collection["data_set_address"])
+        start_is_allowed = True
+        if (not self.parameter_collection["data_set_address"]) or \
+                (self.parameter_collection["data_set_address"] == "A Data-Set Address Should be Assigned!") or \
+                (self.et_data_set_name.toPlainText() == "A Data-Set Name Should be Assigned!") or \
+                ("There is no Folder Named RawData in:" in self.et_data_set_address.toPlainText()):
+
+            if self.rbtn_data_set_name.isChecked():
+                self.et_data_set_name.setText("A Data-Set Name Should be Assigned!")
+                self.et_data_set_name.setStyleSheet("QTextEdit {color:red}")
+
+            else:
+                self.et_data_set_address.setText("A Data-Set Address Should be Assigned!")
+                self.et_data_set_address.setStyleSheet("QTextEdit {color:red}")
+
+            start_is_allowed = False
+
+        elif self.et_data_set_address.toPlainText() == "A Data-Set Address Should be Assigned!":
+            self.et_data_set_address.setText("")
+
+        return start_is_allowed
 
 
 if __name__ == "__main__":
@@ -1327,6 +1424,6 @@ if __name__ == "__main__":
     Form = QtWidgets.QWidget()
     ui = Ui_Form()
     ui.setupUi(Form)
-    Form.show()
+    Form.showMaximized()
     sys.exit(app.exec_())
 
