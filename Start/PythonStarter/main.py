@@ -36,6 +36,7 @@ def main(parameters):
     time_length_of_a_single_chip_in_second = float(parameters["time_length_of_chip"]),
     sampling_frequency = int(float(parameters["sampling_frequency"])),
     communication_frequency = int(float(parameters["communication_frequency"])),
+    data_set_name = parameters["data_set_address"]
 
     # the extensions
     selected_initial_data_set_saving_format = parameters["data_set_saving_format"]  # "txt"
@@ -295,9 +296,7 @@ def main(parameters):
 
 
     # Address Extraction of Selected Data-Set
-    root_folder_address = root_project_folder_address_extractor(target_folder_name=project_name)
-
-    data_set_address = raw_data_folder_address_extractor(root_folder_address, selected_data_set_name)
+    #data_set_address = raw_data_folder_address_extractor(root_folder_address, selected_data_set_name)
 
     output = project_manager(data_set_address=data_set_address,
                              zero_conversion_threshold=zero_conversion_threshold,
