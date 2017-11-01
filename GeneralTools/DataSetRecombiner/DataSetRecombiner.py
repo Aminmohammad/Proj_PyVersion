@@ -106,7 +106,12 @@ class DataSetRecombiner(object):
 
     # preProcessing Functions
     def preProcessor_characteristic_converter(self):
+        print(self.selected_methods)
+        print(type(self.selected_methods))
+        print(self.single_characteristic)
+        print(type(self.single_characteristic))
         converted_characteristic = conversion_manager(self.single_characteristic, self.selected_methods)
+
         output_labels = ""
         return converted_characteristic, output_labels
 

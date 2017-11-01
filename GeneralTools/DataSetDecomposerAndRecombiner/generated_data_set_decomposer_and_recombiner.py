@@ -37,6 +37,7 @@ def generated_data_set_decomposer_and_recombiner(extracted_data_set, name_of_cal
             characteristics_key_list = array(list(burst.keys()))
             number_of_characteristics_covered_for_current_burst = 0
             all_characteristics_of_current_burst_covered = False
+
             for characteristic_key in burst.keys():  # since we have 3 chars for each subRegion
                 number_of_characteristics_covered_for_current_burst += 1
                 if number_of_characteristics_covered_for_current_burst == size(characteristics_key_list):

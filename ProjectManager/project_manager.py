@@ -2,7 +2,7 @@ import csv
 import os
 
 import sys
-from numpy import array, size
+from numpy import array, size, shape
 import pickle
 
 from DataSetLoader.Data_Loading_Manager.Data_Set_Loading_Manager import data_set_loading_manager
@@ -21,6 +21,7 @@ def project_manager(**kwargs):
 
     # output
     output = {}
+
     # extract the DataSet
     extracted_data_set = data_set_loading_manager(
         data_set_address=kwargs["data_set_address"],
@@ -36,62 +37,68 @@ def project_manager(**kwargs):
         selected_loading_format=kwargs["selected_initial_data_set_loading_format"],
         project_name=kwargs["project_name"]
     )
-
     output["Initial_data_set"] = extracted_data_set
-
     if kwargs["save_initial_data_set"]:
         kwargs["selected_saving_format"] = kwargs["selected_initial_data_set_saving_format"]
         file_saver(extracted_data_set, "InitialDataSet", "initial_data_set", kwargs)
 
     # Running the pre-Processing
+    kwargs["run_preProcess"] = False
     if kwargs["run_preProcess"]:
 
         extracted_data_set = preProcessor_manager(extracted_data_set,
                                                   kwargs["selected_preProcessing_conversion_methods"],
                                                   kwargs["project_name"])
+
         output["preProcessed_data_set"] = extracted_data_set
 
         if kwargs["save_preProcessed_data_set"]:
             kwargs["selected_saving_format"] = kwargs["selected_preProcessed_data_set_saving_format"]
             file_saver(extracted_data_set, "preProcessedDataSet", "preProcessed_data_set", kwargs)
 
-    # producing the Finger-Print from `extracted_data_set`
+    # producing the Finger-Print from `extracted_data_set
     if kwargs["run_finger_print_production"]:
         data_bank, collected_labels = finger_print_manager(extracted_data_set,
                                                            kwargs["selected_feature_extraction_methods"],
                                                            kwargs["project_name"])
 
-        data_bank = array(data_bank)
+        data_bank = array(data_bank)  # Here, dimensions are in 'Rows'
 
         kwargs["collected_labels"] = collected_labels
 
         if not kwargs["run_postProcess"]:
 
             if kwargs["dimension_must_be_in_rows_or_columns"] == "columns":
-                output["data_bank"] = data_bank.transpose()
+                output["data_bank"] = data_bank.transpose()  # Here, dimensions are in 'Columns'
 
             elif kwargs["dimension_must_be_in_rows_or_columns"] == "rows":
-                output["data_bank"] = data_bank
+                output["data_bank"] = data_bank  # Here, dimensions are in 'Rows'
 
             if kwargs["save_data_bank"]:
                 kwargs["selected_saving_format"] = kwargs["selected_data_bank_saving_format"]
-                file_saver(data_bank.transpose(), "DataBank", "data_bank", kwargs)
+                file_saver(output["data_bank"], "DataBank", "data_bank", kwargs)
+
 
     # Running the post-Processing
     if kwargs["run_finger_print_production"] and kwargs["run_postProcess"]:
-        new_data_bank, new_collected_labels = postProcessor_manager(data_bank,
+        new_data_bank, new_collected_labels = postProcessor_manager(data_bank,  # Here, dimensions are in 'Rows'
                                                                     kwargs["project_name"],
                                                                     kwargs["selected_postProcessing_conversion_methods"],
                                                                     kwargs["dimension_must_be_in_rows_or_columns"])
+        #   new_data_bank: Dimensions are in 'Rows'
 
         if new_collected_labels:
             kwargs["collected_labels"] = new_collected_labels
 
-        output["data_bank"] = new_data_bank() # no transpose is needed here. since we cared about transpose in data-bank section
+        if kwargs["dimension_must_be_in_rows_or_columns"] == "columns":
+            output["data_bank"] = new_data_bank.transpose()  # Here, dimensions are in 'Columns'
+
+        elif kwargs["dimension_must_be_in_rows_or_columns"] == "rows":
+            output["data_bank"] = new_data_bank  # here, dimensions are in 'Rows'
 
         if kwargs["save_data_bank"]:
             kwargs["selected_saving_format"] = kwargs["selected_data_bank_saving_format"]
-            file_saver(new_data_bank.transpose(), "DataBank", "data_bank", kwargs)
+            file_saver(output["data_bank"], "DataBank", "data_bank", kwargs)
 
     return output
 

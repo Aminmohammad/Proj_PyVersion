@@ -6,7 +6,6 @@ def raw_data_folder_address_extractor(root_folder_address, selected_data_set_nam
     if not selected_data_set_name:
         root = Tk()
         root.withdraw()  # use to hide tkinter window
-
         parent_folder_address = filedialog.askdirectory(parent=root, initialdir=root_folder_address,
                                                         title='Please select a Recorded Data Collection')
 
@@ -15,7 +14,6 @@ def raw_data_folder_address_extractor(root_folder_address, selected_data_set_nam
 
     data_set_address = parent_folder_address + "\\RawData"
     data_set_address = data_set_address.replace("\\", "/")
-
     if not os.path.exists(data_set_address):
         raise ValueError('There is no folder named RawData in: %s' % parent_folder_address)
 

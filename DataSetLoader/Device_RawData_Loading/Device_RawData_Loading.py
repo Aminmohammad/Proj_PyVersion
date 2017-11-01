@@ -14,6 +14,7 @@ from GeneralTools.ModuleOrClassImporterSection.ImporterMethodsManager.ImporterMe
 
 
 def device_raw_data_loading(**kwarg):
+
     # Extraction of inputs
     device_data_set_address = kwarg["device_data_set_address"]
     zero_conversion_threshold = array(kwarg["zero_conversion_threshold"])
