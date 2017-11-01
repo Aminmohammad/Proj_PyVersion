@@ -24,7 +24,7 @@
           <bool>true</bool>
          </property>
          <property name="currentIndex">
-          <number>2</number>
+          <number>1</number>
          </property>
          <widget class="QWidget" name="tab_general">
           <property name="sizePolicy">
@@ -867,35 +867,6 @@ p, li { white-space: pre-wrap; }
             </brush>
            </property>
           </widget>
-          <widget class="QRadioButton" name="rbtn_make_new_data_set">
-           <property name="geometry">
-            <rect>
-             <x>290</x>
-             <y>130</y>
-             <width>181</width>
-             <height>21</height>
-            </rect>
-           </property>
-           <property name="text">
-            <string>Make New Data-Set</string>
-           </property>
-           <property name="checked">
-            <bool>true</bool>
-           </property>
-          </widget>
-          <widget class="QRadioButton" name="rbtn_load_new_data_set">
-           <property name="geometry">
-            <rect>
-             <x>965</x>
-             <y>130</y>
-             <width>191</width>
-             <height>21</height>
-            </rect>
-           </property>
-           <property name="text">
-            <string>Load Current Data-Set</string>
-           </property>
-          </widget>
           <widget class="QMdiArea" name="mdarea_make_data_set_1">
            <property name="geometry">
             <rect>
@@ -1075,6 +1046,48 @@ for ex.:
             </property>
            </widget>
           </widget>
+          <widget class="QGroupBox" name="groupBox">
+           <property name="geometry">
+            <rect>
+             <x>279</x>
+             <y>120</y>
+             <width>891</width>
+             <height>41</height>
+            </rect>
+           </property>
+           <property name="title">
+            <string/>
+           </property>
+           <widget class="QRadioButton" name="rbtn_load_new_data_set">
+            <property name="geometry">
+             <rect>
+              <x>690</x>
+              <y>10</y>
+              <width>191</width>
+              <height>21</height>
+             </rect>
+            </property>
+            <property name="text">
+             <string>Load Current Data-Set</string>
+            </property>
+           </widget>
+           <widget class="QRadioButton" name="rbtn_make_new_data_set">
+            <property name="geometry">
+             <rect>
+              <x>10</x>
+              <y>10</y>
+              <width>181</width>
+              <height>21</height>
+             </rect>
+            </property>
+            <property name="text">
+             <string>Make New Data-Set</string>
+            </property>
+            <property name="checked">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </widget>
           <zorder>mdarea_make_data_set_2</zorder>
           <zorder>mdarea_load_data_set</zorder>
           <zorder>mdarea_make_data_set_1</zorder>
@@ -1104,11 +1117,10 @@ for ex.:
           <zorder>et_data_set_name</zorder>
           <zorder>et_data_set_address</zorder>
           <zorder>btn_brows_data_set</zorder>
-          <zorder>rbtn_make_new_data_set</zorder>
-          <zorder>rbtn_load_new_data_set</zorder>
           <zorder>st11</zorder>
           <zorder>group_saving_data_set</zorder>
           <zorder>group_data_set</zorder>
+          <zorder>groupBox</zorder>
          </widget>
          <widget class="QWidget" name="tab_preProcessing">
           <property name="sizePolicy">
