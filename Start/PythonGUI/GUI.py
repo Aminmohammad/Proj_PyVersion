@@ -1,24 +1,22 @@
-# -*- coding: utf-8 -*-
-
-# Form implementation generated from reading ui file 'GUI.ui'
-#
-# Created by: PyQt5 UI code generator 5.6
-#
-# WARNING! All changes made in this file will be lost!
-from tkinter import Tk, filedialog
+import ast
+from tkinter import filedialog, Tk
 
 import os
-from PyQt5 import QtCore, QtGui, QtWidgets
 
+from GeneralTools.PickleLoader.pickle_file_loader import pickle_file_loader
+from GeneralTools.PickleSaver.pickle_file_saver import pickle_file_saver
 from GeneralTools.RootProjectFolderAddressExtractor.root_project_folder_address_extractor import \
     root_project_folder_address_extractor
-from Start.PythonStarter.main import main
+
+from PyQt5 import QtCore, QtGui, QtWidgets
+
+from Start.PythonStarter.main_GUI import main_GUI
 
 
 class Ui_Form(object):
     def setupUi(self, Form):
         Form.setObjectName("Form")
-        Form.resize(1459, 1066)
+        Form.resize(1237, 1066)
         self.horizontalLayout = QtWidgets.QHBoxLayout(Form)
         self.horizontalLayout.setObjectName("horizontalLayout")
         self.verticalLayout = QtWidgets.QVBoxLayout()
@@ -280,9 +278,9 @@ class Ui_Form(object):
         self.rbtn_save_data_set.setGeometry(QtCore.QRect(15, 7, 61, 31))
         self.rbtn_save_data_set.setChecked(True)
         self.rbtn_save_data_set.setObjectName("rbtn_save_data_set")
-        self.rbtn_dont_save_data_save = QtWidgets.QRadioButton(self.rbgroup_data_set_save)
-        self.rbtn_dont_save_data_save.setGeometry(QtCore.QRect(85, 6, 61, 31))
-        self.rbtn_dont_save_data_save.setObjectName("rbtn_dont_save_data_save")
+        self.rbtn_dont_save_data_set = QtWidgets.QRadioButton(self.rbgroup_data_set_save)
+        self.rbtn_dont_save_data_set.setGeometry(QtCore.QRect(85, 6, 61, 31))
+        self.rbtn_dont_save_data_set.setObjectName("rbtn_dont_save_data_set")
         self.st9 = QtWidgets.QPlainTextEdit(self.tab_data_set)
         self.st9.setGeometry(QtCore.QRect(30, 584, 270, 30))
         font = QtGui.QFont()
@@ -346,7 +344,8 @@ class Ui_Form(object):
         self.mdarea_load_data_set.setObjectName("mdarea_load_data_set")
         self.st11 = QtWidgets.QPlainTextEdit(self.tab_data_set)
         self.st11.setGeometry(QtCore.QRect(832, 420, 511, 391))
-        self.st11.setPlaceholderText("{1: {         \"module_name\":             \"no_change_char\",         \"class_name\": \"\",         \"method_name\":             \"no_change_char\",         \"special_parameters\":             {\"\"}     }")
+        self.st11.setPlaceholderText(
+            "{1: {         \"module_name\":             \"no_change_char\",         \"class_name\": \"\",         \"method_name\":             \"no_change_char\",         \"special_parameters\":             {\"\"}     }")
         self.st11.setObjectName("st11")
         self.mdarea_make_data_set_2 = QtWidgets.QMdiArea(self.tab_data_set)
         self.mdarea_make_data_set_2.setGeometry(QtCore.QRect(550, 380, 871, 581))
@@ -481,7 +480,8 @@ class Ui_Form(object):
         self.et_preProcessed_methods.setObjectName("et_preProcessed_methods")
         self.st17 = QtWidgets.QPlainTextEdit(self.tab_preProcessing)
         self.st17.setGeometry(QtCore.QRect(870, 10, 541, 761))
-        self.st17.setPlaceholderText("{1: {         \"module_name\":             \"no_change_char\",         \"class_name\": \"\",         \"method_name\":             \"no_change_char\",         \"special_parameters\":             {\"\"}     }")
+        self.st17.setPlaceholderText(
+            "{1: {         \"module_name\":             \"no_change_char\",         \"class_name\": \"\",         \"method_name\":             \"no_change_char\",         \"special_parameters\":             {\"\"}     }")
         self.st17.setObjectName("st17")
         self.group_saving_preProcessed_data_set = QtWidgets.QGroupBox(self.tab_preProcessing)
         self.group_saving_preProcessed_data_set.setGeometry(QtCore.QRect(490, 237, 180, 41))
@@ -608,7 +608,8 @@ class Ui_Form(object):
         self.st24 = QtWidgets.QPlainTextEdit(self.tab_data_bank)
         self.st24.setGeometry(QtCore.QRect(870, 70, 511, 761))
         self.st24.setBackgroundVisible(False)
-        self.st24.setPlaceholderText("{1: {         \"module_name\":             \"no_change_char\",         \"class_name\": \"\",         \"method_name\":             \"no_change_char\",         \"special_parameters\":             {\"\"}     }")
+        self.st24.setPlaceholderText(
+            "{1: {         \"module_name\":             \"no_change_char\",         \"class_name\": \"\",         \"method_name\":             \"no_change_char\",         \"special_parameters\":             {\"\"}     }")
         self.st24.setObjectName("st24")
         self.group_saving_data_bank_format = QtWidgets.QGroupBox(self.tab_data_bank)
         self.group_saving_data_bank_format.setGeometry(QtCore.QRect(560, 222, 180, 41))
@@ -635,12 +636,15 @@ class Ui_Form(object):
         self.group_data_bank_dimensions_in_rows_or_columns = QtWidgets.QGroupBox(self.tab_data_bank)
         self.group_data_bank_dimensions_in_rows_or_columns.setGeometry(QtCore.QRect(560, 290, 180, 41))
         self.group_data_bank_dimensions_in_rows_or_columns.setTitle("")
-        self.group_data_bank_dimensions_in_rows_or_columns.setObjectName("group_data_bank_dimensions_in_rows_or_columns")
-        self.rbtn_data_bank_dimensions_in_columns = QtWidgets.QRadioButton(self.group_data_bank_dimensions_in_rows_or_columns)
+        self.group_data_bank_dimensions_in_rows_or_columns.setObjectName(
+            "group_data_bank_dimensions_in_rows_or_columns")
+        self.rbtn_data_bank_dimensions_in_columns = QtWidgets.QRadioButton(
+            self.group_data_bank_dimensions_in_rows_or_columns)
         self.rbtn_data_bank_dimensions_in_columns.setGeometry(QtCore.QRect(10, 10, 95, 21))
         self.rbtn_data_bank_dimensions_in_columns.setChecked(True)
         self.rbtn_data_bank_dimensions_in_columns.setObjectName("rbtn_data_bank_dimensions_in_columns")
-        self.rbtn_data_bank_dimensions_in_rows = QtWidgets.QRadioButton(self.group_data_bank_dimensions_in_rows_or_columns)
+        self.rbtn_data_bank_dimensions_in_rows = QtWidgets.QRadioButton(
+            self.group_data_bank_dimensions_in_rows_or_columns)
         self.rbtn_data_bank_dimensions_in_rows.setGeometry(QtCore.QRect(110, 10, 71, 21))
         self.rbtn_data_bank_dimensions_in_rows.setObjectName("rbtn_data_bank_dimensions_in_rows")
         self.st22 = QtWidgets.QPlainTextEdit(self.tab_data_bank)
@@ -742,7 +746,8 @@ class Ui_Form(object):
         self.et_postProcess_methods.setObjectName("et_postProcess_methods")
         self.st28 = QtWidgets.QPlainTextEdit(self.tab_postProcessing)
         self.st28.setGeometry(QtCore.QRect(870, 28, 511, 761))
-        self.st28.setPlaceholderText("{1: {         \"module_name\":             \"no_change_char\",         \"class_name\": \"\",         \"method_name\":             \"no_change_char\",         \"special_parameters\":             {\"\"}     }")
+        self.st28.setPlaceholderText(
+            "{1: {         \"module_name\":             \"no_change_char\",         \"class_name\": \"\",         \"method_name\":             \"no_change_char\",         \"special_parameters\":             {\"\"}     }")
         self.st28.setObjectName("st28")
         self.mdarea_postProcess.raise_()
         self.st26.raise_()
@@ -819,7 +824,7 @@ class Ui_Form(object):
         self.st12.setPlainText(_translate("Form", "Characteristic Extractor Methods:"))
         self.st8.setPlainText(_translate("Form", "Save the Data-Set:"))
         self.rbtn_save_data_set.setText(_translate("Form", "Yes"))
-        self.rbtn_dont_save_data_save.setText(_translate("Form", "No"))
+        self.rbtn_dont_save_data_set.setText(_translate("Form", "No"))
         self.st9.setPlainText(_translate("Form", "Data-Set Saving Format:"))
         self.st10.setPlainText(_translate("Form", "Data-Set Loading Format:"))
         self.et_data_set_extractor_methods.setPlainText(_translate("Form", "{    \n"
@@ -846,11 +851,12 @@ class Ui_Form(object):
                                                                            "\n"
                                                                            "} "))
         self.btn_dat_set_extractor_method_ex.setText(_translate("Form", "Ex."))
-        self.et_data_set_name.setHtml(_translate("Form", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
-                                                         "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
-                                                         "p, li { white-space: pre-wrap; }\n"
-                                                         "</style></head><body style=\" font-family:\'MS Shell Dlg 2\'; font-size:8pt; font-weight:400; font-style:normal;\">\n"
-                                                         "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">2016_07_11_IQ_20Msps_RZUSBSTICK</p></body></html>"))
+        self.et_data_set_name.setHtml(_translate("Form",
+                                                 "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
+                                                 "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
+                                                 "p, li { white-space: pre-wrap; }\n"
+                                                 "</style></head><body style=\" font-family:\'MS Shell Dlg 2\'; font-size:8pt; font-weight:400; font-style:normal;\">\n"
+                                                 "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">2016_07_11_IQ_20Msps_RZUSBSTICK</p></body></html>"))
         self.btn_brows_data_set.setText(_translate("Form", "Browse"))
         self.st11.setPlainText(_translate("Form", "{\n"
                                                   "     priority-index : {\n"
@@ -968,7 +974,8 @@ class Ui_Form(object):
         self.rbtn_dont_save_preProcessed_data_set.setText(_translate("Form", "No"))
         self.rbtn_run_preProcess.setText(_translate("Form", "Yes"))
         self.rbtn_dont_run_preProcess.setText(_translate("Form", "No"))
-        self.Program_Tabs.setTabText(self.Program_Tabs.indexOf(self.tab_preProcessing), _translate("Form", "preProcessing"))
+        self.Program_Tabs.setTabText(self.Program_Tabs.indexOf(self.tab_preProcessing),
+                                     _translate("Form", "preProcessing"))
         self.st20.setPlainText(_translate("Form", "Data-Bank Saving Format:"))
         self.st18.setPlainText(_translate("Form", "Run Data-Bank Production:"))
         self.st19.setPlainText(_translate("Form", "Save the Data-Bank:"))
@@ -1127,21 +1134,27 @@ class Ui_Form(object):
                                                   "\n"
                                                   "\n"
                                                   "   }"))
-        self.Program_Tabs.setTabText(self.Program_Tabs.indexOf(self.tab_postProcessing), _translate("Form", "postProcessing"))
-        self.Program_Tabs.setTabText(self.Program_Tabs.indexOf(self.tab_classification), _translate("Form", "Classification"))
+        self.Program_Tabs.setTabText(self.Program_Tabs.indexOf(self.tab_postProcessing),
+                                     _translate("Form", "postProcessing"))
+        self.Program_Tabs.setTabText(self.Program_Tabs.indexOf(self.tab_classification),
+                                     _translate("Form", "Classification"))
         self.Program_Tabs.setTabText(self.Program_Tabs.indexOf(self.tab_evaluation), _translate("Form", "Evaluation"))
         self.btn_start.setText(_translate("Form", "Start"))
         self.btn_save_as_default.setText(_translate("Form", "Save as Default"))
         self.btn_close.setText(_translate("Form", "Close"))
 
+
+        self.et_data_set_address.setEnabled(False)
+
         # assigning Event Handlers
         # 1. General
         self.btn_start.clicked.connect(self.start_clicked)
         self.btn_close.clicked.connect(self.close_clicked)
+        self.btn_save_as_default.clicked.connect(self.save_as_default)
 
         # 2. Data-Set
         self.rbtn_make_new_data_set.toggled.connect(self.making_data_set_selected)
-
+        self.making_data_set_selected(True)
         self.btn_brows_data_set.clicked.connect(self.brows_data_set)
         self.rbtn_data_set_name.toggled.connect(self.data_set_name_selected)
 
@@ -1154,100 +1167,261 @@ class Ui_Form(object):
         # 5. postProcessed Data-Set
         self.btn_postProcess_methods_ex.clicked.connect(self.postProcess_ex)
 
-    def making_data_set_selected(self, enabled):
-        if not enabled:
-            self.previous_state_of_data_set_address_rbtn = self.rbtn_data_set_address.isChecked()
-            self.rbtn_data_set_address.click()
+        # 6. Lading default
+        self.load_default()
 
-            self.previous_data_set_name = self.et_data_set_name.toPlainText()
-            self.et_data_set_name.setText("")
+    def configuration_folder_address_extractor(self):
+        root_folder_address = root_project_folder_address_extractor(
+            target_folder_name=self.et_project_name.toPlainText())
 
-            self.previous_data_set_address = self.et_data_set_address.toPlainText()
-            self.et_data_set_address.setText("A Data-Set Address Should be Assigned!")
-            self.et_data_set_address.setStyleSheet("QTextEdit {color:red}")
-            self.et_data_set_name.setDisabled(True)
+        parent_folder_address = root_folder_address + "\\Start\\PythonGUI"
+        parent_folder_address = parent_folder_address.replace("\\", "/")
 
-        else:
-            print(self.previous_data_set_name)
-            if self.previous_state_of_data_set_address_rbtn:
-                self.rbtn_data_set_address.click()
-                self.et_data_set_name.setDisabled(True)
-                self.et_data_set_address.setDisabled(False)
+        return parent_folder_address
+
+    def load_default(self):
+        parent_folder_address = self.configuration_folder_address_extractor()
+        configuration_file_address = ("%s/configuration.txt" % parent_folder_address)
+
+        if os.path.exists(configuration_file_address):
+            loaded_configuration = ast.literal_eval(pickle_file_loader(configuration_file_address))
+
+            # 1. General
+            self.et_project_name.setPlainText(loaded_configuration["project_name"])
+
+            # 2. Data-Set
+            if loaded_configuration["rbtn_data_set_name"]:
+
+                if not self.rbtn_data_set_name.isChecked():
+                    self.rbtn_data_set_name.click()
+                self.data_set_name_selected(True)
+                self.et_data_set_name.setText(loaded_configuration["data_set_name"])
+                self.et_data_set_address.setPlainText("")
 
             else:
-                self.et_data_set_name.setDisabled(False)
-                self.et_data_set_address.setDisabled(True)
-                self.rbtn_data_set_name.click()
+                if not self.rbtn_data_set_address.isChecked():
+                    self.rbtn_data_set_address.click()
+                self.data_set_name_selected(False)
+                self.et_data_set_address.setText(loaded_configuration["data_set_address"])
+                self.et_data_set_name.setPlainText("")
 
-            self.et_data_set_name.setText(self.previous_data_set_name)
-            self.et_data_set_address.setText(self.previous_data_set_address)
+            if loaded_configuration["make_new_data_set"]:
+                if not self.rbtn_make_new_data_set.isChecked():
+                    self.rbtn_make_new_data_set.click()
+                self.making_data_set_selected(True)
+
+            elif not loaded_configuration["make_new_data_set"]:
+                if not self.rbtn_load_new_data_set.isChecked():
+                    self.rbtn_load_new_data_set.click()
+                self.making_data_set_selected(False)
+
+            self.et_zero_conversion_threshold.setPlainText(loaded_configuration["zero_conversion_threshold"])
+            self.et_No_sR.setPlainText(loaded_configuration["number_of_subRegions"])
+            self.et_No_Symbols_preamb.setPlainText(loaded_configuration["number_of_symbols_per_subRegion"])
+            self.et_No_chips_in_sR.setPlainText(loaded_configuration["number_of_chips_per_subRegion"])
+            self.et_chip_length.setPlainText(loaded_configuration["time_length_of_chip"])
+            self.et_sampling_frequency.setPlainText(loaded_configuration["sampling_frequency"])
+            self.et_communication_frequency.setPlainText(loaded_configuration["communication_frequency"])
+
+            if (loaded_configuration["save_data_set"]) and (not self.rbtn_save_data_set.isChecked()):
+                self.rbtn_save_data_set.setChecked(True)
+
+            elif (not loaded_configuration["save_data_set"]) and (not self.rbtn_dont_save_data_set.isChecked()):
+                self.rbtn_dont_save_data_set.setChecked(True)
+
+            if (loaded_configuration["data_set_saving_format"] == "txt") and (
+            not self.rbtn_data_set_saving_format_txt.isChecked()):
+                self.rbtn_data_set_saving_format_txt.setChecked(True)
+
+            elif (loaded_configuration["data_set_saving_format"] != "txt") and (
+            self.rbtn_data_set_saving_format_txt.isChecked()):
+                self.rbtn_data_set_saving_format_txt.setChecked(False)
+
+            self.et_data_set_extractor_methods.setPlainText(loaded_configuration["data_set_extractor_methods"])
+
+            if loaded_configuration["data_set_loading_format"] == "txt" and (
+            not self.rbtn_data_set_loading_format_txt.isChecked()):
+                self.rbtn_data_set_loading_format_txt.click()
+
+            elif (loaded_configuration["data_set_loading_format"] != "txt") and (
+            self.rbtn_data_set_loading_format_txt.isChecked()):
+                self.rbtn_data_set_loading_format_txt.click()
+
+            # 3. preProcessed Data-Set
+            if (loaded_configuration["run_preProcess"]) and (not self.rbtn_run_preProcess.isChecked()):
+                self.rbtn_run_preProcess.click()
+
+            elif (not loaded_configuration["run_preProcess"]) and (not self.rbtn_dont_run_preProcess.isChecked()):
+                self.rbtn_dont_run_preProcess.click()
+
+            if (loaded_configuration["save_preProcessed_data_set"]) and (
+            not self.rbtn_save_preProcessed_data_set.isChecked()):
+                self.rbtn_save_preProcessed_data_set.click()
+
+            elif (not loaded_configuration["save_preProcessed_data_set"]) and (
+            not self.rbtn_dont_save_preProcessed_data_set.isChecked()):
+                self.rbtn_dont_save_preProcessed_data_set.click()
+
+            if loaded_configuration["preProcessed_data_set_saving_format"] == "txt" and (
+            not self.rbtn_saving_preProcessed_data_set_txt.isChecked()):
+                self.rbtn_saving_preProcessed_data_set_txt.click()
+
+            elif (loaded_configuration["preProcessed_data_set_saving_format"] != "txt") and (
+            self.rbtn_saving_preProcessed_data_set_txt.isChecked()):
+                self.rbtn_saving_preProcessed_data_set_txt.click()
+
+            self.et_preProcessed_methods.setPlainText(loaded_configuration["preProcessing_methods"])
+
+            # 4. Data-Bank
+            if (loaded_configuration["run_data_bank"]) and (not self.rbtn_run_data_bank.isChecked()):
+                self.rbtn_run_data_bank.click()
+
+            elif (not loaded_configuration["run_data_bank"]) and (not self.rbtn_dont_run_data_bank.isChecked()):
+                self.rbtn_dont_run_data_bank.click()
+
+            if (loaded_configuration["save_data_bank"]) and (not self.rbtn_save_data_bank.isChecked()):
+                self.rbtn_save_data_bank.click()
+
+            elif (not loaded_configuration["save_data_bank"]) and (not self.rbtn_dont_save_data_bank.isChecked()):
+                self.rbtn_dont_save_data_bank.click()
+
+            if (loaded_configuration["data_bank_saving_format"] == "csv") and (
+            not self.rbtn_saving_data_bank_csv.isChecked()):
+                self.rbtn_saving_data_bank_csv.click()
+
+            elif (loaded_configuration["data_bank_saving_format"] == "mat") and (
+            not self.rbtn_saving_data_bank_mat.isChecked()):
+                self.rbtn_saving_data_bank_mat.click()
+
+            if loaded_configuration["data_bank_dimensions_in_columns"] == "columns" and (
+            not self.rbtn_data_bank_dimensions_in_columns.isChecked()):
+                self.rbtn_data_bank_dimensions_in_columns.click()
+
+            elif loaded_configuration["data_bank_dimensions_in_columns"] == "rows" and (
+            not self.rbtn_data_bank_dimensions_in_rows.isChecked()):
+                self.rbtn_data_bank_dimensions_in_rows.click()
+
+            if loaded_configuration["add_dim_headers"] and (not self.rbtn_add_dim_headers.isChecked()):
+                self.rbtn_add_dim_headers.click()
+
+            elif (not loaded_configuration["add_dim_headers"]) and (not self.rbtn_dont_add_dim_headers.isChecked()):
+                self.rbtn_dont_add_dim_headers.click()
+
+            self.et_data_bank_methods.setPlainText(loaded_configuration["data_bank_methods"])
+
+            # 5. postProcessed Data-Set
+            if (loaded_configuration["run_postProcess"]) and (not self.rbtn_run_postProcess.isChecked()):
+                self.rbtn_run_postProcess.click()
+
+            elif (not loaded_configuration["run_postProcess"]) and (not self.rbtn_dont_run_postProcess.isChecked()):
+                self.rbtn_dont_run_postProcess.click()
+
+            self.et_postProcess_methods.setPlainText(loaded_configuration["postProcessing_methods"])
+
+    def save_as_default(self):
+        saved_parameters = str(self.parameter_collector("save_as_default"))
+
+        parent_folder_address = self.configuration_folder_address_extractor()
+
+        pickle_file_saver(saved_parameters, parent_folder_address, "configuration", [])
+
+    def making_data_set_selected(self, enabled):
+        if not enabled:
+            self.et_zero_conversion_threshold.setDisabled(True)
+            self.et_No_sR.setDisabled(True)
+            self.et_No_Symbols_preamb.setDisabled(True)
+            self.et_No_chips_in_sR.setDisabled(True)
+            self.et_chip_length.setDisabled(True)
+            self.et_sampling_frequency.setDisabled(True)
+            self.et_communication_frequency.setDisabled(True)
+
+            self.rbtn_save_data_set.setEnabled(False)
+            self.rbtn_dont_save_data_set.setEnabled(False)
+
+            self.rbtn_data_set_saving_format_txt.setEnabled(False)
+
+            self.et_data_set_extractor_methods.setDisabled(True)
+
+            self.rbtn_data_set_loading_format_txt.setEnabled(True)
+
+        else:
+            self.et_zero_conversion_threshold.setDisabled(False)
+            self.et_No_sR.setDisabled(False)
+            self.et_No_Symbols_preamb.setDisabled(False)
+            self.et_No_chips_in_sR.setDisabled(False)
+            self.et_chip_length.setDisabled(False)
+            self.et_sampling_frequency.setDisabled(False)
+            self.et_communication_frequency.setDisabled(False)
+
+            self.rbtn_save_data_set.setEnabled(True)
+            self.rbtn_dont_save_data_set.setEnabled(True)
+
+            self.rbtn_data_set_saving_format_txt.setEnabled(True)
+
+            self.et_data_set_extractor_methods.setDisabled(False)
+
+            self.rbtn_data_set_loading_format_txt.setEnabled(False)
 
     def data_set_name_selected(self, enabled):
         if not enabled:
             self.et_data_set_name.setDisabled(True)
             self.et_data_set_address.setDisabled(False)
 
+            if self.et_data_set_name.toPlainText() == "A Data-Set Name Should be Assigned!":
+                self.et_data_set_name.setText("")
+
         else:
             self.et_data_set_address.setDisabled(True)
             self.et_data_set_name.setDisabled(False)
 
+            if (self.et_data_set_address.toPlainText() == "A Data-Set Address Should be Assigned!") or \
+                    ("There is no Folder Named RawData in:" in self.et_data_set_address.toPlainText()):
+                self.et_data_set_address.setText("")
+
     def start_clicked(self):
         # Collecting Variables
-        self.parameter_collection = self.parameter_collector()
+        self.parameter_collection = self.parameter_collector("start_clicked")
 
-        a = main(self.parameter_collection)
-        print(a.keys())
+        if self.start_allowed():
+            outpurt = main_GUI(self.parameter_collection)
+            print(outpurt.keys())
 
     def close_clicked(self):
-        print("close_clicked_method")
-        # TODO: Complete this function
-        pass
+        sys.exit(0)
 
     def brows_data_set(self):
-        if self.rbtn_data_set_address:
-            root_folder_address = root_project_folder_address_extractor(target_folder_name=self.parameter_collection["project_name"])
+        if self.rbtn_data_set_address.isChecked():
+
+            root_folder_address = root_project_folder_address_extractor(
+                target_folder_name=self.et_project_name.toPlainText())
             root = Tk()
             root.withdraw()  # use to hide tkinter window
             parent_folder_address = filedialog.askdirectory(parent=root, initialdir=root_folder_address,
-                                                        title='Please select a Recorded Data Collection')
-            print("111111")
+                                                            title='Please select a Recorded Data Collection')
+
             data_set_address = parent_folder_address + "\\RawData"
             data_set_address = data_set_address.replace("\\", "/")
             self.et_data_set_address.setText(data_set_address)
             self.et_data_set_address.setStyleSheet("QTextEdit {color:black}")
             if not os.path.exists(data_set_address):
-                error_text = ('There is no folder named RawData in: %s' % parent_folder_address)
+                error_text = ('There is no Folder Named RawData in: %s' % parent_folder_address)
                 self.et_data_set_address.setText(error_text)
                 self.et_data_set_address.setStyleSheet("QTextEdit {color:red}")
                 # raise ValueError(error_text)
 
-    def data_set_name_checked(self):
-        print("data_set_name_checked")
-        # TODO: Complete this function
-        pass
-
-    def data_set_address_checked(self):
-        print("data_set_address_checked")
-        # TODO: Complete this function
-        pass
-
     def preProcess_ex(self):
         # TODO: Complete this function
-        print("preProcess_ex")
         pass
 
     def data_bank_ex(self):
-        print("pdata_bank_ex")
         # TODO: Complete this function
         pass
 
     def postProcess_ex(self):
-        print("postProcess_ex")
         # TODO: Complete this function
         pass
 
-    def parameter_collector (self):
-
+    def parameter_collector(self, caller_function):
         self.parameter_collection = {}
 
         # 1. General
@@ -1257,6 +1431,8 @@ class Ui_Form(object):
         self.parameter_collection["data_set_name"] = self.et_data_set_name.toPlainText()
         self.parameter_collection["data_set_address"] = self.et_data_set_address.toPlainText()
 
+        self.parameter_collection["rbtn_data_set_name"] = self.rbtn_data_set_name.isChecked()  # Just for SaveAsDefault
+
         self.parameter_collection["zero_conversion_threshold"] = self.et_zero_conversion_threshold.toPlainText()
         self.parameter_collection["number_of_subRegions"] = self.et_No_sR.toPlainText()
         self.parameter_collection["number_of_symbols_per_subRegion"] = self.et_No_Symbols_preamb.toPlainText()
@@ -1265,41 +1441,64 @@ class Ui_Form(object):
         self.parameter_collection["sampling_frequency"] = self.et_sampling_frequency.toPlainText()
         self.parameter_collection["communication_frequency"] = self.et_communication_frequency.toPlainText()
 
-        if self.rbtn_data_set_saving_format_txt:
+        if self.rbtn_data_set_saving_format_txt.isChecked():
             self.parameter_collection["data_set_saving_format"] = "txt"
 
-        if self.rbtn_data_set_loading_format_txt:
+        else:
+            self.parameter_collection["data_set_saving_format"] = ""
+
+        if self.rbtn_data_set_loading_format_txt.isChecked():
             self.parameter_collection["data_set_loading_format"] = "txt"
+
+        else:
+            self.parameter_collection["data_set_loading_format"] = ""
 
         self.parameter_collection["data_set_extractor_methods"] = self.et_data_set_extractor_methods.toPlainText()
 
         self.parameter_collection["save_data_set"] = self.rbtn_save_data_set.isChecked()
         self.parameter_collection["make_new_data_set"] = self.rbtn_make_new_data_set.isChecked()
 
-        if self.rbtn_data_set_address:
+        if self.rbtn_data_set_address.isChecked():
             self.parameter_collection["data_set_address"] = self.et_data_set_address.toPlainText()
 
         else:
-            root_folder_address = root_project_folder_address_extractor(target_folder_name=self.parameter_collection["project_name"])
-            parent_folder_address = root_folder_address + "\\Resources\\" + self.et_data_set_name.toPlainText()
-            data_set_address = parent_folder_address + "\\RawData"
-            data_set_address = data_set_address.replace("\\", "/")
-            self.parameter_collection["data_set_address"] = data_set_address
+
+            if caller_function == "start_clicked":
+                if self.et_data_set_name.toPlainText():
+                    root_folder_address = root_project_folder_address_extractor(
+                        target_folder_name=self.parameter_collection["project_name"])
+                    parent_folder_address = root_folder_address + "\\Resources\\" + self.et_data_set_name.toPlainText()
+                    data_set_address = parent_folder_address + "\\RawData"
+                    data_set_address = data_set_address.replace("\\", "/")
+                    self.parameter_collection["data_set_address"] = data_set_address
+
+                else:
+                    self.et_data_set_name.setText("A Data-Set Name Should be Assigned!")
+                    self.parameter_collection["data_set_address"] = ""
+
+            elif caller_function == "save_as_default":
+                self.parameter_collection["data_set_address"] = self.et_data_set_name.toPlainText()
 
         # 3. preProcessed Data-Set
         self.parameter_collection["run_preProcess"] = self.rbtn_run_preProcess.isChecked()
         self.parameter_collection["save_preProcessed_data_set"] = self.rbtn_save_preProcessed_data_set.isChecked()
-        self.parameter_collection["preProcessing_methods"] = self.et_preProcessed_methods.toPlainText()
 
-        if self.rbtn_saving_preProcessed_data_set_txt:
+        if self.rbtn_saving_preProcessed_data_set_txt.isChecked():
             self.parameter_collection["preProcessed_data_set_saving_format"] = "txt"
+        else:
+            self.parameter_collection["preProcessed_data_set_saving_format"] = ""
 
-        if self.rbtn_data_set_loading_format_txt:
-            self.parameter_collection["preProcessed_data_set_loading_format"] = "txt"
+        self.parameter_collection["preProcessing_methods"] = self.et_preProcessed_methods.toPlainText()
 
         # 4. Data-Bank
         self.parameter_collection["run_data_bank"] = self.rbtn_run_data_bank.isChecked()
         self.parameter_collection["save_data_bank"] = self.rbtn_save_data_bank.isChecked()
+
+        if self.rbtn_saving_data_bank_csv.isChecked():
+            self.parameter_collection["data_bank_saving_format"] = "csv"
+
+        elif self.rbtn_saving_data_bank_mat.isChecked():
+            self.parameter_collection["data_bank_saving_format"] = "mat"
 
         if self.rbtn_data_bank_dimensions_in_columns.isChecked():
             self.parameter_collection["data_bank_dimensions_in_columns"] = "columns"
@@ -1310,23 +1509,41 @@ class Ui_Form(object):
         self.parameter_collection["add_dim_headers"] = self.rbtn_add_dim_headers.isChecked()
         self.parameter_collection["data_bank_methods"] = self.et_data_bank_methods.toPlainText()
 
-        if self.rbtn_saving_data_bank_csv:
-            self.parameter_collection["data_bank_saving_format"] = "csv"
-
-        elif self.rbtn_saving_data_bank_mat:
-            self.parameter_collection["data_bank_saving_format"] = "mat"
-
         # 5. postProcessed Data-Set
         self.parameter_collection["run_postProcess"] = self.rbtn_run_postProcess.isChecked()
         self.parameter_collection["postProcessing_methods"] = self.et_postProcess_methods.toPlainText()
 
+        return self.parameter_collection
+
+    def start_allowed(self):
+        start_is_allowed = True
+        if (not self.parameter_collection["data_set_address"]) or \
+                (self.parameter_collection["data_set_address"] == "A Data-Set Address Should be Assigned!") or \
+                (self.et_data_set_name.toPlainText() == "A Data-Set Name Should be Assigned!") or \
+                ("There is no Folder Named RawData in:" in self.et_data_set_address.toPlainText()):
+
+            if self.rbtn_data_set_name.isChecked():
+                self.et_data_set_name.setText("A Data-Set Name Should be Assigned!")
+                self.et_data_set_name.setStyleSheet("QTextEdit {color:red}")
+
+            else:
+                self.et_data_set_address.setText("A Data-Set Address Should be Assigned!")
+                self.et_data_set_address.setStyleSheet("QTextEdit {color:red}")
+
+            start_is_allowed = False
+
+        elif self.et_data_set_address.toPlainText() == "A Data-Set Address Should be Assigned!":
+            self.et_data_set_address.setText("")
+
+        return start_is_allowed
+
 
 if __name__ == "__main__":
     import sys
+
     app = QtWidgets.QApplication(sys.argv)
     Form = QtWidgets.QWidget()
     ui = Ui_Form()
     ui.setupUi(Form)
     Form.show()
     sys.exit(app.exec_())
-

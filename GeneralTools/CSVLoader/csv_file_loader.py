@@ -1,11 +1,17 @@
 import csv
 
 
-def csv_file_loader(data, saving_address, file_name):
+def csv_file_loader(loading_address):
+    print(loading_address)
+    with open(loading_address, "w") as file_obj:
 
-    file_address = saving_address + "/"+file_name+".csv"
-    with open(file_address, 'w') as temp0:
-        with open('eggs.csv', 'rb') as csvfile:
-            spamreader = csv.reader(csvfile, delimiter=' ', quotechar='|')
+        reader = csv.DictReader(file_obj, delimiter=',')
+        print(reader)
+        for line in reader:
+            print(line["first_name"]),
+            print(line["last_name"])
 
-            # TODO: This code is wrong. Correct it. Because how can we save and load 'extracted_dataset' as csv file
+        print(reader)
+        print(line)
+
+    return reader

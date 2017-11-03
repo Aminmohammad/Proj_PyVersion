@@ -43,7 +43,6 @@ def project_manager(**kwargs):
         file_saver(extracted_data_set, "InitialDataSet", "initial_data_set", kwargs)
 
     # Running the pre-Processing
-    kwargs["run_preProcess"] = False
     if kwargs["run_preProcess"]:
 
         extracted_data_set = preProcessor_manager(extracted_data_set,
@@ -101,8 +100,6 @@ def project_manager(**kwargs):
             file_saver(output["data_bank"], "DataBank", "data_bank", kwargs)
 
     return output
-
-
 def file_saver(data, folder_name, file_name, kwargs):
     data_saving_address = kwargs["data_set_address"].replace("RawData", folder_name)
     if not (os.path.exists(data_saving_address)):
