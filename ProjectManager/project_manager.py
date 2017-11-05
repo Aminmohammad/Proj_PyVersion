@@ -77,14 +77,14 @@ def project_manager(**kwargs):
                 kwargs["selected_saving_format"] = kwargs["selected_data_bank_saving_format"]
                 file_saver(output["data_bank"], "DataBank", "data_bank", kwargs)
 
-
     # Running the post-Processing
     if kwargs["run_finger_print_production"] and kwargs["run_postProcess"]:
         new_data_bank, new_collected_labels = postProcessor_manager(data_bank,  # Here, dimensions are in 'Rows'
                                                                     kwargs["project_name"],
-                                                                    kwargs["selected_postProcessing_conversion_methods"],
+                                                                    kwargs[
+                                                                        "selected_postProcessing_conversion_methods"],
                                                                     kwargs["dimension_must_be_in_rows_or_columns"])
-        #   new_data_bank: Dimensions are in 'Rows'
+        # new_data_bank: Dimensions are in 'Rows'
 
         if new_collected_labels:
             kwargs["collected_labels"] = new_collected_labels
