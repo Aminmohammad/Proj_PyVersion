@@ -1391,6 +1391,9 @@ class Ui_GUIStart(object):
             outpurt = main_GUI(self.parameter_collection)
             print(outpurt.keys())
 
+            # Analysis section
+
+
     def close_clicked(self):
         sys.exit(0)
 
