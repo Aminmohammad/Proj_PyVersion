@@ -10,7 +10,7 @@ def main():
     Start of program
     """
     # Input Parameters
-    project_name = "PhDProj_Python"
+    project_name = "Proj_PyVersion"
     selected_data_set_name = "2016_07_11_IQ_20Msps_RZUSBSTICK"  # if it is empty, a pop-up window will give you the opportunity to select it graphically   2016_07_11_IQ_20Msps_RZUSBSTICK
     zero_conversion_threshold = 0.7,
     number_of_subRegions = 32,

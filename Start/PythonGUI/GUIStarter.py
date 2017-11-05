@@ -3,13 +3,12 @@ from tkinter import filedialog, Tk
 
 import os
 
+from PyQt5 import QtCore, QtGui, QtWidgets
+
 from GeneralTools.PickleLoader.pickle_file_loader import pickle_file_loader
 from GeneralTools.PickleSaver.pickle_file_saver import pickle_file_saver
 from GeneralTools.RootProjectFolderAddressExtractor.root_project_folder_address_extractor import \
     root_project_folder_address_extractor
-
-from PyQt5 import QtCore, QtGui, QtWidgets
-
 from Start.PythonStarter.main_GUI import main_GUI
 
 class Ui_GUIStart(object):
@@ -795,7 +794,7 @@ class Ui_GUIStart(object):
     def retranslateUi(self, GUIStart):
         _translate = QtCore.QCoreApplication.translate
         GUIStart.setWindowTitle(_translate("GUIStart", "GUIStarter"))
-        self.et_project_name.setPlainText(_translate("GUIStart", "PhDProj_Python"))
+        self.et_project_name.setPlainText(_translate("GUIStart", "Proj_PyVersion"))
         self.st0.setPlainText(_translate("GUIStart", "Project Name:"))
         self.Program_Tabs.setTabText(self.Program_Tabs.indexOf(self.tab_general), _translate("GUIStart", "General"))
         self.data_set_address_groupBox.setTitle(_translate("GUIStart", "Dat Set Adress:"))
@@ -1175,6 +1174,7 @@ class Ui_GUIStart(object):
         self.load_default()
 
     def configuration_folder_address_extractor(self):
+
         root_folder_address = root_project_folder_address_extractor(
             target_folder_name=self.et_project_name.toPlainText())
 
@@ -1185,6 +1185,7 @@ class Ui_GUIStart(object):
 
     def load_default(self):
         parent_folder_address = self.configuration_folder_address_extractor()
+
         configuration_file_address = ("%s/configuration.txt" % parent_folder_address)
 
         if os.path.exists(configuration_file_address):
