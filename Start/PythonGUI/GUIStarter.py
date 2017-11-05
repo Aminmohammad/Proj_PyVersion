@@ -1396,6 +1396,9 @@ class Ui_GUIStart(object):
             print (stop - start)
             # print(outpurt.keys())
 
+            # Analysis section
+
+
     def close_clicked(self):
         sys.exit(0)
 
