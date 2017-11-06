@@ -4,9 +4,6 @@ import sys
 
 from termcolor import cprint
 
-from GeneralTools.RootProjectFolderAddressExtractor.root_project_folder_address_extractor import \
-    root_project_folder_address_extractor
-from GeneralTools.RawDataAddressExtractor.raw_data_address_extractor import raw_data_folder_address_extractor
 from ProjectManager.project_manager import project_manager
 
 

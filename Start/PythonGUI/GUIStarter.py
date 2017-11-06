@@ -1,18 +1,16 @@
 import ast
-import timeit
-
 from tkinter import filedialog, Tk
 
 import os
+
+from PyQt5 import QtCore, QtGui, QtWidgets
 
 from GeneralTools.PickleLoader.pickle_file_loader import pickle_file_loader
 from GeneralTools.PickleSaver.pickle_file_saver import pickle_file_saver
 from GeneralTools.RootProjectFolderAddressExtractor.root_project_folder_address_extractor import \
     root_project_folder_address_extractor
-
-from PyQt5 import QtCore, QtGui, QtWidgets
-
 from Start.PythonStarter.main_GUI import main_GUI
+
 
 class Ui_GUIStart(object):
     def setupUi(self, GUIStart):
@@ -346,7 +344,8 @@ class Ui_GUIStart(object):
         self.mdarea_load_data_set.setObjectName("mdarea_load_data_set")
         self.st11 = QtWidgets.QPlainTextEdit(self.tab_data_set)
         self.st11.setGeometry(QtCore.QRect(832, 420, 511, 391))
-        self.st11.setPlaceholderText("{1: {         \"module_name\":             \"no_change_char\",         \"class_name\": \"\",         \"method_name\":             \"no_change_char\",         \"special_parameters\":             {\"\"}     }")
+        self.st11.setPlaceholderText(
+            "{1: {         \"module_name\":             \"no_change_char\",         \"class_name\": \"\",         \"method_name\":             \"no_change_char\",         \"special_parameters\":             {\"\"}     }")
         self.st11.setObjectName("st11")
         self.mdarea_make_data_set_2 = QtWidgets.QMdiArea(self.tab_data_set)
         self.mdarea_make_data_set_2.setGeometry(QtCore.QRect(550, 380, 871, 581))
@@ -481,7 +480,8 @@ class Ui_GUIStart(object):
         self.et_preProcessed_methods.setObjectName("et_preProcessed_methods")
         self.st17 = QtWidgets.QPlainTextEdit(self.tab_preProcessing)
         self.st17.setGeometry(QtCore.QRect(870, 10, 541, 761))
-        self.st17.setPlaceholderText("{1: {         \"module_name\":             \"no_change_char\",         \"class_name\": \"\",         \"method_name\":             \"no_change_char\",         \"special_parameters\":             {\"\"}     }")
+        self.st17.setPlaceholderText(
+            "{1: {         \"module_name\":             \"no_change_char\",         \"class_name\": \"\",         \"method_name\":             \"no_change_char\",         \"special_parameters\":             {\"\"}     }")
         self.st17.setObjectName("st17")
         self.group_saving_preProcessed_data_set = QtWidgets.QGroupBox(self.tab_preProcessing)
         self.group_saving_preProcessed_data_set.setGeometry(QtCore.QRect(490, 237, 180, 41))
@@ -608,7 +608,8 @@ class Ui_GUIStart(object):
         self.st24 = QtWidgets.QPlainTextEdit(self.tab_data_bank)
         self.st24.setGeometry(QtCore.QRect(870, 70, 511, 761))
         self.st24.setBackgroundVisible(False)
-        self.st24.setPlaceholderText("{1: {         \"module_name\":             \"no_change_char\",         \"class_name\": \"\",         \"method_name\":             \"no_change_char\",         \"special_parameters\":             {\"\"}     }")
+        self.st24.setPlaceholderText(
+            "{1: {         \"module_name\":             \"no_change_char\",         \"class_name\": \"\",         \"method_name\":             \"no_change_char\",         \"special_parameters\":             {\"\"}     }")
         self.st24.setObjectName("st24")
         self.group_saving_data_bank_format = QtWidgets.QGroupBox(self.tab_data_bank)
         self.group_saving_data_bank_format.setGeometry(QtCore.QRect(560, 222, 180, 41))
@@ -635,12 +636,15 @@ class Ui_GUIStart(object):
         self.group_data_bank_dimensions_in_rows_or_columns = QtWidgets.QGroupBox(self.tab_data_bank)
         self.group_data_bank_dimensions_in_rows_or_columns.setGeometry(QtCore.QRect(560, 290, 180, 41))
         self.group_data_bank_dimensions_in_rows_or_columns.setTitle("")
-        self.group_data_bank_dimensions_in_rows_or_columns.setObjectName("group_data_bank_dimensions_in_rows_or_columns")
-        self.rbtn_data_bank_dimensions_in_columns = QtWidgets.QRadioButton(self.group_data_bank_dimensions_in_rows_or_columns)
+        self.group_data_bank_dimensions_in_rows_or_columns.setObjectName(
+            "group_data_bank_dimensions_in_rows_or_columns")
+        self.rbtn_data_bank_dimensions_in_columns = QtWidgets.QRadioButton(
+            self.group_data_bank_dimensions_in_rows_or_columns)
         self.rbtn_data_bank_dimensions_in_columns.setGeometry(QtCore.QRect(10, 10, 95, 21))
         self.rbtn_data_bank_dimensions_in_columns.setChecked(True)
         self.rbtn_data_bank_dimensions_in_columns.setObjectName("rbtn_data_bank_dimensions_in_columns")
-        self.rbtn_data_bank_dimensions_in_rows = QtWidgets.QRadioButton(self.group_data_bank_dimensions_in_rows_or_columns)
+        self.rbtn_data_bank_dimensions_in_rows = QtWidgets.QRadioButton(
+            self.group_data_bank_dimensions_in_rows_or_columns)
         self.rbtn_data_bank_dimensions_in_rows.setGeometry(QtCore.QRect(110, 10, 71, 21))
         self.rbtn_data_bank_dimensions_in_rows.setObjectName("rbtn_data_bank_dimensions_in_rows")
         self.st22 = QtWidgets.QPlainTextEdit(self.tab_data_bank)
@@ -743,7 +747,8 @@ class Ui_GUIStart(object):
         self.et_postProcess_methods.setObjectName("et_postProcess_methods")
         self.st28 = QtWidgets.QPlainTextEdit(self.tab_postProcessing)
         self.st28.setGeometry(QtCore.QRect(870, 28, 511, 761))
-        self.st28.setPlaceholderText("{1: {         \"module_name\":             \"no_change_char\",         \"class_name\": \"\",         \"method_name\":             \"no_change_char\",         \"special_parameters\":             {\"\"}     }")
+        self.st28.setPlaceholderText(
+            "{1: {         \"module_name\":             \"no_change_char\",         \"class_name\": \"\",         \"method_name\":             \"no_change_char\",         \"special_parameters\":             {\"\"}     }")
         self.st28.setObjectName("st28")
         self.mdarea_postProcess.raise_()
         self.st26.raise_()
@@ -769,6 +774,25 @@ class Ui_GUIStart(object):
         self.tab_evaluation.setSizePolicy(sizePolicy)
         self.tab_evaluation.setObjectName("tab_evaluation")
         self.Program_Tabs.addTab(self.tab_evaluation, "")
+        self.tab_3 = QtWidgets.QWidget()
+        self.tab_3.setObjectName("tab_3")
+        self.mdarea_postProcess_3 = QtWidgets.QMdiArea(self.tab_3)
+        self.mdarea_postProcess_3.setGeometry(QtCore.QRect(0, 20, 1431, 951))
+        brush = QtGui.QBrush(QtGui.QColor(233, 255, 180))
+        brush.setStyle(QtCore.Qt.SolidPattern)
+        self.mdarea_postProcess_3.setBackground(brush)
+        self.mdarea_postProcess_3.setObjectName("mdarea_postProcess_3")
+        self.groupBox_3 = QtWidgets.QGroupBox(self.tab_3)
+        self.groupBox_3.setGeometry(QtCore.QRect(10, 30, 311, 241))
+        self.groupBox_3.setObjectName("groupBox_3")
+        self.et_analysis_simulation_times = QtWidgets.QPlainTextEdit(self.groupBox_3)
+        self.et_analysis_simulation_times.setGeometry(QtCore.QRect(140, 15, 163, 215))
+        self.et_analysis_simulation_times.setObjectName("et_analysis_simulation_times")
+        self.plainTextEdit_2 = QtWidgets.QPlainTextEdit(self.groupBox_3)
+        self.plainTextEdit_2.setGeometry(QtCore.QRect(10, 20, 121, 31))
+        self.plainTextEdit_2.setReadOnly(True)
+        self.plainTextEdit_2.setObjectName("plainTextEdit_2")
+        self.Program_Tabs.addTab(self.tab_3, "")
         self.TabsLayout.addWidget(self.Program_Tabs)
         self.verticalLayout.addLayout(self.TabsLayout)
         self.lout_Start_Close = QtWidgets.QHBoxLayout()
@@ -791,7 +815,7 @@ class Ui_GUIStart(object):
         self.horizontalLayout.addLayout(self.verticalLayout)
 
         self.retranslateUi(GUIStart)
-        self.Program_Tabs.setCurrentIndex(1)
+        self.Program_Tabs.setCurrentIndex(7)
         QtCore.QMetaObject.connectSlotsByName(GUIStart)
 
     def retranslateUi(self, GUIStart):
@@ -824,84 +848,85 @@ class Ui_GUIStart(object):
         self.st9.setPlainText(_translate("GUIStart", "Data-Set Saving Format:"))
         self.st10.setPlainText(_translate("GUIStart", "Data-Set Loading Format:"))
         self.et_data_set_extractor_methods.setPlainText(_translate("GUIStart", "{    \n"
-"    1: {\n"
-"                     \"module_name\": \"amplitude_calculator\",\n"
-"                     \"class_name\": \"\",\n"
-"                     \"method_name\":\"amp\",\n"
-"                     \"special_parameters\":{\"\"}\n"
-"                     },\n"
-"\n"
-"                2: {\n"
-"                      \"module_name\": \"phase_calculator\",\n"
-"                      \"class_name\": \"\",\n"
-"                       \"method_name\": \"phase\",\n"
-"                       \"special_parameters\": {\"\"}\n"
-"                     },\n"
-"\n"
-"                 3: {\n"
-"                        \"module_name\": \"ifrequency_calculator\",\n"
-"                        \"class_name\": \"\",\n"
-"                        \"method_name\": \"ifreq\",\n"
-"                        \"special_parameters\": {\"\"}\n"
-"                     },\n"
-"\n"
-"} "))
+                                                                               "    1: {\n"
+                                                                               "                     \"module_name\": \"amplitude_calculator\",\n"
+                                                                               "                     \"class_name\": \"\",\n"
+                                                                               "                     \"method_name\":\"amp\",\n"
+                                                                               "                     \"special_parameters\":{\"\"}\n"
+                                                                               "                     },\n"
+                                                                               "\n"
+                                                                               "                2: {\n"
+                                                                               "                      \"module_name\": \"phase_calculator\",\n"
+                                                                               "                      \"class_name\": \"\",\n"
+                                                                               "                       \"method_name\": \"phase\",\n"
+                                                                               "                       \"special_parameters\": {\"\"}\n"
+                                                                               "                     },\n"
+                                                                               "\n"
+                                                                               "                 3: {\n"
+                                                                               "                        \"module_name\": \"ifrequency_calculator\",\n"
+                                                                               "                        \"class_name\": \"\",\n"
+                                                                               "                        \"method_name\": \"ifreq\",\n"
+                                                                               "                        \"special_parameters\": {\"\"}\n"
+                                                                               "                     },\n"
+                                                                               "\n"
+                                                                               "} "))
         self.btn_dat_set_extractor_method_ex.setText(_translate("GUIStart", "Ex."))
-        self.et_data_set_name.setHtml(_translate("GUIStart", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
-"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
-"p, li { white-space: pre-wrap; }\n"
-"</style></head><body style=\" font-family:\'MS Shell Dlg 2\'; font-size:8pt; font-weight:400; font-style:normal;\">\n"
-"<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><br /></p></body></html>"))
+        self.et_data_set_name.setHtml(_translate("GUIStart",
+                                                 "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
+                                                 "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
+                                                 "p, li { white-space: pre-wrap; }\n"
+                                                 "</style></head><body style=\" font-family:\'MS Shell Dlg 2\'; font-size:8.25pt; font-weight:400; font-style:normal;\">\n"
+                                                 "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:8pt;\"><br /></p></body></html>"))
         self.btn_brows_data_set.setText(_translate("GUIStart", "Browse"))
         self.st11.setPlainText(_translate("GUIStart", "{\n"
-"     priority-index : {\n"
-"                                     \"module_name\":\n"
-"                                               \"name of module\",\n"
-"\n"
-"                                      \"class_name\": \n"
-"                                                  \"name of class\",\n"
-"\n"
-"                                      \"method_name\": \n"
-"                                                   \"name of method\",\n"
-"\n"
-"                                       \"special_parameters\":\n"
-"                                                    {\"parameter-1\": parameter_1,\n"
-"                                                      \"parameter-2\": parameter_2, \n"
-"                                                    ...}\n"
-"                                }, \n"
-"\n"
-" ...  }\n"
-"\n"
-"\n"
-"\n"
-"\n"
-"\n"
-"for ex.:\n"
-"{    \n"
-"    1: {\n"
-"                     \"module_name\": \"amplitude_calculator\",\n"
-"                     \"class_name\": \"\",\n"
-"                     \"method_name\":\"amp\",\n"
-"                     \"special_parameters\":{\"\"}\n"
-"                     },\n"
-"\n"
-"                2: {\n"
-"                      \"module_name\": \"phase_calculator\",\n"
-"                      \"class_name\": \"\",\n"
-"                       \"method_name\": \"phase\",\n"
-"                       \"special_parameters\": {\"\"}\n"
-"                     },\n"
-"\n"
-"                 3: {\n"
-"                        \"module_name\": \"ifrequency_calculator\",\n"
-"                        \"class_name\": \"\",\n"
-"                        \"method_name\": \"ifreq\",\n"
-"                        \"special_parameters\": {\"\"}\n"
-"                     },\n"
-"\n"
-"    4:{}\n"
-"\n"
-"} "))
+                                                      "     priority-index : {\n"
+                                                      "                                     \"module_name\":\n"
+                                                      "                                               \"name of module\",\n"
+                                                      "\n"
+                                                      "                                      \"class_name\": \n"
+                                                      "                                                  \"name of class\",\n"
+                                                      "\n"
+                                                      "                                      \"method_name\": \n"
+                                                      "                                                   \"name of method\",\n"
+                                                      "\n"
+                                                      "                                       \"special_parameters\":\n"
+                                                      "                                                    {\"parameter-1\": parameter_1,\n"
+                                                      "                                                      \"parameter-2\": parameter_2, \n"
+                                                      "                                                    ...}\n"
+                                                      "                                }, \n"
+                                                      "\n"
+                                                      " ...  }\n"
+                                                      "\n"
+                                                      "\n"
+                                                      "\n"
+                                                      "\n"
+                                                      "\n"
+                                                      "for ex.:\n"
+                                                      "{    \n"
+                                                      "    1: {\n"
+                                                      "                     \"module_name\": \"amplitude_calculator\",\n"
+                                                      "                     \"class_name\": \"\",\n"
+                                                      "                     \"method_name\":\"amp\",\n"
+                                                      "                     \"special_parameters\":{\"\"}\n"
+                                                      "                     },\n"
+                                                      "\n"
+                                                      "                2: {\n"
+                                                      "                      \"module_name\": \"phase_calculator\",\n"
+                                                      "                      \"class_name\": \"\",\n"
+                                                      "                       \"method_name\": \"phase\",\n"
+                                                      "                       \"special_parameters\": {\"\"}\n"
+                                                      "                     },\n"
+                                                      "\n"
+                                                      "                 3: {\n"
+                                                      "                        \"module_name\": \"ifrequency_calculator\",\n"
+                                                      "                        \"class_name\": \"\",\n"
+                                                      "                        \"method_name\": \"ifreq\",\n"
+                                                      "                        \"special_parameters\": {\"\"}\n"
+                                                      "                     },\n"
+                                                      "\n"
+                                                      "    4:{}\n"
+                                                      "\n"
+                                                      "} "))
         self.rbtn_data_set_saving_format_txt.setText(_translate("GUIStart", ".TXT"))
         self.rbtn_data_set_loading_format_txt.setText(_translate("GUIStart", ".TXT"))
         self.rbtn_load_new_data_set.setText(_translate("GUIStart", "Load Current Data-Set"))
@@ -913,63 +938,64 @@ class Ui_GUIStart(object):
         self.st16.setPlainText(_translate("GUIStart", "selected pre-Processing Methods:"))
         self.btn_preProcess_methods_ex.setText(_translate("GUIStart", "Ex."))
         self.et_preProcessed_methods.setPlainText(_translate("GUIStart", "{\n"
-"  1 : {\n"
-"          \"module_name\": \"dwt_calculator\",\n"
-"          \"class_name\": \"\",\n"
-"          \"method_name\": \"dwt_calculator\",\n"
-"          \"special_parameters\":{\"important_element\":\"details\"}\n"
-"         }\n"
-"}"))
+                                                                         "  1 : {\n"
+                                                                         "          \"module_name\": \"dwt_calculator\",\n"
+                                                                         "          \"class_name\": \"\",\n"
+                                                                         "          \"method_name\": \"dwt_calculator\",\n"
+                                                                         "          \"special_parameters\":{\"important_element\":\"details\"}\n"
+                                                                         "         }\n"
+                                                                         "}"))
         self.st17.setPlainText(_translate("GUIStart", "{\n"
-"     priority-index : {\n"
-"                                     \"module_name\":\n"
-"                                               \"name of module\",\n"
-"\n"
-"                                      \"class_name\": \n"
-"                                                  \"name of class\",\n"
-"\n"
-"                                      \"method_name\": \n"
-"                                                   \"name of method\",\n"
-"\n"
-"                                       \"special_parameters\":\n"
-"                                                    {\"parameter-1\": parameter_1,\n"
-"                                                      \"parameter-2\": parameter_2, \n"
-"                                                    ...}\n"
-"                                }, \n"
-"\n"
-" ...  }# these functions are executed in order of priority-index\n"
-"\n"
-"\n"
-"\n"
-"\n"
-"\n"
-"for ex.:\n"
-"{\n"
-"                        1 : {\n"
-"                                     \"module_name\": \"wavelet_module_name\",\n"
-"                                      \"class_name\": \"wavelet_class_name\",\n"
-"                                      \"method_name\": \"wavelet_method_name\",\n"
-"                                       \"special_parameters\":{\"important_element\":\"details\"} # or: \"approximations\"\n"
-"                                },\n"
-"\n"
-"\n"
-"                        2 : {\n"
-"                                     \"module_name\":\"fourier_module_name\",\n"
-"                                      \"class_name\":\"fourier_class_name\",\n"
-"                                      \"method_name\":\"fourier_method_name\",\n"
-"                                       \"special_parameters\":\n"
-"                                                    {\"first_factor\": 2,\n"
-"                                                      \"output_name\": \"ft}\n"
-"                                }\n"
-"\n"
-"\n"
-"   }"))
+                                                      "     priority-index : {\n"
+                                                      "                                     \"module_name\":\n"
+                                                      "                                               \"name of module\",\n"
+                                                      "\n"
+                                                      "                                      \"class_name\": \n"
+                                                      "                                                  \"name of class\",\n"
+                                                      "\n"
+                                                      "                                      \"method_name\": \n"
+                                                      "                                                   \"name of method\",\n"
+                                                      "\n"
+                                                      "                                       \"special_parameters\":\n"
+                                                      "                                                    {\"parameter-1\": parameter_1,\n"
+                                                      "                                                      \"parameter-2\": parameter_2, \n"
+                                                      "                                                    ...}\n"
+                                                      "                                }, \n"
+                                                      "\n"
+                                                      " ...  }# these functions are executed in order of priority-index\n"
+                                                      "\n"
+                                                      "\n"
+                                                      "\n"
+                                                      "\n"
+                                                      "\n"
+                                                      "for ex.:\n"
+                                                      "{\n"
+                                                      "                        1 : {\n"
+                                                      "                                     \"module_name\": \"wavelet_module_name\",\n"
+                                                      "                                      \"class_name\": \"wavelet_class_name\",\n"
+                                                      "                                      \"method_name\": \"wavelet_method_name\",\n"
+                                                      "                                       \"special_parameters\":{\"important_element\":\"details\"} # or: \"approximations\"\n"
+                                                      "                                },\n"
+                                                      "\n"
+                                                      "\n"
+                                                      "                        2 : {\n"
+                                                      "                                     \"module_name\":\"fourier_module_name\",\n"
+                                                      "                                      \"class_name\":\"fourier_class_name\",\n"
+                                                      "                                      \"method_name\":\"fourier_method_name\",\n"
+                                                      "                                       \"special_parameters\":\n"
+                                                      "                                                    {\"first_factor\": 2,\n"
+                                                      "                                                      \"output_name\": \"ft}\n"
+                                                      "                                }\n"
+                                                      "\n"
+                                                      "\n"
+                                                      "   }"))
         self.rbtn_saving_preProcessed_data_set_txt.setText(_translate("GUIStart", ".TXT"))
         self.rbtn_save_preProcessed_data_set.setText(_translate("GUIStart", "Yes"))
         self.rbtn_dont_save_preProcessed_data_set.setText(_translate("GUIStart", "No"))
         self.rbtn_run_preProcess.setText(_translate("GUIStart", "Yes"))
         self.rbtn_dont_run_preProcess.setText(_translate("GUIStart", "No"))
-        self.Program_Tabs.setTabText(self.Program_Tabs.indexOf(self.tab_preProcessing), _translate("GUIStart", "preProcessing"))
+        self.Program_Tabs.setTabText(self.Program_Tabs.indexOf(self.tab_preProcessing),
+                                     _translate("GUIStart", "preProcessing"))
         self.st20.setPlainText(_translate("GUIStart", "Data-Bank Saving Format:"))
         self.st18.setPlainText(_translate("GUIStart", "Run Data-Bank Production:"))
         self.st19.setPlainText(_translate("GUIStart", "Save the Data-Bank:"))
@@ -979,95 +1005,95 @@ class Ui_GUIStart(object):
         self.rbtn_run_data_bank.setText(_translate("GUIStart", "Yes"))
         self.rbtn_dont_run_data_bank.setText(_translate("GUIStart", "No"))
         self.et_data_bank_methods.setPlainText(_translate("GUIStart", "{\n"
-"\n"
-"  1:\n"
-"          {\n"
-"            \"module_name\": \"variance\",\n"
-"            \"class_name\": \"\",\n"
-"            \"method_name\": \"variance\",\n"
-"            \"special_parameters\": {}\n"
-"           },\n"
-"  2:\n"
-"          {\n"
-"            \"module_name\": \"skewness\",\n"
-"            \"class_name\": \"\",\n"
-"            \"method_name\": \"skewness\",\n"
-"            \"special_parameters\": {}\n"
-"           },\n"
-"  3:\n"
-"           {\n"
-"             \"module_name\": \"kurtosis\",\n"
-"             \"class_name\": \"\",\n"
-"             \"method_name\": \"kurt\",\n"
-"             \"special_parameters\": {}\n"
-"            }\n"
-"\n"
-"}  \n"
-""))
+                                                                      "\n"
+                                                                      "  1:\n"
+                                                                      "          {\n"
+                                                                      "            \"module_name\": \"variance\",\n"
+                                                                      "            \"class_name\": \"\",\n"
+                                                                      "            \"method_name\": \"variance\",\n"
+                                                                      "            \"special_parameters\": {}\n"
+                                                                      "           },\n"
+                                                                      "  2:\n"
+                                                                      "          {\n"
+                                                                      "            \"module_name\": \"skewness\",\n"
+                                                                      "            \"class_name\": \"\",\n"
+                                                                      "            \"method_name\": \"skewness\",\n"
+                                                                      "            \"special_parameters\": {}\n"
+                                                                      "           },\n"
+                                                                      "  3:\n"
+                                                                      "           {\n"
+                                                                      "             \"module_name\": \"kurtosis\",\n"
+                                                                      "             \"class_name\": \"\",\n"
+                                                                      "             \"method_name\": \"kurt\",\n"
+                                                                      "             \"special_parameters\": {}\n"
+                                                                      "            }\n"
+                                                                      "\n"
+                                                                      "}  \n"
+                                                                      ""))
         self.st23.setPlainText(_translate("GUIStart", "selected Data-Bsnk Poduction Methods:"))
         self.st24.setPlainText(_translate("GUIStart", "{\n"
-"     priority-index : {\n"
-"                                     \"module_name\":\n"
-"                                               \"name of module\",\n"
-"\n"
-"                                      \"class_name\": \n"
-"                                                  \"name of class\",\n"
-"\n"
-"                                      \"method_name\": \n"
-"                                                   \"name of method\",\n"
-"\n"
-"                                       \"special_parameters\":\n"
-"                                                    {\"parameter-1\": parameter_1,\n"
-"                                                      \"parameter-2\": parameter_2, \n"
-"                                                    ...}\n"
-"                                }, \n"
-"\n"
-" ...  }# these functions are executed in order of priority-index\n"
-"\n"
-"\n"
-"\n"
-"\n"
-"\n"
-"for ex.:\n"
-"{\n"
-"                       1:\n"
-"                  {\n"
-"                      \"module_name\": \"variance\",\n"
-"                      \"class_name\": \"\",\n"
-"                      \"method_name\": \"variance\",\n"
-"                      \"special_parameters\": {}\n"
-"                   },\n"
-"             2:\n"
-"                  {\n"
-"                      \"module_name\": \"skewness\",\n"
-"                      \"class_name\": \"\",\n"
-"                      \"method_name\": \"skewness\",\n"
-"                      \"special_parameters\": {}\n"
-"                   },\n"
-"                       3:\n"
-"                   {\n"
-"                       \"module_name\": \"kurtosis\",\n"
-"                        \"class_name\": \"\",\n"
-"                       \"method_name\": \"kurt\",\n"
-"                         \"special_parameters\": {}\n"
-"                                 }\n"
-"\n"
-"\n"
-"   }\n"
-"\n"
-"\n"
-"or:\n"
-"\n"
-"\n"
-"{\n"
-"                       1:\n"
-"                  {\n"
-"                      \"module_name\": \"no_change_FP\",\n"
-"                                  \"class_name\": \"\", \"method_name\": \"no_change_FP\",\n"
-"                                  \"special_parameters\": {}\n"
-"                                 }\n"
-"}  # these functions are executed in order of\n"
-""))
+                                                      "     priority-index : {\n"
+                                                      "                                     \"module_name\":\n"
+                                                      "                                               \"name of module\",\n"
+                                                      "\n"
+                                                      "                                      \"class_name\": \n"
+                                                      "                                                  \"name of class\",\n"
+                                                      "\n"
+                                                      "                                      \"method_name\": \n"
+                                                      "                                                   \"name of method\",\n"
+                                                      "\n"
+                                                      "                                       \"special_parameters\":\n"
+                                                      "                                                    {\"parameter-1\": parameter_1,\n"
+                                                      "                                                      \"parameter-2\": parameter_2, \n"
+                                                      "                                                    ...}\n"
+                                                      "                                }, \n"
+                                                      "\n"
+                                                      " ...  }# these functions are executed in order of priority-index\n"
+                                                      "\n"
+                                                      "\n"
+                                                      "\n"
+                                                      "\n"
+                                                      "\n"
+                                                      "for ex.:\n"
+                                                      "{\n"
+                                                      "                       1:\n"
+                                                      "                  {\n"
+                                                      "                      \"module_name\": \"variance\",\n"
+                                                      "                      \"class_name\": \"\",\n"
+                                                      "                      \"method_name\": \"variance\",\n"
+                                                      "                      \"special_parameters\": {}\n"
+                                                      "                   },\n"
+                                                      "             2:\n"
+                                                      "                  {\n"
+                                                      "                      \"module_name\": \"skewness\",\n"
+                                                      "                      \"class_name\": \"\",\n"
+                                                      "                      \"method_name\": \"skewness\",\n"
+                                                      "                      \"special_parameters\": {}\n"
+                                                      "                   },\n"
+                                                      "                       3:\n"
+                                                      "                   {\n"
+                                                      "                       \"module_name\": \"kurtosis\",\n"
+                                                      "                        \"class_name\": \"\",\n"
+                                                      "                       \"method_name\": \"kurt\",\n"
+                                                      "                         \"special_parameters\": {}\n"
+                                                      "                                 }\n"
+                                                      "\n"
+                                                      "\n"
+                                                      "   }\n"
+                                                      "\n"
+                                                      "\n"
+                                                      "or:\n"
+                                                      "\n"
+                                                      "\n"
+                                                      "{\n"
+                                                      "                       1:\n"
+                                                      "                  {\n"
+                                                      "                      \"module_name\": \"no_change_FP\",\n"
+                                                      "                                  \"class_name\": \"\", \"method_name\": \"no_change_FP\",\n"
+                                                      "                                  \"special_parameters\": {}\n"
+                                                      "                                 }\n"
+                                                      "}  # these functions are executed in order of\n"
+                                                      ""))
         self.rbtn_saving_data_bank_csv.setText(_translate("GUIStart", ".CSV"))
         self.rbtn_saving_data_bank_mat.setText(_translate("GUIStart", ".MAT"))
         self.st21.setPlainText(_translate("GUIStart", "Data-Bank Dimensions in Columns or Rows:"))
@@ -1083,72 +1109,77 @@ class Ui_GUIStart(object):
         self.rbtn_run_postProcess.setText(_translate("GUIStart", "Yes"))
         self.rbtn_dont_run_postProcess.setText(_translate("GUIStart", "No"))
         self.et_postProcess_methods.setPlainText(_translate("GUIStart", "{\n"
-"\n"
-"1:\n"
-"        {\n"
-"            \"module_name\": \"normalizer\",\n"
-"            \"class_name\": \"\",\n"
-"            \"method_name\": \"normalizer\",\n"
-"            \"special_parameters\": {}\n"
-"        },\n"
-" 2:\n"
-"        {\n"
-"            \"module_name\": \"standardizer\",\n"
-"            \"class_name\": \"\",\n"
-"            \"method_name\": \"standardizer\",\n"
-"            \"special_parameters\": {}\n"
-"         },\n"
-"\n"
-"}  "))
+                                                                        "\n"
+                                                                        "1:\n"
+                                                                        "        {\n"
+                                                                        "            \"module_name\": \"normalizer\",\n"
+                                                                        "            \"class_name\": \"\",\n"
+                                                                        "            \"method_name\": \"normalizer\",\n"
+                                                                        "            \"special_parameters\": {}\n"
+                                                                        "        },\n"
+                                                                        " 2:\n"
+                                                                        "        {\n"
+                                                                        "            \"module_name\": \"standardizer\",\n"
+                                                                        "            \"class_name\": \"\",\n"
+                                                                        "            \"method_name\": \"standardizer\",\n"
+                                                                        "            \"special_parameters\": {}\n"
+                                                                        "         },\n"
+                                                                        "\n"
+                                                                        "}  "))
         self.st28.setPlainText(_translate("GUIStart", "{\n"
-"     priority-index : {\n"
-"                                     \"module_name\":\n"
-"                                               \"name of module\",\n"
-"\n"
-"                                      \"class_name\": \n"
-"                                                  \"name of class\",\n"
-"\n"
-"                                      \"method_name\": \n"
-"                                                   \"name of method\",\n"
-"\n"
-"                                       \"special_parameters\":\n"
-"                                                    {\"parameter-1\": parameter_1,\n"
-"                                                      \"parameter-2\": parameter_2, \n"
-"                                                    ...}\n"
-"                                }, \n"
-"\n"
-" ...  }# these functions are executed in order of priority-index\n"
-"\n"
-"\n"
-"\n"
-"\n"
-"\n"
-"for ex.:\n"
-"{\n"
-"\n"
-"                        1 : {\n"
-"                                     \"module_name\":  \"normalizer\",\n"
-"                                      \"class_name\": \"\",\n"
-"                                      \"method_name\": \"normalizer\",\n"
-"                                       \"special_parameters\":{}\n"
-"                                },\n"
-"\n"
-"                        2 : {\n"
-"                                     \"module_name\":  \"standardizer\",\n"
-"                                      \"class_name\": \"\",\n"
-"                                      \"method_name\": \"standardizer\",\n"
-"                                       \"special_parameters\":{}\n"
-"                                }\n"
-"\n"
-"\n"
-"   }"))
-        self.Program_Tabs.setTabText(self.Program_Tabs.indexOf(self.tab_postProcessing), _translate("GUIStart", "postProcessing"))
-        self.Program_Tabs.setTabText(self.Program_Tabs.indexOf(self.tab_classification), _translate("GUIStart", "Classification"))
-        self.Program_Tabs.setTabText(self.Program_Tabs.indexOf(self.tab_evaluation), _translate("GUIStart", "Evaluation"))
+                                                      "     priority-index : {\n"
+                                                      "                                     \"module_name\":\n"
+                                                      "                                               \"name of module\",\n"
+                                                      "\n"
+                                                      "                                      \"class_name\": \n"
+                                                      "                                                  \"name of class\",\n"
+                                                      "\n"
+                                                      "                                      \"method_name\": \n"
+                                                      "                                                   \"name of method\",\n"
+                                                      "\n"
+                                                      "                                       \"special_parameters\":\n"
+                                                      "                                                    {\"parameter-1\": parameter_1,\n"
+                                                      "                                                      \"parameter-2\": parameter_2, \n"
+                                                      "                                                    ...}\n"
+                                                      "                                }, \n"
+                                                      "\n"
+                                                      " ...  }# these functions are executed in order of priority-index\n"
+                                                      "\n"
+                                                      "\n"
+                                                      "\n"
+                                                      "\n"
+                                                      "\n"
+                                                      "for ex.:\n"
+                                                      "{\n"
+                                                      "\n"
+                                                      "                        1 : {\n"
+                                                      "                                     \"module_name\":  \"normalizer\",\n"
+                                                      "                                      \"class_name\": \"\",\n"
+                                                      "                                      \"method_name\": \"normalizer\",\n"
+                                                      "                                       \"special_parameters\":{}\n"
+                                                      "                                },\n"
+                                                      "\n"
+                                                      "                        2 : {\n"
+                                                      "                                     \"module_name\":  \"standardizer\",\n"
+                                                      "                                      \"class_name\": \"\",\n"
+                                                      "                                      \"method_name\": \"standardizer\",\n"
+                                                      "                                       \"special_parameters\":{}\n"
+                                                      "                                }\n"
+                                                      "\n"
+                                                      "\n"
+                                                      "   }"))
+        self.Program_Tabs.setTabText(self.Program_Tabs.indexOf(self.tab_postProcessing),
+                                     _translate("GUIStart", "postProcessing"))
+        self.Program_Tabs.setTabText(self.Program_Tabs.indexOf(self.tab_classification),
+                                     _translate("GUIStart", "Classification"))
+        self.Program_Tabs.setTabText(self.Program_Tabs.indexOf(self.tab_evaluation),
+                                     _translate("GUIStart", "Evaluation"))
+        self.groupBox_3.setTitle(_translate("GUIStart", "Timing"))
+        self.plainTextEdit_2.setPlainText(_translate("GUIStart", "Simulation Time:"))
+        self.Program_Tabs.setTabText(self.Program_Tabs.indexOf(self.tab_3), _translate("GUIStart", "Analysis"))
         self.btn_start.setText(_translate("GUIStart", "Start"))
         self.btn_save_as_default.setText(_translate("GUIStart", "Save as Default"))
         self.btn_close.setText(_translate("GUIStart", "Close"))
-
 
         self.et_data_set_address.setEnabled(False)
 
@@ -1177,6 +1208,7 @@ class Ui_GUIStart(object):
         self.load_default()
 
     def configuration_folder_address_extractor(self):
+
         root_folder_address = root_project_folder_address_extractor(
             target_folder_name=self.et_project_name.toPlainText())
 
@@ -1187,6 +1219,7 @@ class Ui_GUIStart(object):
 
     def load_default(self):
         parent_folder_address = self.configuration_folder_address_extractor()
+
         configuration_file_address = ("%s/configuration.txt" % parent_folder_address)
 
         if os.path.exists(configuration_file_address):
@@ -1236,21 +1269,21 @@ class Ui_GUIStart(object):
                 self.rbtn_dont_save_data_set.setChecked(True)
 
             if (loaded_configuration["data_set_saving_format"] == "txt") and (
-            not self.rbtn_data_set_saving_format_txt.isChecked()):
+                    not self.rbtn_data_set_saving_format_txt.isChecked()):
                 self.rbtn_data_set_saving_format_txt.setChecked(True)
 
             elif (loaded_configuration["data_set_saving_format"] != "txt") and (
-            self.rbtn_data_set_saving_format_txt.isChecked()):
+                    self.rbtn_data_set_saving_format_txt.isChecked()):
                 self.rbtn_data_set_saving_format_txt.setChecked(False)
 
             self.et_data_set_extractor_methods.setPlainText(loaded_configuration["data_set_extractor_methods"])
 
             if loaded_configuration["data_set_loading_format"] == "txt" and (
-            not self.rbtn_data_set_loading_format_txt.isChecked()):
+                    not self.rbtn_data_set_loading_format_txt.isChecked()):
                 self.rbtn_data_set_loading_format_txt.click()
 
             elif (loaded_configuration["data_set_loading_format"] != "txt") and (
-            self.rbtn_data_set_loading_format_txt.isChecked()):
+                    self.rbtn_data_set_loading_format_txt.isChecked()):
                 self.rbtn_data_set_loading_format_txt.click()
 
             # 3. preProcessed Data-Set
@@ -1261,19 +1294,19 @@ class Ui_GUIStart(object):
                 self.rbtn_dont_run_preProcess.click()
 
             if (loaded_configuration["save_preProcessed_data_set"]) and (
-            not self.rbtn_save_preProcessed_data_set.isChecked()):
+                    not self.rbtn_save_preProcessed_data_set.isChecked()):
                 self.rbtn_save_preProcessed_data_set.click()
 
             elif (not loaded_configuration["save_preProcessed_data_set"]) and (
-            not self.rbtn_dont_save_preProcessed_data_set.isChecked()):
+                    not self.rbtn_dont_save_preProcessed_data_set.isChecked()):
                 self.rbtn_dont_save_preProcessed_data_set.click()
 
             if loaded_configuration["preProcessed_data_set_saving_format"] == "txt" and (
-            not self.rbtn_saving_preProcessed_data_set_txt.isChecked()):
+                    not self.rbtn_saving_preProcessed_data_set_txt.isChecked()):
                 self.rbtn_saving_preProcessed_data_set_txt.click()
 
             elif (loaded_configuration["preProcessed_data_set_saving_format"] != "txt") and (
-            self.rbtn_saving_preProcessed_data_set_txt.isChecked()):
+                    self.rbtn_saving_preProcessed_data_set_txt.isChecked()):
                 self.rbtn_saving_preProcessed_data_set_txt.click()
 
             self.et_preProcessed_methods.setPlainText(loaded_configuration["preProcessing_methods"])
@@ -1292,19 +1325,19 @@ class Ui_GUIStart(object):
                 self.rbtn_dont_save_data_bank.click()
 
             if (loaded_configuration["data_bank_saving_format"] == "csv") and (
-            not self.rbtn_saving_data_bank_csv.isChecked()):
+                    not self.rbtn_saving_data_bank_csv.isChecked()):
                 self.rbtn_saving_data_bank_csv.click()
 
             elif (loaded_configuration["data_bank_saving_format"] == "mat") and (
-            not self.rbtn_saving_data_bank_mat.isChecked()):
+                    not self.rbtn_saving_data_bank_mat.isChecked()):
                 self.rbtn_saving_data_bank_mat.click()
 
             if loaded_configuration["data_bank_dimensions_in_columns"] == "columns" and (
-            not self.rbtn_data_bank_dimensions_in_columns.isChecked()):
+                    not self.rbtn_data_bank_dimensions_in_columns.isChecked()):
                 self.rbtn_data_bank_dimensions_in_columns.click()
 
             elif loaded_configuration["data_bank_dimensions_in_columns"] == "rows" and (
-            not self.rbtn_data_bank_dimensions_in_rows.isChecked()):
+                    not self.rbtn_data_bank_dimensions_in_rows.isChecked()):
                 self.rbtn_data_bank_dimensions_in_rows.click()
 
             if loaded_configuration["add_dim_headers"] and (not self.rbtn_add_dim_headers.isChecked()):
@@ -1389,15 +1422,19 @@ class Ui_GUIStart(object):
         self.parameter_collection = self.parameter_collector("start_clicked")
 
         if self.start_allowed():
-            start = timeit.default_timer()
-            outpurt = main_GUI(self.parameter_collection)
-            stop = timeit.default_timer()
-
-            print (stop - start)
-            # print(outpurt.keys())
-
+            output = main_GUI(self.parameter_collection)
+            print("hfytrtyrytr")
             # Analysis section
+            self.analysis_simulation_time_demonstrator(output["simulation_times"])
+            output.pop('simulation_times', None)
 
+            print(output.keys())
+
+            initial_data_set = output["Initial_data_set"]
+            prePocessed_data_set = output["preProcessed_data_set"]
+            data_bank = output["data_bank"]
+
+            print("sdfssf")
 
     def close_clicked(self):
         sys.exit(0)
@@ -1550,8 +1587,27 @@ class Ui_GUIStart(object):
 
         return start_is_allowed
 
+    def analysis_simulation_time_demonstrator(self, simulation_times):
+        times = ""
+        simulation_times = dict(simulation_times)
+
+        for key in simulation_times.keys():
+            temp = simulation_times [key]
+            string = ("%s: %3.4f (%s)" % (str(key), temp["value"], temp["label"]))
+
+            if not times:
+                times = string
+
+            else:
+                times = ("%s\n%s" % (times, string))
+        print(times)
+
+        self.et_analysis_simulation_times.setPlainText(times)
+
+
 if __name__ == "__main__":
     import sys
+
     app = QtWidgets.QApplication(sys.argv)
     GUIStart = QtWidgets.QWidget()
     ui = Ui_GUIStart()
@@ -1559,4 +1615,3 @@ if __name__ == "__main__":
 
     GUIStart.showMaximized()
     sys.exit(app.exec_())
-
